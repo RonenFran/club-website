@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background: var(--primary-color1); /* Alternate Maroon color (Darker) */
+  padding: 0rem 1rem;
+  color: white;
+  width: 100%;       /* Ensures full width */
+  margin: 0;          /* Removes default margins */
+  position: fixed;    /* Optional: Sticks to top */
+  top: 0;             /* Aligns to top edge */
+  left: 0;            /* Aligns to left edge */
+  box-sizing: border-box; /* Includes padding in width */
+}
+
+.logo {
+  font-size: 0.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+} 
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
