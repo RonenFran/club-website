@@ -5,13 +5,3 @@
   display: flex;
 }
 
-.clubItem {
-  display: flex;
-  align-items: center;
-}
-
-.clubImage {
-  width: 50px;
-  height: 50px;
-}
-

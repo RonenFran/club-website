@@ -1,24 +1,23 @@
 import { Link } from "react-router-dom"; // Importing Link for navigation
-import "./Navbar.css"; // Importing CSS for styling
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <ul className="nav-links">
+    <nav className="bg-primary">
+      <ul className="flex flex-row justify-start items-center gap-4 text-xl p-4">
         <li>
-          <img src="/smu_logo_white.png" alt="Logo" className="logo" />
+          <img src="/smu_logo_white.png" alt="Logo" className="w-40" />
         </li>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" className="text-secondary">Home</Link>
         </li>
         <li>
-          <Link to="/browse">Browse</Link>
+          <Link to="/browse" className="text-secondary">Browse</Link>
         </li>
         <li>
-          <Link to="/myClubs">My Clubs</Link>
+          <Link to="/myClubs" className="text-secondary">My Clubs</Link>
         </li>
         <li>
-          <Link to="/events">Events</Link>
+          <Link to="/events" className="text-secondary">Events</Link>
         </li>
       </ul>
     </nav>
