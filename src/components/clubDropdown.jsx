@@ -7,11 +7,16 @@ const ClubDropdown = () => {
         <Link to="TBA" className="">
           <div className="flex flex-row gap-6 p-2 border-2 border-primary rounded-md">
             <img src="/horse_cropped.jpg" alt="Horse head" className="size-20"/>
-            <div className="flex-9">
-              <span class="font-semibold text-primary font">Equestrian Society</span>
-              <span class="mt-1 text-gray-600">Members</span>
+            <div className="flex flex-col gap-2 p-1">
+              <span class="font-semibold text-primary text-xl">Equestrian Society</span>
+              <div class="flex items-center mt-1 text-gray-600">
+                <svg viewBox="0 0 5 5" fill="currentColor" aria-hidden="true" className="size-4 mr-1">
+                  <circle r="1" cx="2.5" cy="1.5"/>
+                  <circle r="1.5" cx="2.5" cy="4.5"/>
+                </svg>
+                22 Members
+              </div>
             </div>
-            
           </div>
         </Link>
         <Link to="TBA" className="clubItem">
