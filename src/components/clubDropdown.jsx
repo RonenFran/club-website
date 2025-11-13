@@ -1,22 +1,20 @@
-import "./clubDropdown.css";
 import { Link } from "react-router-dom";
 
 const ClubDropdown = () => {
   return (
     <>
-      <div className="clubDropdown">
+      <div className="flex flex-col m-16 p-8 border-4 rounded-lg border-solid border-primary">
         <Link to="TBA" className="">
-          <div className="grid grid-cols-2">
+          <div className="flex flex-row gap-6 p-2 border-2 border-primary rounded-md">
             <img src="/horse_cropped.jpg" alt="Horse head" className="size-20"/>
-            <a href="#" class="block font-semibold text-gray-900">
-                    Equestrian Society
-                    <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Get a better understanding of your traffic</p>
+            <div className="flex-9">
+              <span class="font-semibold text-primary font">Equestrian Society</span>
+              <span class="mt-1 text-gray-600">Members</span>
+            </div>
+            
           </div>
         </Link>
         <Link to="TBA" className="clubItem">
-        <a href=""></a>
           <img src="/podium.jpg" alt="Podium" className="clubImage" />
         </Link>
         <Link to="TBA" className="clubItem">

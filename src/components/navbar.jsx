@@ -8,16 +8,16 @@ const Navbar = () => {
           <img src="/smu_logo_white.png" alt="Logo" className="w-40" />
         </li>
         <li>
-          <Link to="/" className="text-secondary">Home</Link>
+          <Link to="/" className="text-secondary font-bold">Home</Link>
         </li>
         <li>
-          <Link to="/browse" className="text-secondary">Browse</Link>
+          <Link to="/browse" className="text-secondary font-bold">Browse</Link>
         </li>
         <li>
-          <Link to="/myClubs" className="text-secondary">My Clubs</Link>
+          <Link to="/myClubs" className="text-secondary font-bold">My Clubs</Link>
         </li>
         <li>
-          <Link to="/events" className="text-secondary">Events</Link>
+          <Link to="/events" className="text-secondary font-bold">Events</Link>
         </li>
       </ul>
     </nav>
