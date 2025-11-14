@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const ClubDropdown = () => {
   return (
     <>
-      <div className="flex flex-col m-16 p-8 border-4 gap-4 rounded-lg border-solid border-primary mx-auto max-w-5xl">
+      <div className="flex flex-col m-16 p-8 border-4 gap-4 rounded-lg border-solid border-primary max-w-5xl">
         <Link to="TBA" className="">
           <div className="flex flex-row gap-6 p-2 border-2 border-primary rounded-md items-center">
             <img src="/horse_cropped.jpg" alt="Horse head" className="size-20 border-2 border-primary rounded-[50%]"/>
