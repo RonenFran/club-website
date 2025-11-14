@@ -1,12 +1,12 @@
 const ClubOptionSelector = () => {
   return (
-    <div className="flex flex-col -ml-16 gap-1">
-      <button className="border-2 border-primary rounded-sm text-start text-white bg-primary">All</button>
-      <button className="border-2 border-primary rounded-sm text-start text-white bg-primary">Societies</button>
-      <button className="border-2 border-primary rounded-sm text-start text-white bg-primary">Sports</button>
-      <button className="border-2 border-primary rounded-sm text-start text-white bg-primary">E-Sports</button>
-      <button className="border-2 border-primary rounded-sm text-start text-white bg-primary">Teams</button>
-    </div>
+    <ul className="flex flex-col -ml-16 gap-0.5 w-36">
+      <li className="pl-2 border-2 border-s-0 border-e-4 border-primary w-44 rounded-e-lg text-start text-lg text-primary bg-secondary">(23) All</li>
+      <li className="pl-2 border-2 border-primary rounded-e-lg text-start text-lg text-white bg-primary">(11) Societies</li>
+      <li className="pl-2 border-2 border-primary rounded-e-lg text-start text-lg text-white bg-primary">(9) Sports</li>
+      <li className="pl-2 border-2 border-primary rounded-e-lg text-start text-lg text-white bg-primary">(4) E-Sports</li>
+      <li className="pl-2 border-2 border-primary rounded-e-lg text-start text-lg text-white bg-primary">(15) Teams</li>
+    </ul>
   );
 };
 
