@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"; // Importing Link for navigation
 
 const Navbar = () => {
   return (
-    <nav className="bg-primary">
+    <nav className="z-40 bg-primary relative shadow-[0_4px_20px_rgba(0,0,0,0.4)] z-50">
       <ul className="flex flex-row justify-start items-center gap-4 text-xl p-4">
         <li>
           <img src="/smu_logo_white.png" alt="Logo" className="w-40" />
