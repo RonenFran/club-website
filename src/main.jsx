@@ -3,13 +3,14 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import Browse from './Browse.jsx';
-import ClassPage from './ClubPage.jsx';
+import ClubPage from './ClubPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       {/* <Browse /> */}
-      <ClassPage />
+      <ClubPage />
     </BrowserRouter>
   </StrictMode>,
 );
+ 
