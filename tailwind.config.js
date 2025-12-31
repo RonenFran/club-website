@@ -8,6 +8,8 @@ export default {
     extend: {
       colors: {
         primary: "#550000",
+        "primary-light": "maroon",
+        oak: "#decaab",
         secondary: "#ffffff",
       }
     },
