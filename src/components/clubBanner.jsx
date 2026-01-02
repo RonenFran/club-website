@@ -36,7 +36,7 @@ const ClubBanner = () => {
         <img
           src="./club_banners/equestrian4.avif"
           alt="Horses prancing on a grassy field"
-          className="absolute h-[200%] -right-56 -top-10"
+          className="absolute h-[200%] -right-56 -top-10 object-cover"
         />
       </div>
     </div>

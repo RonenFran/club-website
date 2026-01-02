@@ -12,12 +12,12 @@ function ClubPage() {
       {/* Club banner */}
       <ClubBanner />
 
-      <div className="my-40">
+      <div className="mt-40 h-[180vh]">
         {/* Club description */}
         <ClubBoard />
 
         {/* Message board for club posts and updates */}
-        <div className="relative -top-[155vh] left-24">
+        <div className="relative -top-[155vh] pl-24 pointer-events-none">
           <ClubDescription />
         </div>
 
