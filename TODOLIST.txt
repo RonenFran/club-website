@@ -1,0 +1,5 @@
+* Page based file organize system rather than jumbled components together
+    - Move images into respective folders as well
+* Profile button up in top right
+* Sign up and Sign in page 
+* My Account page

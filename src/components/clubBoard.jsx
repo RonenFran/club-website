@@ -1,6 +1,8 @@
 const ClubBoard = () => {
   return (
+    // Parent box
     <div className="z-30 mx-auto h-[150vh] w-2/3 rounded-xl bg-primary-700 shadow-[0_0_10px_3px_rgba(0,0,0,0.35)]">
+      {/* Join Button */}
       <div className="relative flex w-48 h-16 px-4 rounded-md justify-center items-center justify-self-end bg-primary-600 text-secondary font-bold top-8 right-8">
         <span className="flex-1 text-center text-xl">Join Now</span>
         <svg viewBox="0 0 10 10" fill="white" className="size-12">
@@ -8,10 +10,21 @@ const ClubBoard = () => {
           <rect width="1.5" height="7" x="4.25" y="1.5" ry="0.5" />
         </svg>
       </div>
+
+      {/* Header */}
       <h2 className="text-6xl font-bold text-secondary text-center mt-4">
         Message Board
       </h2>
-      <div className="z-30 mx-auto flex flex-col h-screen w-2/3 bg-primary-50 rounded-xl mt-8 overflow-y-scroll shadow-[0_0_20px_6px_rgba(0,0,0,0.35)]">
+
+      {/* Message Board */}
+      <div className="z-30 relative mx-auto flex flex-col h-screen w-2/3 bg-primary-50 rounded-xl mt-8 overflow-y-scroll no-scrollbar shadow-[0_0_20px_6px_rgba(0,0,0,0.35)]">
+        {/* Top scroll fade */}
+        <div
+          className="sticky top-0 w-full bg-gradient-to-b from-primary-100 to-transparent backdrop-blur-xs"
+          id="top-fade"
+        ></div>
+
+        {/* Item 1 */}
         <div className="flex mx-8 mt-4 p-2 pr-6 pb-4 bg-primary-200">
           <img
             src="/unknown_person.jpg"
@@ -29,6 +42,8 @@ const ClubBoard = () => {
             </div>
           </div>
         </div>
+
+        {/* Item 2 */}
         <div className="flex mx-8 mt-4 p-2 pr-6 pb-4 bg-primary-200">
           <img
             src="/unknown_person.jpg"
@@ -49,6 +64,8 @@ const ClubBoard = () => {
             </div>
           </div>
         </div>
+
+        {/* Item 3*/}
         <div className="flex mx-8 mt-4 p-2 pr-6 pb-4 bg-primary-200">
           <img
             src="/unknown_person.jpg"
@@ -72,6 +89,8 @@ const ClubBoard = () => {
             </div>
           </div>
         </div>
+
+        {/* Item 4 */}
         <div className="flex mx-8 mt-4 p-2 pr-6 pb-4 bg-primary-200">
           <img
             src="/unknown_person.jpg"
