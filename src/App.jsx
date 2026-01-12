@@ -11,7 +11,7 @@ import SignUp from "./pages/SignUp";
 const App = () => {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<ClubPage />} />
         <Route path="/browse" element={<Browse />} />
