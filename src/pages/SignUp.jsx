@@ -67,7 +67,7 @@ function SignUp() {
           {/* Sign in instead */}
           <p className="mt-2 self-center text-sm">
             Already have an account?{" "}
-            <Link to="/signin" className="text-primary font-bold hover:underline">
+            <Link to="/SignIn" className="text-primary font-bold hover:underline">
               Sign in
             </Link>
           </p>
