@@ -2,8 +2,8 @@ import { Link } from "react-router-dom"; // Importing Link for navigation
 
 const Navbar = () => {
   return (
-    <nav className="z-40 bg-primary relative shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
-      <ul className="flex flex-row justify-start items-center gap-4 text-xl p-4">
+    <nav className="z-40 flex justify-between items-center bg-primary relative shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+      <ul className="flex justify-start items-center gap-4 text-xl p-4">
         <li>
           <img src="/smu_logo_white.png" alt="Logo" className="w-40" />
         </li>
@@ -28,6 +28,18 @@ const Navbar = () => {
           </Link>
         </li>
       </ul>
+
+      <Link to="/profile">
+        <svg
+          viewBox="0 0 5 5"
+          fill="white"
+          aria-hidden="true"
+          className="size-8 mr-4"
+        >
+          <circle r="1" cx="2.5" cy="1.5" />
+          <circle r="1.7" cx="2.5" cy="4.5" />
+        </svg>
+      </Link>
     </nav>
   );
 };
