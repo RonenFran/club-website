@@ -13,23 +13,23 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/browse" className="text-secondary font-bold">
+          <Link to="/Browse" className="text-secondary font-bold">
             Browse
           </Link>
         </li>
         <li>
-          <Link to="/myClubs" className="text-secondary font-bold">
+          <Link to="/MyClubs" className="text-secondary font-bold">
             My Clubs
           </Link>
         </li>
         <li>
-          <Link to="/events" className="text-secondary font-bold">
+          <Link to="/Events" className="text-secondary font-bold">
             Events
           </Link>
         </li>
       </ul>
 
-      <Link to="/profile">
+      <Link to="/SignUp">
         <svg
           viewBox="0 0 5 5"
           fill="white"
