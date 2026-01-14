@@ -16,6 +16,7 @@ const ClubBanner = () => {
         <svg
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
+          aria-hidden="true"
           className="absolute w-full h-full"
         >
           <polygon points="100,0 90,0 70,100 80,100" fill="maroon" />
