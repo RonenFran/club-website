@@ -7,10 +7,12 @@ function SignIn() {
       {/* Return button */}
 
       {/* Sign up div */}
-      <div className="flex flex-col items-start w-[30vw] h-[70vh] text-center shadow-[2px_6px_20px_0_rgba(0,0,0,0.25)]">
+      <div className="flex flex-col items-start w-[30vw] h-[42vh] text-center shadow-[2px_6px_20px_0_rgba(0,0,0,0.25)]">
+        {/* Return back button */}
+
         <h1 className="self-center font-bold text-5xl mt-6">Sign In</h1>
         {/* Sign up form */}
-        <form className="flex flex-col items-start mx-12 my-8 w-[85%]">
+        <form className="flex flex-col items-start mx-12 my-8 w-[85%] h-full">
           {/* Email or Username */}
           <label htmlFor="user" className="font-bold">
             Email or Username
@@ -36,12 +38,19 @@ function SignIn() {
           />
 
           {/* Submit Button */}
-          <input type="submit" value="Sign In" className="mt-10 self-center font-bold text-secondary bg-primary w-48 h-10 rounded-sm"></input>
+          <input
+            type="submit"
+            value="Sign In"
+            className="mt-auto self-center font-bold text-secondary bg-primary w-48 h-10 rounded-sm"
+          ></input>
 
           {/* Sign in instead */}
           <p className="mt-2 self-center text-sm">
             Don't have an account yet?{" "}
-            <Link to="/SignUp" className="text-primary font-bold hover:underline">
+            <Link
+              to="/SignUp"
+              className="text-primary font-bold hover:underline"
+            >
               Sign Up
             </Link>
           </p>
