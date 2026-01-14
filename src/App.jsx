@@ -6,7 +6,7 @@ import ClubPage from "./pages/ClubPage";
 // import Events from "./pages/Events";
 // import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
-// import SignIn from "./pages/SignIn";
+import SignIn from "./pages/SignIn";
 
 const App = () => {
   return (
@@ -18,8 +18,8 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         {/* <Route path="/myClubs" element={<MyClubs />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/signin" element={<SignIn />} /> */}
+        <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/signin" element={<SignIn />} /> 
       </Routes>
     </>
   );

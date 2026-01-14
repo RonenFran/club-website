@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function SignIn() {
   return (
     // Page container
@@ -46,5 +48,7 @@ function SignIn() {
         </form>
       </div>
     </div>
-  )
+  );
 }
+
+export default SignIn;

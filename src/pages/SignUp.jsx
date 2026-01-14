@@ -12,52 +12,60 @@ function SignUp() {
         {/* Sign up form */}
         <form className="flex flex-col items-start mx-12 my-8 w-[85%]">
           {/* Email */}
-          <label htmlFor="email" className="font-bold">
-            Email
-          </label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value="example.student@smu.ca"
-            className="w-full border-b-2 text-[#b1b1b1]"
-          />
+          <>
+            <label htmlFor="email" className="font-bold">
+              Email
+            </label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value="example.student@smu.ca"
+              className="w-full border-b-2 text-[#b1b1b1]"
+            />
+          </>
 
           {/* Username */}
-          <label htmlFor="username" className="font-bold mt-8">
-            Username
-          </label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value="Enter your name"
-            className="w-full border-b-2 text-[#b1b1b1]"
-          />
+          <>
+            <label htmlFor="username" className="font-bold mt-8">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value="Enter your name"
+              className="w-full border-b-2 text-[#b1b1b1]"
+            />
+          </>
 
           {/* Password */}
-          <label htmlFor="password" className="font-bold mt-8">
-            Password
-          </label>
-          <input
-            type="text"
-            id="password"
-            name="password"
-            value="Enter your password"
-            className="w-full border-b-2 text-[#b1b1b1]"
-          />
+          <>
+            <label htmlFor="password" className="font-bold mt-8">
+              Password
+            </label>
+            <input
+              type="text"
+              id="password"
+              name="password"
+              value="Enter your password"
+              className="w-full border-b-2 text-[#b1b1b1]"
+            />
+          </>
 
           {/* Resubmit password */}
-          <label htmlFor="passwordRe" className="font-bold mt-8">
-            Repeat Password
-          </label>
-          <input
-            type="text"
-            id="passwordRe"
-            name="passwordRe"
-            value="Confirm your password"
-            className="w-full border-b-2 text-[#b1b1b1]"
-          />
+          <>
+            <label htmlFor="passwordRe" className="font-bold mt-8">
+              Repeat Password
+            </label>
+            <input
+              type="text"
+              id="passwordRe"
+              name="passwordRe"
+              value="Confirm your password"
+              className="w-full border-b-2 text-[#b1b1b1]"
+            />
+          </>
 
           {/* Maybe robot captcha */}
 
