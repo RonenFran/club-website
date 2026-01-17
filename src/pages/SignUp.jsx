@@ -87,7 +87,7 @@ function SignUp() {
             type="submit"
             value="Sign Up"
             className="self-center mt-auto font-bold text-secondary bg-primary w-48 h-10 rounded-sm"
-          ></input>
+          />
 
           {/* Sign in instead */}
           <p className="mt-2 self-center text-sm">

@@ -8,12 +8,12 @@ function ClubPage() {
       {/* Club banner */}
       <ClubBanner />
 
-      <div className="mt-40 h-[180vh]">
+      <div className="mt-40 h-[140vh]">
         {/* Club description */}
         <ClubBoard />
 
         {/* Message board for club posts and updates */}
-        <div className="relative -top-[155vh] pl-24 pointer-events-none">
+        <div className="relative h-full -top-[125vh] pl-16 pointer-events-none">
           <ClubDescription />
         </div>
 
