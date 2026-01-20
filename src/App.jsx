@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Browse from "./pages/Browse";
+import Home from "./pages/Home";
 import ClubPage from "./pages/ClubPage";
 // import MyClubs from "./pages/MyClubs";
 // import Events from "./pages/Events";
@@ -16,9 +17,10 @@ const App = () => {
     <>
       {showNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<ClubPage />} />
+        <Route path="/" element={<Home />} />
         <Route path="/browse" element={<Browse />} />
         <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/ClubPage" element={<ClubPage />} />
         {/* <Route path="/myClubs" element={<MyClubs />} />
         <Route path="/events" element={<Events />} />
         <Route path="/profile" element={<Profile />} /> */}

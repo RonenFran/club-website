@@ -6,7 +6,7 @@ const ClubDropdown = () => {
       {/* Dropdown container */}
       <div className="flex flex-col m-16 p-8 border-4 gap-4 rounded-lg border-solid border-primary max-w-5xl">
         {/* Club 1 */}
-        <Link to="TBA" className="">
+        <Link to="/ClubPage">
           <div className="flex flex-row gap-6 p-2 border-2 border-primary rounded-md items-center">
             {/* Icon */}
             <img
