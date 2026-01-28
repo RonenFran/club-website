@@ -1,4 +1,4 @@
-const ClubDescription = () => {
+const ClubPageDescription = () => {
   return (
     <div className="z-20 flex-col justify-items-center py-5 px-10 bg-oak w-[25vw] shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.6)] h-[125vh] rounded-lg">
       <img
@@ -29,4 +29,4 @@ const ClubDescription = () => {
   );
 };
 
-export default ClubDescription;
+export default ClubPageDescription;

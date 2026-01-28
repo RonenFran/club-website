@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ClubDropdown = () => {
+const ClubBrowser = () => {
   return (
     <>
       {/* Dropdown container */}
@@ -171,4 +171,4 @@ const ClubDropdown = () => {
   );
 };
 
-export default ClubDropdown;
+export default ClubBrowser;
