@@ -8,22 +8,22 @@ const Navbar = () => {
           <img src="/smu_logo_white.png" alt="Logo" className="w-40" />
         </li>
         <li>
-          <Link to="/" className="text-secondary font-bold">
+          <Link to="/" className="select-none text-secondary font-bold">
             Home
           </Link>
         </li>
         <li>
-          <Link to="/Browse" className="text-secondary font-bold">
+          <Link to="/Browse" className="select-none text-secondary font-bold">
             Browse
           </Link>
         </li>
         <li>
-          <Link to="/MyClubs" className="text-secondary font-bold">
+          <Link to="/MyClubs" className="select-none text-secondary font-bold">
             My Clubs
           </Link>
         </li>
         <li>
-          <Link to="/Events" className="text-secondary font-bold">
+          <Link to="/Events" className="select-none text-secondary font-bold">
             Events
           </Link>
         </li>
