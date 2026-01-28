@@ -1,6 +1,6 @@
 function Home() {
   return (
-    <div>
+    <div className="grid grid-cols-3 gap-4">
       {/* Left side tab */}
 
         {/* Events component */}
