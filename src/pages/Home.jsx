@@ -2,7 +2,7 @@ import UpcomingEvents from "../components/upcomingEvents";
 
 function Home() {
   return (
-    <div className="h-screen w-screen grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-4">
       {/* Left side tab */}
       <>
         {/* Events component */}

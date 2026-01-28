@@ -1,12 +1,12 @@
-import ClubDropdown from "../components/clubDropdown.jsx";
-import ClubOptionSelector from "../components/clubOptionSelector.jsx";
+import ClubBrowser from "../components/clubBrowser.jsx";
+import ClubBrowserOptions from "../components/clubBrowserOptions.jsx";
 
 function Browse() {
   return (
     <>
       <div className="flex justify-center items-center">
-        <ClubDropdown />
-        <ClubOptionSelector />
+        <ClubBrowser />
+        <ClubBrowserOptions />
       </div>
     </>
   );

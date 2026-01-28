@@ -1,20 +1,20 @@
-import ClubBanner from "../components/clubBanner.jsx";
-import ClubBoard from "../components/clubBoard.jsx";
-import ClubDescription from "../components/clubDescription.jsx";
+import ClubPageBanner from "../components/clubPageBanner.jsx";
+import ClubPageMessages from "../components/clubPageMessages.jsx";
+import ClubPageDescription from "../components/clubPageDescription.jsx";
 
 function ClubPage() {
   return (
     <>
       {/* Club banner */}
-      <ClubBanner />
+      <ClubPageBanner />
 
       <div className="mt-40 h-[140vh]">
         {/* Club description */}
-        <ClubBoard />
+        <ClubPageMessages />
 
         {/* Message board for club posts and updates */}
         <div className="relative h-full -top-[125vh] pl-16 pointer-events-none">
-          <ClubDescription />
+          <ClubPageDescription />
         </div>
 
         {/* Member list (Potential component)*/}
