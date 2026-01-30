@@ -1,4 +1,5 @@
 import UpcomingEvents from "../components/upcomingEvents";
+import HomeFeed from "../components/homeFeed";
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
         {/* Popular clubs / news */}
 
         {/* Your feed */}
+        <HomeFeed />
       </>
     </div>
   );
