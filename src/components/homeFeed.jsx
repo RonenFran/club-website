@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { List, useDynamicRowHeight } from "react-window";
 
 function RowComponent({ index, listState, style }) {
@@ -13,7 +14,7 @@ function RowComponent({ index, listState, style }) {
       onClick={() => listState.toggleRow(index)}
       style={style}
     >
-      <ToggleIcon isCollapsed={isCollapsed} /> {index}: {text}
+      {index}: {text}
     </div>
   );
 }
