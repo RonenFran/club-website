@@ -16,7 +16,7 @@ function Home() {
         {/* Popular clubs / news */}
 
         {/* Your feed */}
-        <HomeFeed />
+        <HomeFeed posts={["Post 1", "Post 2", "Post 3", "Post 4"]} />
       </>
     </div>
   );

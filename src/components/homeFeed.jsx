@@ -1,21 +1,37 @@
-import { List } from "react-window";
+import { List, useDynamicRowHeight } from "react-window";
 
-const items = Array.from({ length: 1000 }, (_, index) => `Item ${index + 1}`);
-const Row = ({ index, style }) => (
-  <div style={{ ...style, padding: "10px", borderBottom: "1px solid #ccc" }}>
-    {items[index]}
-  </div>
-);
-const HomeFeed = () => {
+function RowComponent({ index, listState, style }) {
+  const isCollapsed = listState.isRowCollapsed(index);
+  const text = listState.getText(index);
+
+  return (
+    <div
+      className={cn("p-2 cursor-pointer", {
+        "bg-white/10": index % 2 === 0,
+        truncate: isCollapsed,
+      })}
+      onClick={() => listState.toggleRow(index)}
+      style={style}
+    >
+      <ToggleIcon isCollapsed={isCollapsed} /> {index}: {text}
+    </div>
+  );
+}
+
+const HomeFeed = ({ posts }) => {
+  const listState = useListState(posts);
+
+  const rowHeight = useDynamicRowHeight({
+    defaultRowHeight: 50,
+  });
+
   return (
     <List
-      height={400} // Height of the viewport
-      itemCount={items.length} // Total number of items
-      itemSize={35} // Height of each item
-      width={"100%"} // Width of the list
-    >
-      {Row}
-    </List>
+      rowComponent={RowComponent}
+      rowCount={posts.length}
+      rowHeight={rowHeight}
+      rowProps={{ listState }}
+    />
   );
 };
 
