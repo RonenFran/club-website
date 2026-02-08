@@ -19,7 +19,7 @@ function RowComponent({ index, listState, style }) {
   );
 }
 
-const HomeFeed = ({ posts }) => {
+export default function HomeFeed({ posts }) {
   const listState = useListState(posts);
 
   const rowHeight = useDynamicRowHeight({
@@ -34,6 +34,4 @@ const HomeFeed = ({ posts }) => {
       rowProps={{ listState }}
     />
   );
-};
-
-export default HomeFeed;
+}

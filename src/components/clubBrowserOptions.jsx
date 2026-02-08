@@ -1,4 +1,4 @@
-const ClubBrowserOptions = () => {
+export default function ClubBrowserOptions() {
   return (
     <ul className="flex flex-col -ml-16 gap-0.5 w-36">
       <li className="pl-2 border-2 border-s-0 border-e-4 border-primary w-44 rounded-e-lg text-start text-lg text-primary bg-secondary">
@@ -18,6 +18,4 @@ const ClubBrowserOptions = () => {
       </li>
     </ul>
   );
-};
-
-export default ClubBrowserOptions;
+}

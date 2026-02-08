@@ -1,6 +1,6 @@
 import { useScrollFades } from "../hooks/useScrollFades";
 
-const ClubPageMessages = () => {
+export default function ClubPageMessages() {
   const { topFade, botFade, onScroll } = useScrollFades(128);
 
   return (
@@ -227,6 +227,4 @@ const ClubPageMessages = () => {
       </div>
     </div>
   );
-};
-
-export default ClubPageMessages;
+}

@@ -1,4 +1,4 @@
-const UpcomingEvents = () => {
+export default function UpcomingEvents() {
   return (
     <div className="relative left-8 top-8 w-[25vw] h-[50vh] border-2 border-primary rounded-md bg-secondary">
       {/* Header */}
@@ -102,6 +102,4 @@ const UpcomingEvents = () => {
       </div>
     </div>
   );
-};
-
-export default UpcomingEvents;
+}
