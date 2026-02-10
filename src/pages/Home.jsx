@@ -16,7 +16,25 @@ function Home() {
         {/* Popular clubs / news */}
 
         {/* Your feed */}
-        <HomeFeed posts={["Post 1", "Post 2", "Post 3", "Post 4"]} />
+        <HomeFeed
+          posts={[
+            {
+              id: "1",
+              type: "clubPost",
+              author: "John Smith",
+              text: "Lorem ipsum...",
+            },
+            {
+              id: "2",
+              type: "clubPost",
+              author: "Jane Doe",
+              text: "Another post...",
+            },
+            {
+              type: "clubPost",
+            },
+          ]}
+        />
       </>
     </div>
   );
