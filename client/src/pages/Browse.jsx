@@ -1,7 +1,7 @@
 import ClubBrowser from "../components/clubBrowser.jsx";
 import ClubBrowserOptions from "../components/clubBrowserOptions.jsx";
 
-function Browse() {
+export default function Browse() {
   return (
     <>
       <div className="flex justify-center items-center">
@@ -11,5 +11,3 @@ function Browse() {
     </>
   );
 }
-
-export default Browse;

@@ -2,7 +2,7 @@ import ClubPageBanner from "../components/clubPageBanner.jsx";
 import ClubPageMessages from "../components/clubPageMessages.jsx";
 import ClubPageDescription from "../components/clubPageDescription.jsx";
 
-function ClubPage() {
+export default function ClubPage() {
   return (
     <>
       {/* Club banner */}
@@ -22,5 +22,3 @@ function ClubPage() {
     </>
   );
 }
-
-export default ClubPage;

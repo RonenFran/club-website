@@ -1,7 +1,7 @@
 import UpcomingEvents from "../components/upcomingEvents";
 import HomeFeed from "../components/homeFeed";
 
-function Home() {
+export default function Home() {
   return (
     <div className="grid grid-cols-3 gap-4">
       {/* Left side tab */}
@@ -39,5 +39,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

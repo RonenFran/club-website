@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function SignUp() {
+export default function SignUp() {
   return (
     // Page container
     <div className="flex justify-center items-center h-screen w-screen">
@@ -104,5 +104,3 @@ function SignUp() {
     </div>
   );
 }
-
-export default SignUp;

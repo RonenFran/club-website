@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function SignIn() {
+export default function SignIn() {
   return (
     // Page container
     <div className="flex justify-center items-center h-screen w-screen">
@@ -70,5 +70,3 @@ function SignIn() {
     </div>
   );
 }
-
-export default SignIn;
