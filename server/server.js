@@ -40,20 +40,14 @@ app.get("/api/clubs/:clubId/members", async (req, res) => {
   }
 });
 
-app.get("/api/clubs/:name/membercount", async (req, res) => {
-  const { name } = req.params;
+app.get("/api/membership/:clubId", async (req, res) => {
+  const { clubId } = req.params;
 
   try {
-    const memberCount = await db("Club")
-      .leftJoin("Membership", "Club.clubId", "Membership.clubId")
-      .where("Club.name", name)
-      .groupBy("Club.clubId")
-      .count("Membership.userId as count")
+    const memberCount = await db("Membership")
+      .where("clubId", clubId)
+      .count("userId as count")
       .first();
-
-    if (!memberCount) {
-      return res.status(404).json({ error: "No such club exists" });
-    }
 
     res.json(Number(memberCount.count));
   } catch (err) {

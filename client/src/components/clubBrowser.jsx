@@ -5,19 +5,15 @@ import axios from "axios";
 export default function ClubBrowser() {
   const [clubMemCount, setCount] = useState(0);
 
-  const fetchClub = async (clubName) => {
-    const memberCount = await axios.get(
-      `http://localhost:8080/api/clubs/${encodeURIComponent(clubName)}/membercount`
-    );
-    return memberCount.data;
-  };
-
   useEffect(() => {
-    const run = async () => {
-      const data = await fetchClub("Debate Team");
-      setCount(data);
+    const fetch = async () => {
+      const res = await axios.get(
+        `http://localhost:8080/api/clubs/${encodeURIComponent("Debate Team")}/membercount`
+      );
+      setCount(res.data);
     };
-    run();
+
+    fetch();
   }, []);
 
   return (

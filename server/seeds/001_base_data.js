@@ -1,12 +1,16 @@
 /**
  * @param { import("knex").Knex } knex
- * @returns { Promise<void> } 
+ * @returns { Promise<void> }
  */
-exports.seed = async function(knex) {
+exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex("Membership").del()
-  await knex("Club").del()
-  await knex("User").del()
+  await knex("Membership").del();
+  await knex("Club").del();
+  await knex("User").del();
+
+  await knex.raw("ALTER TABLE User AUTO_INCREMENT = 1");
+  await knex.raw("ALTER TABLE Club AUTO_INCREMENT = 1");
+  await knex.raw("ALTER TABLE Membership AUTO_INCREMENT = 1");
 
   await knex("User").insert([
     { firstName: "John", lastName: "Smith", email: "john.smith@gmail.com", passwordHash: "hash" },
@@ -32,10 +36,10 @@ exports.seed = async function(knex) {
   ]);
 
   await knex("Club").insert([
-    { name: "Equestrian Society" },
-    { name: "Debate Team" },
-    { name: "League of Legends E-Sports Team" },
-    { name: "Chess Club" },
+    { name: "Equestrian Society", iconPath: "/horse_cropped.jpg" },
+    { name: "Debate Team", iconPath: "/podium.jpg" },
+    { name: "League of Legends E-Sports Team", iconPath: "/league_cropped.jpg" },
+    { name: "Chess Club", iconPath: "/chess_cropped.png" },
     { name: "Computer Science Society" },
     { name: "Photography Club" },
     { name: "International Students Association" },
@@ -79,4 +83,3 @@ exports.seed = async function(knex) {
     { clubId: 10, userId: 20, status: "joined" },
   ]);
 };
-
