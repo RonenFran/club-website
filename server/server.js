@@ -9,7 +9,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get("/api/Club", async (req, res) => {
+app.get("/api/clubs", async (req, res) => {
   try {
     clubs = await db("Club").select("*");
     res.json(clubs);
@@ -19,6 +19,7 @@ app.get("/api/Club", async (req, res) => {
   }
 });
 
+// Retrieve all the members in a certain club by clubId
 app.get("/api/clubs/:clubId/members", async (req, res) => {
   const { clubId } = req.params;
 
@@ -40,6 +41,7 @@ app.get("/api/clubs/:clubId/members", async (req, res) => {
   }
 });
 
+// Retrieve the member count of a certain club by clubId
 app.get("/api/membership/:clubId", async (req, res) => {
   const { clubId } = req.params;
 

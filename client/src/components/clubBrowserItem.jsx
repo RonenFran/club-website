@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -23,7 +24,7 @@ export default function ClubBrowserItem({ club }) {
       <div className="flex flex-row gap-6 p-2 border-2 border-primary rounded-md items-center">
         {/* Icon */}
         <img
-          src={club.icon}
+          src={club.iconPath}
           alt="Club icon"
           className="size-20 border-2 border-primary rounded-[50%]"
         />
@@ -36,7 +37,7 @@ export default function ClubBrowserItem({ club }) {
               <circle r="1" cx="2.5" cy="1.5" />
               <circle r="1.5" cx="2.5" cy="4.5" />
             </svg>
-            {clubCount}
+            {clubCount + " Members"}
           </div>
         </div>
 

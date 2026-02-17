@@ -36,7 +36,11 @@ exports.seed = async function (knex) {
   ]);
 
   await knex("Club").insert([
-    { name: "Equestrian Society", iconPath: "/horse_cropped.jpg", clubLink: "/ClubPage" },
+    {
+      name: "Equestrian Society",
+      iconPath: "/horse_cropped.jpg",
+      clubLink: "/ClubPage",
+    },
     { name: "Debate Team", iconPath: "/podium.jpg" },
     { name: "League of Legends E-Sports Team", iconPath: "/league_cropped.jpg" },
     { name: "Chess Club", iconPath: "/chess_cropped.png" },
