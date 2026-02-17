@@ -2,7 +2,6 @@
  * @param {import("knex").Knex} knex
  */
 exports.up = async function up(knex) {
-
   await knex.schema
     .createTable("User", (t) => {
       t.increments("userId").primary();
@@ -25,6 +24,7 @@ exports.up = async function up(knex) {
       t.text("description").nullable();
       t.string("bannerPath", 255).nullable();
       t.string("iconPath", 255).nullable();
+      t.string("clubLink", 255).nullable();
       t.timestamps(true, true);
 
       t.engine("InnoDB");
@@ -34,15 +34,13 @@ exports.up = async function up(knex) {
 
     .createTable("Membership", (t) => {
       t.primary(["clubId", "userId"]);
-      t
-        .integer("clubId")
+      t.integer("clubId")
         .notNullable()
         .unsigned()
         .references("clubId")
         .inTable("Club")
         .onDelete("CASCADE");
-      t
-        .integer("userId")
+      t.integer("userId")
         .notNullable()
         .unsigned()
         .references("userId")

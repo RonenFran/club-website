@@ -19,35 +19,37 @@ export default function ClubBrowserItem({ club }) {
   }, [club.clubId]);
 
   return (
-    <div className="flex flex-row gap-6 p-2 border-2 border-primary rounded-md items-center">
-      {/* Icon */}
-      <img
-        src={club.icon}
-        alt="Club icon"
-        className="size-20 border-2 border-primary rounded-[50%]"
-      />
+    <Link to={club.clubLink}>
+      <div className="flex flex-row gap-6 p-2 border-2 border-primary rounded-md items-center">
+        {/* Icon */}
+        <img
+          src={club.icon}
+          alt="Club icon"
+          className="size-20 border-2 border-primary rounded-[50%]"
+        />
 
-      {/* Club and Members */}
-      <div className="flex flex-col gap-2 p-1">
-        <span className="font-semibold text-primary text-xl">{club.name}</span>
-        <div className="flex items-center mt-1 text-gray-600">
-          <svg viewBox="0 0 5 5" fill="currentColor" aria-hidden="true" className="size-4 mr-1">
-            <circle r="1" cx="2.5" cy="1.5" />
-            <circle r="1.5" cx="2.5" cy="4.5" />
-          </svg>
-          {clubCount}
+        {/* Club and Members */}
+        <div className="flex flex-col gap-2 p-1">
+          <span className="font-semibold text-primary text-xl">{club.name}</span>
+          <div className="flex items-center mt-1 text-gray-600">
+            <svg viewBox="0 0 5 5" fill="currentColor" aria-hidden="true" className="size-4 mr-1">
+              <circle r="1" cx="2.5" cy="1.5" />
+              <circle r="1.5" cx="2.5" cy="4.5" />
+            </svg>
+            {clubCount}
+          </div>
         </div>
-      </div>
 
-      {/* Add club button */}
-      <svg
-        viewBox="0 0 10 10"
-        fill="white"
-        className="bg-primary size-12 border-2 border-primary rounded-md ml-auto mr-2"
-      >
-        <rect width="7" height="1.5" x="1.5" y="4.25" rx="0.5" />
-        <rect width="1.5" height="7" x="4.25" y="1.5" ry="0.5" />
-      </svg>
-    </div>
+        {/* Add club button */}
+        <svg
+          viewBox="0 0 10 10"
+          fill="white"
+          className="bg-primary size-12 border-2 border-primary rounded-md ml-auto mr-2"
+        >
+          <rect width="7" height="1.5" x="1.5" y="4.25" rx="0.5" />
+          <rect width="1.5" height="7" x="4.25" y="1.5" ry="0.5" />
+        </svg>
+      </div>
+    </Link>
   );
 }

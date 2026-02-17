@@ -3,17 +3,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function ClubBrowser() {
-  const [clubMemCount, setCount] = useState(0);
+  const [clubs, setClubs] = useState({});
 
   useEffect(() => {
-    const fetch = async () => {
-      const res = await axios.get(
-        `http://localhost:8080/api/clubs/${encodeURIComponent("Debate Team")}/membercount`
-      );
-      setCount(res.data);
+    const fetchClubs = async () => {
+      const res = await axios.get(`http://localhost:8080/api/clubs`);
+      setClubs(res.data);
     };
 
-    fetch();
+    fetchClubs();
   }, []);
 
   return (
