@@ -1,6 +1,25 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function ClubBrowser() {
+  const [clubMemCount, setCount] = useState(0);
+
+  const fetchClub = async (clubName) => {
+    const memberCount = await axios.get(
+      `http://localhost:8080/api/clubs/${encodeURIComponent(clubName)}/membercount`
+    );
+    return memberCount.data;
+  };
+
+  useEffect(() => {
+    const run = async () => {
+      const data = await fetchClub("Debate Team");
+      setCount(data);
+    };
+    run();
+  }, []);
+
   return (
     <>
       {/* Dropdown container */}
@@ -17,9 +36,7 @@ export default function ClubBrowser() {
 
             {/* Club and Members */}
             <div className="flex flex-col gap-2 p-1">
-              <span class="font-semibold text-primary text-xl">
-                Equestrian Society
-              </span>
+              <span class="font-semibold text-primary text-xl">Equestrian Society</span>
               <div class="flex items-center mt-1 text-gray-600">
                 <svg
                   viewBox="0 0 5 5"
@@ -58,9 +75,7 @@ export default function ClubBrowser() {
 
             {/* Club and Members */}
             <div className="flex flex-col gap-2 p-1">
-              <span class="font-semibold text-primary text-xl">
-                Debate Team
-              </span>
+              <span class="font-semibold text-primary text-xl">Debate Team</span>
               <div class="flex items-center mt-1 text-gray-600">
                 <svg
                   viewBox="0 0 5 5"
