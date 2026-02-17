@@ -7,9 +7,10 @@ exports.up = async function up(knex) {
     .createTable("User", (t) => {
       t.increments("userId").primary();
       t.string("firstName", 50).notNullable();
+      t.string("preferredName", 50).nullable();
       t.string("lastName", 50).notNullable();
       t.string("email", 255).notNullable().unique();
-      t.string("displayName", 100).notNullable().unique();
+      t.string("displayName", 100).nullable().unique();
       t.string("passwordHash", 255).notNullable();
       t.timestamps(true, true);
 
