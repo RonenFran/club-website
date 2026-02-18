@@ -155,7 +155,7 @@ app.post(
       }
 
       if (formData.password != formData.passwordRe) {
-        return res.status(400).json({ error: "Passwords don't match" });
+        return res.status(409).json({ error: "matchingPassword" });
       }
       const passwordHash = await bcrypt.hash(formData.password, SALT_ROUNDS);
 

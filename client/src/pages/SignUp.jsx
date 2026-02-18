@@ -13,14 +13,18 @@ export default function SignUp() {
   });
 
   const navigate = useNavigate();
+  const [error, setError] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const res = await axios.post("/api/auth/sign-up", formData);
-      navigate("/home");
-    } catch (err) {}
+      navigate("/");
+    } catch (err) {
+      for (const error of err) {
+      }
+    }
   };
 
   return (
