@@ -1,6 +1,6 @@
 import Return from "../components/return";
-import { Link } from "react-router-dom";
-import { useState, useNavigate } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 
 export default function SignUp() {
@@ -118,7 +118,7 @@ export default function SignUp() {
           {/* Sign in instead */}
           <p className="mt-2 self-center text-sm">
             Already have an account?{" "}
-            <Link to="/SignIn" className="text-primary font-bold hover:underline">
+            <Link to="/signin" className="text-primary font-bold hover:underline">
               Sign in
             </Link>
           </p>

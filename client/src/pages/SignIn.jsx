@@ -52,7 +52,7 @@ export default function SignIn() {
           {/* Sign in instead */}
           <p className="mt-2 self-center text-sm">
             Don't have an account yet?{" "}
-            <Link to="/SignUp" className="text-primary font-bold hover:underline">
+            <Link to="/signup" className="text-primary font-bold hover:underline">
               Sign Up
             </Link>
           </p>

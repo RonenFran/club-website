@@ -13,29 +13,24 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/Browse" className="select-none text-secondary font-bold">
+          <Link to="/browse" className="select-none text-secondary font-bold">
             Browse
           </Link>
         </li>
         <li>
-          <Link to="/MyClubs" className="select-none text-secondary font-bold">
+          <Link to="/myclubs" className="select-none text-secondary font-bold">
             My Clubs
           </Link>
         </li>
         <li>
-          <Link to="/Events" className="select-none text-secondary font-bold">
+          <Link to="/events" className="select-none text-secondary font-bold">
             Events
           </Link>
         </li>
       </ul>
 
-      <Link to="/SignUp">
-        <svg
-          viewBox="0 0 5 5"
-          fill="white"
-          aria-hidden="true"
-          className="size-8 mr-4"
-        >
+      <Link to="/signup">
+        <svg viewBox="0 0 5 5" fill="white" aria-hidden="true" className="size-8 mr-4">
           <circle r="1" cx="2.5" cy="1.5" />
           <circle r="1.7" cx="2.5" cy="4.5" />
         </svg>

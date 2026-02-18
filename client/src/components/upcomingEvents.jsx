@@ -19,15 +19,9 @@ export default function UpcomingEvents() {
 
           {/* Description */}
           <div className="pl-4">
-            <h3 className="font-bold text-xl text-primary-600 select-none">
-              SMUSA Wonderland
-            </h3>
-            <h4 className="mb-1 text-primary-500 font-semibold select-none">
-              SMUSA
-            </h4>
-            <span className="font-bold px-4 bg-yellow-300 rounded-md select-none">
-              Social
-            </span>
+            <h3 className="font-bold text-xl text-primary-600 select-none">SMUSA Wonderland</h3>
+            <h4 className="mb-1 text-primary-500 font-semibold select-none">SMUSA</h4>
+            <span className="font-bold px-4 bg-yellow-300 rounded-md select-none">Social</span>
           </div>
         </div>
 
@@ -42,15 +36,9 @@ export default function UpcomingEvents() {
 
           {/* Description */}
           <div className="pl-4">
-            <h3 className="font-bold text-xl text-primary-600 select-none">
-              Business Seminar
-            </h3>
-            <h4 className="mb-1 text-primary-500 font-semibold select-none">
-              John Smith
-            </h4>
-            <span className="font-bold px-4 bg-primary-200 rounded-md select-none">
-              Business
-            </span>
+            <h3 className="font-bold text-xl text-primary-600 select-none">Business Seminar</h3>
+            <h4 className="mb-1 text-primary-500 font-semibold select-none">John Smith</h4>
+            <span className="font-bold px-4 bg-primary-200 rounded-md select-none">Business</span>
           </div>
         </div>
 
@@ -65,15 +53,9 @@ export default function UpcomingEvents() {
 
           {/* Description */}
           <div className="pl-4">
-            <h3 className="font-bold text-xl text-primary-600 select-none">
-              GenAI Hackathon
-            </h3>
-            <h4 className="mb-1 text-primary-500 font-semibold select-none">
-              AI Incorporated
-            </h4>
-            <span className="font-bold px-4 bg-blue-200 rounded-md select-none">
-              Technology
-            </span>
+            <h3 className="font-bold text-xl text-primary-600 select-none">GenAI Hackathon</h3>
+            <h4 className="mb-1 text-primary-500 font-semibold select-none">AI Incorporated</h4>
+            <span className="font-bold px-4 bg-blue-200 rounded-md select-none">Technology</span>
           </div>
         </div>
 
@@ -88,15 +70,9 @@ export default function UpcomingEvents() {
 
           {/* Description */}
           <div className="pl-4">
-            <h3 className="font-bold text-xl text-primary-600 select-none">
-              Valentines Ball
-            </h3>
-            <h4 className="mb-1 text-primary-500 font-semibold select-none">
-              SMU Events
-            </h4>
-            <span className="font-bold px-4 bg-yellow-300 rounded-md select-none">
-              Social
-            </span>
+            <h3 className="font-bold text-xl text-primary-600 select-none">Valentines Ball</h3>
+            <h4 className="mb-1 text-primary-500 font-semibold select-none">SMU Events</h4>
+            <span className="font-bold px-4 bg-yellow-300 rounded-md select-none">Social</span>
           </div>
         </div>
       </div>
