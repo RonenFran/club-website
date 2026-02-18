@@ -8,7 +8,7 @@ const corsOptions = {
 };
 
 const session = require("express-session");
-const { query, matchedData, validationResult } = require("express-validator");
+const { body, matchedData, validationResult } = require("express-validator");
 const MySQLStore = require("express-mysql-session")(session);
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
@@ -134,39 +134,55 @@ app.post("/api/auth/logout", (req, res) => {
   });
 });
 
-app.post("/api/auth/sign-up", async (req, res) => {
-  try {
-    const { firstName, lastName, email, password, passwordRe } = req.body;
+app.post(
+  "/api/auth/sign-up",
+  body("firstName").trim().isAlpha().notEmpty().escape(),
+  body("lastName").trim().isAlpha().notEmpty().escape(),
+  body("email").trim().isEmail().notEmpty().normalizeEmail(),
+  body("password").trim().isLength({ min: 8 }).escape(),
+  body("passwordRe").trim().isLength({ min: 8 }).escape(),
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
 
-    if (!firstName || !lastName || !email || !password || !passwordRe) {
-      return res.status(400).json({ error: "Missing fields" });
+      const formData = matchedData(req);
+      const existing = await db("User").where({ email: formData.email }).first();
+      if (existing) {
+        return res.status(409).json({ error: "Email already in use" });
+      }
+
+      if (formData.password != formData.passwordRe) {
+        return res.status(400).json({ error: "Passwords don't match" });
+      }
+      const passwordHash = await bcrypt.hash(formData.password, SALT_ROUNDS);
+
+      const [userId] = await db("User").insert({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        passwordHash,
+      });
+
+      req.session.regenerate((err) => {
+        if (err) return res.status(500).json({ error: "Sign up failed" });
+        req.session.userId = userId;
+
+        res.status(201).json({
+          userId,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+        });
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Sign up failed" });
     }
-
-    const existing = await db("User").where({ email }).first();
-    if (existing) {
-      return res.status(409).json({ error: "Email already in use" });
-    }
-
-    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
-
-    const [userId] = await db("User").insert({
-      firstName,
-      lastName,
-      email,
-      passwordHash,
-    });
-
-    req.session.regenerate((err) => {
-      if (err) return res.status(500).json({ error: "Sign up failed" });
-      req.session.userId = userId;
-
-      res.status(201).json({ userId, firstName, lastName, email });
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Sign up failed" });
   }
-});
+);
 
 app.post("/api/auth/sign-in", loginLimiter, async (req, res) => {
   try {
