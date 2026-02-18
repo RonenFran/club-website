@@ -1,5 +1,6 @@
 import Return from "../components/return";
-import { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function SignIn() {
   return (
@@ -12,7 +13,11 @@ export default function SignIn() {
       <div className="flex flex-col items-start w-[30vw] h-[42vh] text-center shadow-[2px_6px_20px_0_rgba(0,0,0,0.25)]">
         <h1 className="self-center font-bold text-5xl mt-6">Sign In</h1>
         {/* Sign up form */}
-        <form className="flex flex-col items-start mx-12 my-8 w-[85%] h-full">
+        <form
+          method="post"
+          action={`${axios.defaults.baseURL}/api/auth/sign-in`}
+          className="flex flex-col items-start mx-12 my-8 w-[85%] h-full"
+        >
           {/* Email or Username */}
           <label htmlFor="user" className="font-bold">
             Email or Username
@@ -21,7 +26,7 @@ export default function SignIn() {
             type="text"
             id="user"
             name="user"
-            value="Enter your email or username"
+            placeholder="Enter your email or username"
             className="w-full border-b-2 text-[#b1b1b1]"
           />
 
@@ -33,14 +38,14 @@ export default function SignIn() {
             type="text"
             id="password"
             name="password"
-            value="Enter your password"
+            placeholder="Enter your password"
             className="w-full border-b-2 text-[#b1b1b1]"
           />
 
           {/* Submit Button */}
           <input
             type="submit"
-            value="Sign In"
+            placeholder="Sign In"
             className="mt-auto self-center font-bold text-secondary bg-primary w-48 h-10 rounded-sm"
           ></input>
 

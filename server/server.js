@@ -8,6 +8,7 @@ const corsOptions = {
 };
 
 const session = require("express-session");
+const { query, matchedData, validationResult } = require("express-validator");
 const MySQLStore = require("express-mysql-session")(session);
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
@@ -93,7 +94,7 @@ app.get("/api/clubs/:clubId/members", async (req, res) => {
 });
 
 // Retrieve the member count of a certain club by clubId
-app.get("/api/membership/:clubId", async (req, res) => {
+app.get("/api/members/:clubId", async (req, res) => {
   const { clubId } = req.params;
 
   try {
@@ -133,11 +134,11 @@ app.post("/api/auth/logout", (req, res) => {
   });
 });
 
-app.post("/api/auth/signup", async (req, res) => {
+app.post("/api/auth/sign-up", async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, passwordRe } = req.body;
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !email || !password || !passwordRe) {
       return res.status(400).json({ error: "Missing fields" });
     }
 
@@ -156,18 +157,18 @@ app.post("/api/auth/signup", async (req, res) => {
     });
 
     req.session.regenerate((err) => {
-      if (err) return res.status(500).json({ error: "Login failed" });
+      if (err) return res.status(500).json({ error: "Sign up failed" });
       req.session.userId = userId;
 
       res.status(201).json({ userId, firstName, lastName, email });
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Signup failed" });
+    res.status(500).json({ error: "Sign up failed" });
   }
 });
 
-app.post("/api/auth/login", loginLimiter, async (req, res) => {
+app.post("/api/auth/sign-in", loginLimiter, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -186,7 +187,7 @@ app.post("/api/auth/login", loginLimiter, async (req, res) => {
     }
 
     req.session.regenerate((err) => {
-      if (err) return res.status(500).json({ error: "Login failed" });
+      if (err) return res.status(500).json({ error: "Sign in failed" });
 
       req.session.userId = user.userId;
 
@@ -199,7 +200,7 @@ app.post("/api/auth/login", loginLimiter, async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Login failed" });
+    res.status(500).json({ error: "Sign in failed" });
   }
 });
 
