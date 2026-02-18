@@ -11,7 +11,7 @@ import SignIn from "./pages/SignIn";
 
 function RootLayout() {
   const { pathname } = useLocation();
-  const hideNavbarRoutes = ["/signIn", "/signUp"];
+  const hideNavbarRoutes = ["/signin", "/signup"];
   const showNavbar = !hideNavbarRoutes.includes(pathname);
 
   return (

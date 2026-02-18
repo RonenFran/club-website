@@ -19,7 +19,7 @@ export default function SignUp() {
 
     try {
       const res = await axios.post("/api/auth/sign-up", formData);
-      navigate("/Home");
+      navigate("/home");
     } catch (err) {}
   };
 
