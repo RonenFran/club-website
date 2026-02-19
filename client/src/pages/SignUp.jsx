@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function SignUp() {
-  // Form data inputs
+  // Sign up data inputs
   const [formData, setFormData] = useState({});
 
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ export default function SignUp() {
     });
 
     // Send back to home page upon account creation
-    if (res.status === 201) {
+    if (res.status === 200) {
       navigate("/");
     }
   };
@@ -50,7 +50,7 @@ export default function SignUp() {
     <div className="flex justify-center items-center h-screen w-screen">
       <Return />
       {/* Sign up div */}
-      <div className="flex flex-col items-start w-[40vw] text-center shadow-[2px_6px_20px_0_rgba(0,0,0,0.25)]">
+      <div className="flex flex-col items-start w-[600px] text-center shadow-[2px_6px_20px_0_rgba(0,0,0,0.25)]">
         <h1 className="self-center font-bold text-5xl mt-6">Sign Up</h1>
         {/* Sign up form */}
         <form
@@ -147,7 +147,7 @@ export default function SignUp() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="mt-6 self-center font-bold text-secondary bg-primary w-48 h-10 rounded-sm"
+            className="mt-8 self-center font-bold text-secondary bg-primary w-48 h-10 rounded-sm"
           >
             Sign Up
           </button>

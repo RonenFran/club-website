@@ -21,7 +21,7 @@ if (!process.env.SESSION_SECRET) {
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 100,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Too many login attempts, try again later." },
