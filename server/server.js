@@ -136,11 +136,31 @@ app.post("/api/auth/logout", (req, res) => {
 
 app.post(
   "/api/auth/sign-up",
-  body("firstName").trim().isAlpha().notEmpty().escape(),
-  body("lastName").trim().isAlpha().notEmpty().escape(),
-  body("email").trim().isEmail().notEmpty().normalizeEmail(),
-  body("password").trim().isLength({ min: 8 }).escape(),
-  body("passwordRe").trim().isLength({ min: 8 }).escape(),
+  body("firstName")
+    .trim()
+    .matches(/^[\p{L}\p{M}\p{Zs}'-]/u)
+    .withMessage("Names can include letters, spaces, dashes, and apostrophes")
+    .notEmpty()
+    .withMessage("Names cannot be empty")
+    .escape(),
+  body("lastName")
+    .trim()
+    .matches(/^[\p{L}\p{M}\p{Zs}'-]/u)
+    .withMessage("Names can include letters, spaces, dashes, and apostrophes")
+    .notEmpty()
+    .withMessage("Names cannot be empty")
+    .escape(),
+  body("email").trim().isEmail().withMessage("Emails must be valid email format").normalizeEmail(),
+  body("password")
+    .trim()
+    .isLength({ min: 8 })
+    .withMessage("Passwords must be minimum 8 characters")
+    .escape(),
+  body("passwordRe")
+    .trim()
+    .isLength({ min: 8 })
+    .withMessage("Passwords must be minimum 8 characters")
+    .escape(),
   async (req, res) => {
     try {
       const errors = validationResult(req);
@@ -151,11 +171,11 @@ app.post(
       const formData = matchedData(req);
       const existing = await db("User").where({ email: formData.email }).first();
       if (existing) {
-        return res.status(409).json({ error: "Email already in use" });
+        return res.status(409).json({ error: "Email already in use", path: "email" });
       }
 
       if (formData.password != formData.passwordRe) {
-        return res.status(409).json({ error: "matchingPassword" });
+        return res.status(409).json({ error: "Passwords do not match", path: "passwordRe" });
       }
       const passwordHash = await bcrypt.hash(formData.password, SALT_ROUNDS);
 
@@ -167,7 +187,7 @@ app.post(
       });
 
       req.session.regenerate((err) => {
-        if (err) return res.status(500).json({ error: "Sign up failed" });
+        if (err) return res.status(500).json({ error: "Sign in failed", path: "passwordRe" });
         req.session.userId = userId;
 
         res.status(201).json({
