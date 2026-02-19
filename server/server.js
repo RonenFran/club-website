@@ -138,7 +138,7 @@ app.post(
   "/api/auth/sign-up",
   body("firstName")
     .trim()
-    .matches(/^[\p{L}\p{M}\p{Zs}'-]/u)
+    .matches(/^[\p{L}\p{M}\p{Zs}'-]+$/u)
     .withMessage("Names can include letters, spaces, dashes, and apostrophes")
     .notEmpty()
     .withMessage("Names cannot be empty")

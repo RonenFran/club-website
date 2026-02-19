@@ -4,13 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    passwordRe: "",
-  });
+  // Form data inputs
+  const [formData, setFormData] = useState({});
 
   const navigate = useNavigate();
   // Errors on incorrect input
@@ -152,7 +147,7 @@ export default function SignUp() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="self-center mt-auto font-bold text-secondary bg-primary w-48 h-10 rounded-sm"
+            className="mt-6 self-center font-bold text-secondary bg-primary w-48 h-10 rounded-sm"
           >
             Sign Up
           </button>
