@@ -6,6 +6,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { QueryClient } from "@tanstack/react-query";
 import Navbar from "./components/navbar";
 import Home from "./routes/Home";
 import Browse from "./routes/Browse";
@@ -46,4 +47,8 @@ const router = createBrowserRouter(
 
 export default function App() {
   return <RouterProvider router={router} fallbackElement={<p>Initial Load...</p>} />;
+}
+
+async function getUser() {
+  const userID = await axios.get("api/auth/me");
 }

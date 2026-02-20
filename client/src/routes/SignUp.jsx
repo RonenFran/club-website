@@ -20,29 +20,30 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post("/api/auth/sign-up", formData).catch(function (error) {
-      const errorData = error.response.data;
-      switch (error.status) {
-        // Validation errors with inputs
-        case 400:
-          const newErrors = {};
-          for (let i = 0; i < errorData.errors.length; i++) {
-            if (errorData.errors[i].path === "firstName" || errorData.errors[i].path === "lastName")
-              newErrors["names"] = errorData.errors[i].msg;
-            newErrors[errorData.errors[i].path] = errorData.errors[i].msg;
-          }
-          setErr(newErrors);
-          break;
-        // Conflicts among input data or server data
-        case 409:
-          setErr({ [errorData.path]: errorData.error });
-      }
-    });
-
-    // Send back to home page upon account creation
-    if (res.status === 200) {
-      navigate("/");
-    }
+    const res = await axios
+      .post("/api/auth/sign-up", formData)
+      .then(() => navigate("/"))
+      .catch(function (error) {
+        const errorData = error.response.data;
+        switch (error.status) {
+          // Validation errors with inputs
+          case 400:
+            const newErrors = {};
+            for (let i = 0; i < errorData.errors.length; i++) {
+              if (
+                errorData.errors[i].path === "firstName" ||
+                errorData.errors[i].path === "lastName"
+              )
+                newErrors["names"] = errorData.errors[i].msg;
+              newErrors[errorData.errors[i].path] = errorData.errors[i].msg;
+            }
+            setErr(newErrors);
+            break;
+          // Conflicts among input data or server data
+          case 409:
+            setErr({ [errorData.path]: errorData.error });
+        }
+      });
   };
 
   return (
