@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Return() {
   return (
-    <Link to="/clubpage">
+    <Link to="/">
       <div className="flex items-center absolute w-24 top-4 left-4">
         <svg viewBox="0 0 100 100">
           <polygon points="20,0 0,50 10,50 30,0" fill="maroon" />
