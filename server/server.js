@@ -145,7 +145,7 @@ app.post(
     .escape(),
   body("lastName")
     .trim()
-    .matches(/^[\p{L}\p{M}\p{Zs}'-]/u)
+    .matches(/^[\p{L}\p{M}\p{Zs}'-]+$/u)
     .withMessage("Names can include letters, spaces, dashes, and apostrophes")
     .notEmpty()
     .withMessage("Names cannot be empty")

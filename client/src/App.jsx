@@ -6,7 +6,6 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { QueryClient } from "@tanstack/react-query";
 import Navbar from "./components/navbar";
 import Home from "./routes/Home";
 import Browse from "./routes/Browse";
@@ -35,7 +34,7 @@ function Root() {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Root />}>
+    <Route path="/" id="root" element={<Root />} loader={getUser}>
       <Route index element={<Home />} />
       <Route path="browse" element={<Browse />} />
       <Route path="clubpage" element={<ClubPage />} />
@@ -50,5 +49,6 @@ export default function App() {
 }
 
 async function getUser() {
-  const userID = await axios.get("api/auth/me");
+  const response = await axios.get("/api/auth/me");
+  return response.data;
 }
