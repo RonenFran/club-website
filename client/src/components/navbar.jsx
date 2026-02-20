@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"; // Importing Link for navigation
+import ProfileDropdown from "./profileDropdown";
 
 export default function Navbar() {
   return (
@@ -29,14 +30,16 @@ export default function Navbar() {
         </li>
       </ul>
 
-      <Link to="/signup">
-        <div className="bg-primary-400 size-12 p-2 rounded-3xl mr-4">
+      <ProfileDropdown />
+      {/* 
+      <Link to="/signup"> */}
+      {/* <div className="bg-primary-400 size-12 p-2 rounded-3xl mr-4">
           <svg viewBox="0 0 5 5" fill="white" aria-hidden="true" className="size-8 mr-4">
             <circle r="1" cx="2.5" cy="1.5" />
             <circle r="1.7" cx="2.5" cy="4.5" />
           </svg>
         </div>
-      </Link>
+      </Link> */}
     </nav>
   );
 }

@@ -12,6 +12,7 @@ import Browse from "./routes/Browse";
 import ClubPage from "./routes/ClubPage";
 import SignUp from "./routes/SignUp";
 import Login from "./routes/Login";
+import Logout from "./routes/Logout";
 // import MyClubs from "./pages/MyClubs";
 // import Events from "./pages/Events";
 // import Profile from "./pages/Profile";
@@ -21,7 +22,7 @@ axios.defaults.withCredentials = true;
 
 function Root() {
   const { pathname } = useLocation();
-  const hideNavbarRoutes = ["/login", "/signup"];
+  const hideNavbarRoutes = ["/login", "/signup", "/logout"];
   const showNavbar = !hideNavbarRoutes.includes(pathname);
 
   return (
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
       <Route path="clubpage" element={<ClubPage />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
+      <Route path="logout" id="logout" element={<Logout />} loader={logoutUser} />
     </Route>
   )
 );
@@ -50,5 +52,10 @@ export default function App() {
 
 async function getUser() {
   const response = await axios.get("/api/auth/me");
+  return response.data;
+}
+
+async function logoutUser() {
+  const response = await axios.post("/api/auth/logout");
   return response.data;
 }
