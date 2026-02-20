@@ -11,7 +11,7 @@ import Home from "./routes/Home";
 import Browse from "./routes/Browse";
 import ClubPage from "./routes/ClubPage";
 import SignUp from "./routes/SignUp";
-import SignIn from "./routes/SignIn";
+import Login from "./routes/Login";
 // import MyClubs from "./pages/MyClubs";
 // import Events from "./pages/Events";
 // import Profile from "./pages/Profile";
@@ -21,7 +21,7 @@ axios.defaults.withCredentials = true;
 
 function Root() {
   const { pathname } = useLocation();
-  const hideNavbarRoutes = ["/signin", "/signup"];
+  const hideNavbarRoutes = ["/login", "/signup"];
   const showNavbar = !hideNavbarRoutes.includes(pathname);
 
   return (
@@ -38,7 +38,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="browse" element={<Browse />} />
       <Route path="clubpage" element={<ClubPage />} />
-      <Route path="signin" element={<SignIn />} />
+      <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
     </Route>
   )

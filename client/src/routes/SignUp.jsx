@@ -155,8 +155,8 @@ export default function SignUp() {
           {/* Sign in instead */}
           <p className="mt-2 self-center text-sm">
             Already have an account?{" "}
-            <Link to="/signin" className="text-primary font-bold hover:underline">
-              Sign in
+            <Link to="/login" className="text-primary font-bold hover:underline">
+              Login here
             </Link>
           </p>
         </form>

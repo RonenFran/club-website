@@ -204,7 +204,7 @@ app.post(
   }
 );
 
-app.post("/api/auth/sign-in", loginLimiter, async (req, res) => {
+app.post("/api/auth/login", loginLimiter, async (req, res) => {
   try {
     const { email, password } = req.body;
 

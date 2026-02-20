@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function SignIn() {
+export default function Login() {
   // Sign in data inputs
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function SignIn() {
     e.preventDefault();
 
     const res = await axios
-      .post("/api/auth/sign-in", formData)
+      .post("/api/auth/login", formData)
       .then(() => navigate("/"))
       .catch(function (error) {
         setErrorMessage(error.response.data.error);
@@ -29,7 +29,7 @@ export default function SignIn() {
 
       {/* Sign up div */}
       <div className="flex flex-col items-start w-[600px] h-[42vh] text-center shadow-[2px_6px_20px_0_rgba(0,0,0,0.25)]">
-        <h1 className="self-center font-bold text-5xl mt-6">Sign In</h1>
+        <h1 className="self-center font-bold text-5xl mt-6">Login</h1>
         {/* Sign up form */}
         <form
           onSubmit={handleSubmit}
@@ -70,7 +70,7 @@ export default function SignIn() {
             type="submit"
             className="mt-8 self-center font-bold text-secondary bg-primary w-48 h-10 rounded-sm"
           >
-            Sign In
+            Login in
           </button>
 
           {/* Sign in instead */}
