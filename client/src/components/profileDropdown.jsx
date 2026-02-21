@@ -1,7 +1,8 @@
-import { useRouteLoaderData, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
 
 export default function ProfileDropdown() {
-  const user = useRouteLoaderData("root");
+  const user = useContext(authContext);
   let dropdown = [];
 
   if (user) {

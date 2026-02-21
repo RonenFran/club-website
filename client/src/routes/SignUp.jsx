@@ -1,7 +1,7 @@
 import Return from "../components/return";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+import axios from "../api";
 
 export default function SignUp() {
   // Sign up data inputs

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../api";
 import ClubBrowserItem from "./clubBrowserItem";
 
 export default function ClubBrowser() {
@@ -7,7 +7,7 @@ export default function ClubBrowser() {
 
   useEffect(() => {
     const fetchClubs = async () => {
-      const res = await axios.get(`http://localhost:8080/api/clubs`);
+      const res = await axios.get(`/api/clubs`);
       setClubs(res.data);
     };
 

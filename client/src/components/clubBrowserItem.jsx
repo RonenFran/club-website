@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../api";
 
 export default function ClubBrowserItem({ club }) {
   const [clubCount, setClubCount] = useState(0);
@@ -8,7 +8,7 @@ export default function ClubBrowserItem({ club }) {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/members/${club.clubId}`);
+        const res = await axios.get(`/api/members/${club.clubId}`);
         setClubCount(res.data);
       } catch (err) {
         console.error("Failed to fetch member count", err);
