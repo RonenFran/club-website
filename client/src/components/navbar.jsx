@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"; // Importing Link for navigation
+import { Link } from "react-router-dom";
 import ProfileDropdown from "./profileDropdown";
 
 export default function Navbar() {

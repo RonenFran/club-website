@@ -1,10 +1,26 @@
+import { useEffect, useState } from "react";
 import Return from "../components/return";
-import { useLoaderData } from "react-router-dom";
+import { useAuth } from "../auth";
 
 export default function Logout() {
-  const logoutSuccess = useLoaderData("logout");
-  let message = <p></p>;
-  if (logoutSuccess.ok) {
+  const { signout } = useAuth();
+  const [status, setStatus] = useState("pending");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await signout();
+        setStatus("ok");
+      } catch {
+        setStatus("fail");
+      }
+    })();
+  }, [signout]);
+
+  let message;
+  if (status === "pending") {
+    message = <p className="h-full mt-28 text-3xl">Logging out...</p>;
+  } else if (status === "ok") {
     message = <p className="h-full mt-28 text-3xl">You have been successfully logged out</p>;
   } else {
     message = <p className="h-full mt-28 text-3xl">Something went wrong with your log out</p>;

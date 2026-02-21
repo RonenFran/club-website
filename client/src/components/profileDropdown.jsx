@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useAuth } from "../auth";
 
 export default function ProfileDropdown() {
-  const user = useContext(authContext);
+  const { isAuthenticated } = useAuth();
   let dropdown = [];
 
-  if (user) {
+  if (isAuthenticated) {
     dropdown = (
       <>
         <Link to="/profile">Profile</Link>

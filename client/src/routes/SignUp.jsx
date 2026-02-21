@@ -1,11 +1,18 @@
 import Return from "../components/return";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../auth";
 import axios from "../api";
 
 export default function SignUp() {
   // Sign up data inputs
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    passwordRe: "",
+  });
 
   const navigate = useNavigate();
   // Errors on incorrect input
@@ -17,12 +24,16 @@ export default function SignUp() {
   });
 
   // Form submission function
+  const { refreshUser } = useAuth();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios
+    await axios
       .post("/api/auth/sign-up", formData)
-      .then(() => navigate("/"))
+      .then(async () => {
+        await refreshUser();
+        navigate("/");
+      })
       .catch(function (error) {
         const errorData = error.response.data;
         switch (error.status) {

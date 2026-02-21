@@ -129,7 +129,7 @@ app.get("/api/auth/me", async (req, res) => {
 app.post("/api/auth/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) return res.status(500).json({ error: "logout failed" });
-    res.clearCookie("sid"); // match the cookie name you set in session config
+    res.clearCookie("sid");
     res.json({ ok: true });
   });
 });

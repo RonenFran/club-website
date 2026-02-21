@@ -2,6 +2,7 @@ import Return from "../components/return";
 import axios from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../auth";
 
 export default function Login() {
   // Sign in data inputs
@@ -10,12 +11,16 @@ export default function Login() {
 
   // Error handling
   const [errorMessage, setErrorMessage] = useState("");
+  const { refreshUser } = useAuth();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const res = await axios
       .post("/api/auth/login", formData)
-      .then(() => navigate("/"))
+      .then(async () => {
+        await refreshUser();
+        navigate("/");
+      })
       .catch(function (error) {
         setErrorMessage(error.response.data.error);
       });
