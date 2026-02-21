@@ -1,33 +1,58 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth";
+import { useState, useEffect } from "react";
 
 export default function ProfileDropdown() {
   const { isAuthenticated } = useAuth();
-  let dropdown = [];
+  const [displayDropdown, setDisplayDropdown] = useState("hidden");
 
-  if (isAuthenticated) {
-    dropdown = (
-      <>
-        <Link to="/profile">Profile</Link>
-        <Link to="/logout">Log out</Link>
-      </>
-    );
-  } else {
-    dropdown = (
-      <>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign up</Link>
-      </>
-    );
-  }
+  useEffect(() => {}, [
+    {
+      /* hover */
+    },
+  ]);
+
+  useEffect(
+    () => {},
+    [
+      /* click */
+    ]
+  );
 
   return (
-    <div className="bg-gray-400 size-12 p-2 rounded-3xl mr-4">
-      <svg viewBox="0 0 5 5" fill="white" aria-hidden="true" className="size-8 mr-4">
-        <circle r="1" cx="2.5" cy="1.5" />
-        <circle r="1.7" cx="2.5" cy="4.5" />
-      </svg>
-      {dropdown}
+    <div>
+      <div className="bg-gray-400 size-12 p-2 rounded-3xl mr-6">
+        <svg viewBox="0 0 5 5" fill="white" aria-hidden="true" className="size-8">
+          <circle r="1" cx="2.5" cy="1.5" />
+          <circle r="1.7" cx="2.5" cy="4.5" />
+        </svg>
+      </div>
+
+      {isAuthenticated ? (
+        <div
+          className={`flex flex-col absolute top-20 right-2 w-24 text-center bg-secondary shadow-md rounded-md px-1 z-10 text-lg font-semibold border-[1px] text-primary ${displayDropdown}`}
+        >
+          <Link to="/profile" className="py-1 border-b-2">
+            Profile
+          </Link>
+          <Link to="/logout" className="py-1 z-10">
+            Log out
+          </Link>
+        </div>
+      ) : (
+        <div
+          className={`flex flex-col absolute top-20 right-2 w-24 text-center bg-secondary shadow-md rounded-md px-1 z-10 text-lg font-semibold border-[1px] text-primary ${displayDropdown}`}
+        >
+          <div className="absolute -top-2 right-8 size-4 bg-secondary rotate-45 border-t-[1px] border-l-[1px] -z-10 " />
+
+          <Link to="/login" className="py-1 border-b-2">
+            Login
+          </Link>
+          <Link to="/signup" className="py-1 z-10">
+            Sign up
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
