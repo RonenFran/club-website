@@ -54,7 +54,7 @@ export default function ProfileDropdown() {
           <div className="absolute -top-2 right-6 size-4 bg-secondary rotate-45 border-t-[1px] border-l-[1px] -z-10" />
 
           <Link to="/login" className="py-1 border-b-2">
-            Login
+            Log in
           </Link>
           <Link to="/signup" className="py-1 z-10">
             Sign up

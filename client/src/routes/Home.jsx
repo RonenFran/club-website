@@ -1,5 +1,5 @@
 import UpcomingEvents from "../components/upcomingEvents";
-import HomeFeed from "../components/homeFeed";
+import NewsFeed from "../components/NewsFeed";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
         {/* Popular clubs / news */}
 
         {/* Your feed */}
-        <HomeFeed
+        <NewsFeed
           posts={[
             {
               id: "1",

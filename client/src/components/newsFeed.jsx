@@ -13,11 +13,6 @@ function RowComponent({ index, posts, style }) {
 
 export default function HomeFeed({ posts }) {
   return (
-    <List
-      rowComponent={RowComponent}
-      rowCount={posts.length}
-      rowHeight={50}
-      rowProps={{ posts }}
-    />
+    <List rowComponent={RowComponent} rowCount={posts.length} rowHeight={50} rowProps={{ posts }} />
   );
 }

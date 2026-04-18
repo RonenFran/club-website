@@ -6,11 +6,8 @@ export default function Navbar() {
     <nav className="z-40 flex justify-between items-center bg-primary relative shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
       <ul className="flex justify-start items-center gap-4 text-xl p-4">
         <li>
-          <img src="/smu_logo_white.png" alt="Logo" className="w-40" />
-        </li>
-        <li>
           <Link to="/" className="select-none text-secondary font-bold">
-            Home
+            <img src="/smu_logo_white.png" alt="Logo" className="w-40" />
           </Link>
         </li>
         <li>

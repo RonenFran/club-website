@@ -14,7 +14,7 @@ import ClubPage from "./routes/ClubPage";
 import SignUp from "./routes/SignUp";
 import Login from "./routes/Login";
 import Logout from "./routes/Logout";
-// import MyClubs from "./pages/MyClubs";
+import MyClubs from "./routes/MyClubs";
 // import Events from "./pages/Events";
 // import Profile from "./pages/Profile";
 
@@ -36,6 +36,7 @@ const router = createBrowserRouter(
     <Route path="/" id="root" element={<Root />}>
       <Route index element={<Home />} />
       <Route path="browse" element={<Browse />} />
+      <Route path="myclubs" element={<MyClubs />} />
       <Route path="clubpage" element={<ClubPage />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
