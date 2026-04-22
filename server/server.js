@@ -240,6 +240,29 @@ app.post("/api/auth/login", loginLimiter, async (req, res) => {
   }
 });
 
+// Retrieve the users new notifications from all chats
+app.get("/api/chats/messages/:userId", async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const messages = await db("TextChat")
+      .join("ChatMessage", function () {
+        this.on("TextChat.userId", "=", "ChatMessage.userId").andOn(
+          "TextChat.chatId",
+          "=",
+          "ChatMessage.chatId"
+        );
+      })
+      .where("TextChat.userId", userId)
+      .whereRaw("ChatMessage.posted > TextChat.lastView");
+
+    res.json(messages);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch messages " });
+  }
+});
+
 app.listen(8080, () => {
   console.log("Server started on port 8080");
 });
