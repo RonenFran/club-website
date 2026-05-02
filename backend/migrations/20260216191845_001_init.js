@@ -3,7 +3,7 @@
  */
 exports.up = async function up(knex) {
   await knex.schema
-    // No FKs — create first
+    // Individual users and account data
     .createTable("User", (t) => {
       t.increments("userId").primary();
       t.string("firstName", 50).notNullable();
@@ -18,6 +18,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Clubs and their respective page information
     .createTable("Club", (t) => {
       t.increments("clubId").primary();
       t.string("name", 100).notNullable().unique();
@@ -31,6 +32,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Generic tag describing a theme of the club
     .createTable("InterestTag", (t) => {
       t.increments("tagId").primary();
       t.string("name", 100).notNullable().unique();
@@ -39,6 +41,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Permissions for specific roles in clubs
     .createTable("Permission", (t) => {
       t.increments("permissionId").primary();
       t.string("permissionKey", 100).notNullable().unique();
@@ -47,6 +50,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Event information
     .createTable("Event", (t) => {
       t.increments("eventId").primary();
       t.string("title", 160).notNullable();
@@ -60,7 +64,17 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
-    // Depends on Club only
+    // Group chats and direct message chats between users
+    .createTable("TextChat", (t) => {
+      t.increments("chatId").primary();
+      t.enum("chatType", ["dm", "group"]).notNullable();
+      t.timestamps(true, true);
+      t.engine("InnoDB");
+      t.charset("utf8mb4");
+      t.collate("utf8mb4_0900_ai_ci");
+    })
+
+    // Roles in clubs that give members certain permissions
     .createTable("Role", (t) => {
       t.increments("roleId").primary();
       t.integer("clubId")
@@ -75,30 +89,14 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
-    // Depends on Club
-    .createTable("ClubChat", (t) => {
-      t.increments("chatId").primary();
-      t.integer("clubId")
-        .notNullable()
-        .unsigned()
-        .references("clubId")
-        .inTable("Club")
-        .onDelete("CASCADE");
-      t.string("name", 100).notNullable();
-      t.timestamps(true, true);
-      t.engine("InnoDB");
-      t.charset("utf8mb4");
-      t.collate("utf8mb4_0900_ai_ci");
-    })
-
-    // Depends on ClubChat + User
+    // Table dependent on chats and describes which users are in which chat
     .createTable("ChatMember", (t) => {
       t.primary(["chatId", "userId"]);
       t.integer("chatId")
         .notNullable()
         .unsigned()
         .references("chatId")
-        .inTable("ClubChat")
+        .inTable("TextChat")
         .onDelete("CASCADE");
       t.integer("userId")
         .notNullable()
@@ -112,20 +110,20 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
-    // Depends on ClubChat + User
+    // Chat message entities for each user in a chat
     .createTable("ChatMessage", (t) => {
       t.increments("messageId").primary();
       t.integer("chatId")
         .notNullable()
         .unsigned()
         .references("chatId")
-        .inTable("ClubChat")
+        .inTable("ChatMember")
         .onDelete("CASCADE");
       t.integer("userId")
         .notNullable()
         .unsigned()
         .references("userId")
-        .inTable("User")
+        .inTable("ChatMember")
         .onDelete("CASCADE");
       t.string("message", 255).notNullable();
       t.dateTime("posted").notNullable();
@@ -134,6 +132,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Describes what clubs users are in
     .createTable("Membership", (t) => {
       t.primary(["clubId", "userId"]);
       t.integer("clubId")
@@ -161,6 +160,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Front page posts created by clubs
     .createTable("Post", (t) => {
       t.increments("postId").primary();
       t.integer("userId")
@@ -182,7 +182,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
-    // Junction tables
+    // Tags that clubs establish as related to them
     .createTable("ClubTag", (t) => {
       t.primary(["clubId", "tagId"]);
       t.integer("clubId")
@@ -202,6 +202,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Tags that users establish as their interests
     .createTable("UserTag", (t) => {
       t.primary(["userId", "tagId"]);
       t.integer("userId")
@@ -221,6 +222,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Tags that events establish that are related to them
     .createTable("EventTag", (t) => {
       t.primary(["eventId", "tagId"]);
       t.integer("eventId")
@@ -240,6 +242,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Permissions given to certain roles in clubs, dictated by club managers
     .createTable("RolePermission", (t) => {
       t.primary(["roleId", "clubId", "permissionId"]);
       t.integer("roleId")
@@ -265,6 +268,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Body that leads an event that is not a club
     .createTable("EventUserHost", (t) => {
       t.primary(["userId", "eventId"]);
       t.integer("userId")
@@ -285,6 +289,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Body that leads an event that is a club
     .createTable("EventClubHost", (t) => {
       t.primary(["eventId", "clubId"]);
       t.integer("eventId")
@@ -305,6 +310,7 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
+    // Users who have registered or shown interest in an event
     .createTable("Registered", (t) => {
       t.primary(["userId", "eventId"]);
       t.integer("userId")
@@ -344,7 +350,7 @@ exports.down = async function down(knex) {
     .dropTableIfExists("Membership")
     .dropTableIfExists("ChatMessage")
     .dropTableIfExists("ChatMember")
-    .dropTableIfExists("ClubChat")
+    .dropTableIfExists("TextChat") // ✦ was ClubChat
     .dropTableIfExists("Role")
     .dropTableIfExists("Event")
     .dropTableIfExists("Permission")
