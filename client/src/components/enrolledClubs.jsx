@@ -9,7 +9,7 @@ export default function EnrolledClubs() {
       {/* {clubs.map(())} */}
       <div className="grid grid-cols-3">
         <img
-          src="../../public/horse_cropped.jpg"
+          src="../../horse_cropped.jpg"
           alt="Picture of a horse's head"
           className="rounded-[50%] size-16 border-2 border-primary m-2"
         />

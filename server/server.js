@@ -240,6 +240,17 @@ app.post("/api/auth/login", loginLimiter, async (req, res) => {
   }
 });
 
+app.get("/api/chats/clubs/:userId", async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const clubChats = await db("");
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch clubs " });
+  }
+});
+
 // Retrieve the users new notifications from all chats
 app.get("/api/chats/messages/:userId", async (req, res) => {
   const { userId } = req.params;
