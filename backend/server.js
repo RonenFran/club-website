@@ -12,7 +12,7 @@ const { body, matchedData, validationResult } = require("express-validator");
 const MySQLStore = require("express-mysql-session")(session);
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
-const rateLimit = require("./node_modules/express-rate-limit/dist/index.d.cts");
+const rateLimit = require("express-rate-limit");
 const SALT_ROUNDS = 10;
 require("dotenv").config();
 if (!process.env.SESSION_SECRET) {
