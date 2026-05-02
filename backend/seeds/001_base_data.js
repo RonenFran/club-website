@@ -4,10 +4,15 @@
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
+  await knex("ChatMessage").del();
+  await knex("ChatMember").del();
+  await knex("TextChat").del();
   await knex("Membership").del();
   await knex("Club").del();
   await knex("User").del();
 
+  await knex.raw("ALTER TABLE ChatMessage AUTO_INCREMENT = 1");
+  await knex.raw("ALTER TABLE TextChat AUTO_INCREMENT = 1");
   await knex.raw("ALTER TABLE User AUTO_INCREMENT = 1");
   await knex.raw("ALTER TABLE Club AUTO_INCREMENT = 1");
   await knex.raw("ALTER TABLE Membership AUTO_INCREMENT = 1");
@@ -85,5 +90,60 @@ exports.seed = async function (knex) {
     { clubId: 10, userId: 18, status: "joined" },
     { clubId: 10, userId: 19, status: "joined" },
     { clubId: 10, userId: 20, status: "joined" },
+  ]);
+
+  await knex("TextChat").insert([
+    { chatType: "group" }, // chatId: 1 — Chess Club group chat
+    { chatType: "dm" }, // chatId: 2 — John & Ronen DM
+  ]);
+
+  await knex("ChatMember").insert([
+    // Chess Club group chat
+    { chatId: 1, userId: 1 }, // John
+    { chatId: 1, userId: 3 }, // Ronen
+    { chatId: 1, userId: 7 }, // Daniel
+
+    // John & Ronen DM
+    { chatId: 2, userId: 1 }, // John
+    { chatId: 2, userId: 3 }, // Ronen
+  ]);
+
+  await knex("ChatMessage").insert([
+    // Chess Club group chat
+    {
+      chatId: 1,
+      userId: 3,
+      message: "Hey everyone, are we still meeting Thursday?",
+      posted: "2025-05-01 10:00:00",
+    },
+    {
+      chatId: 1,
+      userId: 7,
+      message: "Yeah I'll be there, bringing my opening book too",
+      posted: "2025-05-01 10:05:00",
+    },
+    {
+      chatId: 1,
+      userId: 1,
+      message: "Thursday works for me, see you both then!",
+      posted: "2025-05-01 10:09:00",
+    },
+    { chatId: 1, userId: 3, message: "Perfect, I'll book the room", posted: "2025-05-01 10:12:00" },
+
+    // John & Ronen DM
+    {
+      chatId: 2,
+      userId: 1,
+      message: "Hey Ronen, do you want to run through some endgame drills before Thursday?",
+      posted: "2025-05-01 11:00:00",
+    },
+    {
+      chatId: 2,
+      userId: 3,
+      message: "Sure! How about Wednesday evening?",
+      posted: "2025-05-01 11:04:00",
+    },
+    { chatId: 2, userId: 1, message: "Works for me, around 7pm?", posted: "2025-05-01 11:06:00" },
+    { chatId: 2, userId: 3, message: "Perfect, see you then", posted: "2025-05-01 11:07:00" },
   ]);
 };

@@ -77,10 +77,10 @@ app.get("/api/clubs/:clubId/members", async (req, res) => {
 
   try {
     const clubMembers = await db("Club")
-      .where("Club.clubId", clubId)
+      .select("Club.clubId", "name", "User.userId", "firstName", "lastName")
       .join("Membership", "Club.clubId", "=", "Membership.clubId")
       .join("User", "Membership.userId", "=", "User.userId")
-      .select("Club.clubId", "name", "User.userId", "firstName", "lastName");
+      .where("Club.clubId", clubId);
 
     if (clubMembers.length === 0) {
       return res.status(404).json({ error: "No members" });
@@ -240,39 +240,46 @@ app.post("/api/auth/login", loginLimiter, async (req, res) => {
   }
 });
 
-app.get("/api/chats/clubs/:userId", async (req, res) => {
+// Get the users clubs
+app.get("/api/myclubs/:userId", async (req, res) => {
   const { userId } = req.params;
 
   try {
-    const clubChats = await db("");
+    const clubs = await db("Membership")
+      .select("Club.name", "Club.iconPath", "Membership.favorite", "Role.roleName")
+      .where("Membership.userId", userId)
+      .join("Role", "Membership.roleId", "=", "Role.roleId")
+      .join("Club", "Membership.clubId", "=", "Club.clubId");
+
+    res.json(clubs);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch clubs " });
   }
 });
 
-// Retrieve the users new notifications from all chats
-app.get("/api/chats/messages/:userId", async (req, res) => {
-  const { userId } = req.params;
+// // Retrieve the users new notifications from all chats
+// app.get("/api/chats/messages/:userId", async (req, res) => {
+//   const { userId } = req.params;
 
-  try {
-    const messages = await db("TextChat")
-      .join("ChatMessage", function () {
-        this.on("TextChat.userId", "=", "ChatMessage.userId").andOn(
-          "TextChat.chatId",
-          "=",
-          "ChatMessage.chatId"
-        );
-      })
-      .where("TextChat.userId", userId)
-      .whereRaw("ChatMessage.posted > TextChat.lastView");
+//   try {
+//     const messages = await db("TextChat")
+//       .join("ChatMessage", function () {
+//         this.on("TextChat.userId", "=", "ChatMessage.userId").andOn(
+//           "TextChat.chatId",
+//           "=",
+//           "ChatMessage.chatId"
+//         );
+//       })
+//       .where("TextChat.userId", userId)
+//       .whereRaw("ChatMessage.posted > TextChat.lastView");
 
-    res.json(messages);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to fetch messages " });
-  }
-});
+//     res.json(messages);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ error: "Failed to fetch messages " });
+//   }
+// });
 
 app.listen(8080, () => {
   console.log("Server started on port 8080");

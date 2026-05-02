@@ -117,14 +117,14 @@ exports.up = async function up(knex) {
         .notNullable()
         .unsigned()
         .references("chatId")
-        .inTable("ChatMember")
+        .inTable("TextChat")
         .onDelete("CASCADE");
       t.integer("userId")
-        .notNullable()
+        .nullable()
         .unsigned()
         .references("userId")
-        .inTable("ChatMember")
-        .onDelete("CASCADE");
+        .inTable("User")
+        .onDelete("SET NULL");
       t.string("message", 255).notNullable();
       t.dateTime("posted").notNullable();
       t.engine("InnoDB");
@@ -154,6 +154,7 @@ exports.up = async function up(knex) {
         .inTable("Role")
         .onDelete("SET NULL");
       t.dateTime("joinedAt").nullable();
+      t.boolean("favorite").defaultTo("FALSE");
       t.enum("status", ["pending", "joined", "rejected", "banned"]).notNullable();
       t.engine("InnoDB");
       t.charset("utf8mb4");
@@ -350,7 +351,7 @@ exports.down = async function down(knex) {
     .dropTableIfExists("Membership")
     .dropTableIfExists("ChatMessage")
     .dropTableIfExists("ChatMember")
-    .dropTableIfExists("TextChat") // ✦ was ClubChat
+    .dropTableIfExists("TextChat")
     .dropTableIfExists("Role")
     .dropTableIfExists("Event")
     .dropTableIfExists("Permission")
