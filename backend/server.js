@@ -246,7 +246,14 @@ app.get("/api/myclubs/:userId", async (req, res) => {
 
   try {
     const clubs = await db("Membership")
-      .select("Club.name", "Club.iconPath", "Membership.favorite", "Role.roleName")
+      .select(
+        "Club.name",
+        "Club.iconPath",
+        "Club.clubId",
+        "Membership.favorite",
+        "Membership.userId",
+        "Role.roleName"
+      )
       .where("Membership.userId", userId)
       .join("Role", "Membership.roleId", "=", "Role.roleId")
       .join("Club", "Membership.clubId", "=", "Club.clubId");
@@ -255,6 +262,34 @@ app.get("/api/myclubs/:userId", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch clubs " });
+  }
+});
+
+app.post("/api/myclubs/:userId/:clubId/favorite", async (req, res) => {
+  const { userId, clubId } = req.params;
+
+  try {
+    await db("Membership")
+      .where({ userId, clubId })
+      .update({ favorite: db.raw("NOT favorite") });
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to update favorite " });
+  }
+});
+
+app.post("/api/myclubs/:userId/:clubId/leave", async (req, res) => {
+  const { userId, clubId } = req.params;
+
+  try {
+    await db("Membership").where({ userId, clubId }).delete();
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to leave club " });
   }
 });
 

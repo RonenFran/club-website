@@ -57,11 +57,20 @@ exports.seed = async function (knex) {
     { name: "Outdoor Adventure Club" },
   ]);
 
+  await knex("Role").insert([
+    { roleId: 1, clubId: 4, roleName: "President" }, // Chess Club
+    { roleId: 2, clubId: 4, roleName: "Member" }, // Chess Club
+    { roleId: 3, clubId: 5, roleName: "President" }, // CS Society
+    { roleId: 4, clubId: 5, roleName: "Member" }, // CS Society
+    { roleId: 5, clubId: 2, roleName: "Member" }, // Debate Team
+    { roleId: 6, clubId: 8, roleName: "Member" }, // Robotics Club
+  ]);
+
   await knex("Membership").insert([
     // Chess Club (clubId: 4)
-    { clubId: 4, userId: 1, status: "joined" },
-    { clubId: 4, userId: 3, status: "joined" },
-    { clubId: 4, userId: 7, status: "joined" },
+    { clubId: 4, userId: 1, roleId: 2, status: "joined" },
+    { clubId: 4, userId: 3, roleId: 1, status: "joined" },
+    { clubId: 4, userId: 7, roleId: 2, status: "joined" },
 
     // Debate Team (clubId: 2)
     { clubId: 2, userId: 2, status: "joined" },
@@ -74,13 +83,13 @@ exports.seed = async function (knex) {
     { clubId: 3, userId: 9, status: "pending" },
 
     // CS Society (clubId: 5)
-    { clubId: 5, userId: 3, status: "joined" },
-    { clubId: 5, userId: 10, status: "joined" },
-    { clubId: 5, userId: 12, status: "joined" },
+    { clubId: 5, userId: 3, roleId: 3, status: "joined" },
+    { clubId: 5, userId: 10, roleId: 4, status: "joined" },
+    { clubId: 5, userId: 12, roleId: 4, status: "joined" },
 
     // Robotics Club (clubId: 8)
-    { clubId: 8, userId: 7, status: "joined" },
-    { clubId: 8, userId: 14, status: "joined" },
+    { clubId: 8, userId: 7, roleId: 6, status: "joined" },
+    { clubId: 8, userId: 14, roleId: 6, status: "joined" },
 
     // Photography Club (clubId: 6)
     { clubId: 6, userId: 15, status: "joined" },

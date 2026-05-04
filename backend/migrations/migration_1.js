@@ -154,7 +154,7 @@ exports.up = async function up(knex) {
         .inTable("Role")
         .onDelete("SET NULL");
       t.dateTime("joinedAt").nullable();
-      t.boolean("favorite").defaultTo("FALSE");
+      t.boolean("favorite").defaultTo(false);
       t.enum("status", ["pending", "joined", "rejected", "banned"]).notNullable();
       t.engine("InnoDB");
       t.charset("utf8mb4");
