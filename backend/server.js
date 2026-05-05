@@ -240,7 +240,7 @@ app.post("/api/auth/login", loginLimiter, async (req, res) => {
   }
 });
 
-// Get the users clubs
+// Get the user's clubs
 app.get("/api/myclubs/:userId", async (req, res) => {
   const { userId } = req.params;
 
@@ -265,6 +265,7 @@ app.get("/api/myclubs/:userId", async (req, res) => {
   }
 });
 
+// Set specified club as a favorited club for the user
 app.post("/api/myclubs/:userId/:clubId/favorite", async (req, res) => {
   const { userId, clubId } = req.params;
 
@@ -280,6 +281,7 @@ app.post("/api/myclubs/:userId/:clubId/favorite", async (req, res) => {
   }
 });
 
+// Remove user from specified club
 app.post("/api/myclubs/:userId/:clubId/leave", async (req, res) => {
   const { userId, clubId } = req.params;
 
@@ -289,7 +291,21 @@ app.post("/api/myclubs/:userId/:clubId/leave", async (req, res) => {
     res.json({ ok: true });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Failed to leave club " });
+    res.status(500).json({ error: "Failed to leave club" });
+  }
+});
+
+// Club page required info
+app.get("/api/clubs/:clubId", async (req, res) => {
+  const { clubId } = req.params;
+
+  try {
+    const clubInfo = await db("Club").select("*").where("Club.clubId", clubId);
+
+    res.json(clubInfo);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch club information" });
   }
 });
 

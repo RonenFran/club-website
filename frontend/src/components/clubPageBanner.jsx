@@ -1,18 +1,14 @@
-export default function ClubPageBanner() {
+export default function ClubPageBanner({ clubName, clubSlogan, clubBanner }) {
   return (
     // Container div which maintains the size of the banner and is width of the screen
     <div className="flex relative w-full h-80 overflow-hidden relative shadow-xl border-b-2 border-primary">
       {/* SMU Husky Logo */}
       <div className="pt-3">
-        <img
-          src="./husky_logo_cropped.png"
-          alt="SMU Huskies logo"
-          className="h-40"
-        />
+        <img src="./husky_logo_cropped.png" alt="SMU Huskies logo" className="h-40" />
       </div>
 
       {/* Horizontal polygon section with club name*/}
-      <div className="flex absolute left-0 top-0 w-[66%] h-80 z-10">
+      <div className="flex absolute left-0 top-0 w-2/3 h-80 z-10">
         <svg
           viewBox="0 0 100 100"
           preserveAspectRatio="none"

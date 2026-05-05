@@ -1,8 +1,9 @@
 import ClubPageBanner from "../components/clubPageBanner.jsx";
 import ClubPageMessages from "../components/clubPageMessages.jsx";
 import ClubPageDescription from "../components/clubPageDescription.jsx";
+import axios from "axios";
 
-export default function ClubPage() {
+export default function ClubPage({ clubId }) {
   return (
     <>
       {/* Club banner */}
