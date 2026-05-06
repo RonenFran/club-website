@@ -300,7 +300,7 @@ app.get("/api/clubs/:clubName", async (req, res) => {
   const { clubName } = req.params;
 
   try {
-    const clubInfo = await db("Club").select("*").where("Club.clubName", clubName);
+    const clubInfo = await db("Club").select("*").where("Club.name", clubName);
 
     res.json(clubInfo);
   } catch (err) {

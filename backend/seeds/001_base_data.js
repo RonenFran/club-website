@@ -144,6 +144,8 @@ exports.seed = async function (knex) {
     {
       name: "Equestrian Society",
       iconPath: "/horse_cropped.jpg",
+      bannerPath: "/club_banners/equestrian4.avif",
+      slogan: "Learn.Ride.Connect.",
     },
     { name: "Debate Team", iconPath: "/podium.jpg" },
     { name: "League of Legends E-Sports Team", iconPath: "/league_cropped.jpg" },
