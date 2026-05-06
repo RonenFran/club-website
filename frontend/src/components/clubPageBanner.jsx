@@ -4,7 +4,7 @@ export default function ClubPageBanner({ clubName, clubSlogan, clubBanner }) {
     <div className="flex relative w-full h-80 overflow-hidden relative shadow-xl border-b-2 border-primary">
       {/* SMU Husky Logo */}
       <div className="pt-3">
-        <img src="./husky_logo_cropped.png" alt="SMU Huskies logo" className="h-40" />
+        <img src="/husky_logo_cropped.png" alt="SMU Huskies logo" className="h-40" />
       </div>
 
       {/* Horizontal polygon section with club name*/}
