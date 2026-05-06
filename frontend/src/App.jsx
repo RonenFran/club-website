@@ -37,7 +37,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="browse" element={<Browse />} />
       <Route path="myclubs" element={<MyClubs />} />
-      <Route path="clubpage" element={<ClubPage />} />
+      <Route path="clubpage/:clubName" element={<ClubPage />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="logout" id="logout" element={<Logout />} action={logoutUser} />

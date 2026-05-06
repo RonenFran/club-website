@@ -295,12 +295,12 @@ app.post("/api/myclubs/:userId/:clubId/leave", async (req, res) => {
   }
 });
 
-// Club page required info
-app.get("/api/clubs/:clubId", async (req, res) => {
-  const { clubId } = req.params;
+// Getting the required info for a specified club's club page
+app.get("/api/clubs/:clubName", async (req, res) => {
+  const { clubName } = req.params;
 
   try {
-    const clubInfo = await db("Club").select("*").where("Club.clubId", clubId);
+    const clubInfo = await db("Club").select("*").where("Club.clubName", clubName);
 
     res.json(clubInfo);
   } catch (err) {

@@ -23,15 +23,15 @@ export default function ClubPageBanner({ clubName, clubSlogan, clubBanner }) {
 
         {/* Text block over white polygon */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="text-8xl font-bold text-primary">Equestrian Club</h1>
-          <p className="text-lg text-gray-700">Ride. Learn. Connect.</p>
+          <h1 className="text-8xl font-bold text-primary">{clubName}</h1>
+          <p className="text-lg text-gray-700">{clubSlogan}</p>
         </div>
       </div>
 
       {/* Pretty image for the other half of the banner */}
       <div className="h-full right-0">
         <img
-          src="./club_banners/equestrian4.avif"
+          src={clubBanner} //./club_banners/equestrian4.avif
           alt="Horses prancing on a grassy field"
           className="absolute h-[200%] -right-56 -top-10 object-cover"
         />
