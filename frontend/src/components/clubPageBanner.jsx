@@ -23,7 +23,7 @@ export default function ClubPageBanner({ clubName, clubSlogan, clubBanner }) {
 
         {/* Text block over white polygon */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="text-8xl font-bold text-primary">{clubName}</h1>
+          <h1 className="text-7xl font-bold text-primary">{clubName}</h1>
           <p className="text-lg text-gray-700">{clubSlogan}</p>
         </div>
       </div>
