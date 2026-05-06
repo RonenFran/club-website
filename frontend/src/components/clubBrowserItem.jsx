@@ -5,6 +5,7 @@ import axios from "../api";
 export default function ClubBrowserItem({ club }) {
   const [clubCount, setClubCount] = useState(0);
 
+  // Fetching number of members in the club
   useEffect(() => {
     const fetchCount = async () => {
       try {
@@ -20,7 +21,8 @@ export default function ClubBrowserItem({ club }) {
   }, [club.clubId]);
 
   return (
-    <Link to={club.clubLink}>
+    // Overall link to the club
+    <Link to={"/clubpage/" + club.name}>
       <div className="flex flex-row bg-secondary gap-6 p-2 border-2 border-primary rounded-md items-center transition duration-250 ease-in-out hover:brightness-90 hover:scale-95 hover:-translate-y-2">
         {/* Icon */}
         <img

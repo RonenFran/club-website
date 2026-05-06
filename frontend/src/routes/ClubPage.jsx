@@ -4,12 +4,12 @@ import ClubPageDescription from "../components/clubPageDescription.jsx";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function ClubPage({ clubId }) {
+export default function ClubPage({ clubName }) {
   const [clubInfo, setClubInfo] = useState([]);
 
   useEffect(() => {
     const fetchClubInfo = async () => {
-      const res = await axios.get(`/api/clubs/${clubId}`);
+      const res = await axios.get(`/api/clubs/${clubName}`);
       setClubInfo(res.data);
     };
 

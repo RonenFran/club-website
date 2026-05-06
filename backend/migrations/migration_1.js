@@ -25,7 +25,6 @@ exports.up = async function up(knex) {
       t.text("description").nullable();
       t.string("bannerPath", 255).nullable();
       t.string("iconPath", 255).nullable();
-      t.string("clubLink", 255).nullable();
       t.string("slogan", 127).nullable();
       t.timestamps(true, true);
       t.engine("InnoDB");
