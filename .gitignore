@@ -28,3 +28,6 @@ notes.txt
 *.njsproj
 *.sln
 *.sw?
+
+# Docker volumes / local data
+mysql_data/
