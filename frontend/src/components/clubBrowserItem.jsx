@@ -28,7 +28,7 @@ export default function ClubBrowserItem({ club }) {
         <img
           src={club.iconPath}
           alt="Club icon"
-          className="size-20 border-2 border-primary rounded-[50%]"
+          className="size-20 border-2 border-primary object-cover rounded-[50%]"
         />
 
         {/* Club and Members */}

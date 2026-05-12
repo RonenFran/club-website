@@ -147,15 +147,39 @@ exports.seed = async function (knex) {
       bannerPath: "/club_banners/equestrian4.avif",
       slogan: "Ride. Learn. Connect.",
     },
-    { name: "Debate Team", iconPath: "/podium.jpg" },
-    { name: "League of Legends E-Sports Team", iconPath: "/league_cropped.jpg" },
-    { name: "Chess Club", iconPath: "/chess_cropped.png" },
-    { name: "Computer Science Society" },
-    { name: "Photography Club" },
-    { name: "International Students Association" },
-    { name: "Robotics Club" },
-    { name: "Film Appreciation Society" },
-    { name: "Outdoor Adventure Club" },
+    { name: "Debate Team", iconPath: "/podium.jpg", bannerPath: "/club_banners/debating.jpg" },
+    {
+      name: "League of Legends E-Sports Team",
+      iconPath: "/league_cropped.jpg",
+      bannerPath: "/club_banners/league.avif",
+    },
+    { name: "Chess Club", iconPath: "/chess_cropped.png", bannerPath: "/club_banners/chess.jpg" },
+    {
+      name: "Computer Science Society",
+      iconPath: "/computer.jpg",
+      bannerPath: "/club_banners/code.jpg",
+    },
+    {
+      name: "Photography Club",
+      iconPath: "/camera.jpg",
+      bannerPath: "/club_banners/viewfinder.jpg",
+    },
+    {
+      name: "International Students Association",
+      iconPath: "/earth.avif",
+      bannerPath: "/club_banners/graduation.webp",
+    },
+    { name: "Robotics Club", iconPath: "/robot.png", bannerPath: "/club_banners/robot.jpg" },
+    {
+      name: "Film Appreciation Society",
+      iconPath: "/film.jpg",
+      bannerPath: "/club_banners/projector.jpg",
+    },
+    {
+      name: "Outdoor Adventure Club",
+      iconPath: "/tree.jpg",
+      bannerPath: "/club_banners/outdoors.jpg",
+    },
   ]);
 
   await knex("Role").insert([
