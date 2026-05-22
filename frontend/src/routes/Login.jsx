@@ -73,7 +73,7 @@ export default function Login() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="mt-8 self-center font-bold text-secondary bg-primary w-48 h-10 rounded-sm"
+            className="mt-8 self-center font-bold text-secondary bg-primary w-48 h-10 rounded-xs"
           >
             Login in
           </button>

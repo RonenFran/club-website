@@ -28,7 +28,7 @@ export default function ClubPageMessages() {
         >
           {/* Top scroll fade */}
           <div
-            className="sticky top-0 w-full\ bg-gradient-to-b from-primary-100 to-transparent backdrop-blur-xs"
+            className="sticky top-0 w-full\ bg-linear-to-b from-primary-100 to-transparent backdrop-blur-xs"
             style={{ minHeight: topFade }}
           ></div>
 
@@ -220,7 +220,7 @@ export default function ClubPageMessages() {
 
           {/* Bottom scroll fade */}
           <div
-            className="sticky bottom-0 w-full bg-gradient-to-t from-primary-100 to-transparent backdrop-blur-xs"
+            className="sticky bottom-0 w-full bg-linear-to-t from-primary-100 to-transparent backdrop-blur-xs"
             style={{ minHeight: botFade }}
           ></div>
         </div>

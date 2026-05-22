@@ -38,7 +38,7 @@ export default function ProfileDropdown() {
 
       {isAuthenticated ? (
         <div
-          className={`flex flex-col absolute top-20 right-2 w-24 text-center bg-secondary shadow-md rounded-md px-1 z-10 text-lg font-semibold border-[1px] text-primary ${displayDropdown ? "" : "hidden"}`}
+          className={`flex flex-col absolute top-20 right-2 w-24 text-center bg-secondary shadow-md rounded-md px-1 z-10 text-lg font-semibold border text-primary ${displayDropdown ? "" : "hidden"}`}
         >
           <Link to="/profile" className="py-1 border-b-2">
             Profile
@@ -49,9 +49,9 @@ export default function ProfileDropdown() {
         </div>
       ) : (
         <div
-          className={`flex flex-col absolute top-20 right-2 w-36 text-center bg-secondary shadow-md rounded-md px-1 z-10 text-xl font-semibold border-[1px] text-primary ${displayDropdown ? "" : "hidden"}`}
+          className={`flex flex-col absolute top-20 right-2 w-36 text-center bg-secondary shadow-md rounded-md px-1 z-10 text-xl font-semibold border text-primary ${displayDropdown ? "" : "hidden"}`}
         >
-          <div className="absolute -top-2 right-6 size-4 bg-secondary rotate-45 border-t-[1px] border-l-[1px] -z-10" />
+          <div className="absolute -top-2 right-6 size-4 bg-secondary rotate-45 border-t border-l -z-10" />
 
           <Link to="/login" className="py-1 border-b-2">
             Log in
