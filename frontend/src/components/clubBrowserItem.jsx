@@ -44,14 +44,14 @@ export default function ClubBrowserItem({ club }) {
         </div>
 
         {/* Gradient background image */}
-        <div className="z-10 absolute bg-gradient--to-tr from-white to-transparent right-0 w-[75%] h-full" />
-        <img src={club.bannerPath} className="absolute right-0 -top-12 w-[50%]"></img>
+        <div className="z-10 absolute bg-linear-20 from-secondary from-25% to-transparent to-125% w-[75%] right-0 h-full" />
+        <img src={club.bannerPath} className="absolute right-0 -top-12 w-[75%]"></img>
 
         {/* Add club button */}
         <svg
           viewBox="0 0 10 10"
           fill="white"
-          className="bg-primary size-12 border-2 border-primary rounded-md ml-auto mr-2 transition ease-in-out hover:brightness-75 hover:scale-125"
+          className="z-10 bg-primary size-12 border-2 border-primary rounded-md ml-auto mr-2 transition ease-in-out hover:brightness-75 hover:scale-125"
         >
           <rect width="7" height="1.5" x="1.5" y="4.25" rx="0.5" />
           <rect width="1.5" height="7" x="4.25" y="1.5" ry="0.5" />
