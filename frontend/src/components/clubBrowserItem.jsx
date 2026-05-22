@@ -23,7 +23,7 @@ export default function ClubBrowserItem({ club }) {
   return (
     // Overall link to the club
     <Link to={"/clubpage/" + club.name}>
-      <div className="flex flex-row bg-secondary gap-6 p-2 border-2 border-primary rounded-md items-center transition duration-250 ease-in-out hover:brightness-90 hover:scale-95 hover:-translate-y-2">
+      <div className="relative flex flex-row overflow-hidden bg-secondary gap-6 p-2 border-2 border-primary rounded-md items-center transition duration-250 ease-in-out hover:brightness-90 hover:scale-95 hover:-translate-y-2">
         {/* Icon */}
         <img
           src={club.iconPath}
@@ -42,6 +42,10 @@ export default function ClubBrowserItem({ club }) {
             {clubCount + " Members"}
           </div>
         </div>
+
+        {/* Gradient background image */}
+        <div className="z-10 absolute bg-gradient--to-tr from-white to-transparent right-0 w-[75%] h-full" />
+        <img src={club.bannerPath} className="absolute right-0 -top-12 w-[50%]"></img>
 
         {/* Add club button */}
         <svg

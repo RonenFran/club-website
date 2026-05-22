@@ -147,38 +147,59 @@ exports.seed = async function (knex) {
       bannerPath: "/club_banners/equestrian4.avif",
       slogan: "Ride. Learn. Connect.",
     },
-    { name: "Debate Team", iconPath: "/podium.jpg", bannerPath: "/club_banners/debating.jpg" },
+    {
+      name: "Debate Team",
+      iconPath: "/podium.jpg",
+      bannerPath: "/club_banners/debating.jpg",
+      slogan: "May the best argument win.",
+    },
     {
       name: "League of Legends E-Sports Team",
       iconPath: "/league_cropped.jpg",
       bannerPath: "/club_banners/league.avif",
+      slogan: "Queue Up",
     },
-    { name: "Chess Club", iconPath: "/chess_cropped.png", bannerPath: "/club_banners/chess.jpg" },
+    {
+      name: "Chess Club",
+      iconPath: "/chess_cropped.png",
+      bannerPath: "/club_banners/chess.jpg",
+      slogan: "Make every move count",
+    },
     {
       name: "Computer Science Society",
       iconPath: "/computer.jpg",
       bannerPath: "/club_banners/code.jpg",
+      slogan: "We speak fluent machine",
     },
     {
       name: "Photography Club",
       iconPath: "/camera.jpg",
       bannerPath: "/club_banners/viewfinder.jpg",
+      slogan: "Capture it before it's gone",
     },
     {
       name: "International Students Association",
       iconPath: "/earth.avif",
       bannerPath: "/club_banners/graduation.webp",
+      slogan: "One world, one campus",
     },
-    { name: "Robotics Club", iconPath: "/robot.png", bannerPath: "/club_banners/robot.jpg" },
+    {
+      name: "Robotics Club",
+      iconPath: "/robot.png",
+      bannerPath: "/club_banners/robot.jpg",
+      slogan: "Built by students, powered by curiosity",
+    },
     {
       name: "Film Appreciation Society",
       iconPath: "/film.jpg",
       bannerPath: "/club_banners/projector.jpg",
+      slogan: "The credits never really roll",
     },
     {
       name: "Outdoor Adventure Club",
       iconPath: "/tree.jpg",
       bannerPath: "/club_banners/outdoors.jpg",
+      slogan: "It's about time to unplug",
     },
   ]);
 
