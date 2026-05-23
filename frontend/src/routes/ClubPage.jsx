@@ -30,10 +30,10 @@ export default function ClubPage() {
       />
 
       <div className="mt-40 h-[140vh]">
-        {/* Club description */}
+        {/* Message board for club posts and updates */}
         <ClubPageMessages />
 
-        {/* Message board for club posts and updates */}
+        {/* Club description side panel*/}
         <div className="relative h-full top-[-125vh] pl-16 pointer-events-none">
           <ClubPageDescription />
         </div>

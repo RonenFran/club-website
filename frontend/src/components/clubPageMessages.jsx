@@ -17,9 +17,7 @@ export default function ClubPageMessages() {
 
       <div className="w-[65vw] ml-auto mr-8">
         {/* Header */}
-        <h2 className="text-6xl font-bold text-secondary text-center mt-4">
-          Message Board
-        </h2>
+        <h2 className="text-6xl font-bold text-secondary text-center mt-4">Message Board</h2>
 
         {/* Message Board */}
         <div
@@ -43,10 +41,9 @@ export default function ClubPageMessages() {
               <span className="text-primary font-bold">John Smith</span>
               <div className="text-primary-800">
                 {" "}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </div>
             </div>
           </div>
@@ -61,9 +58,8 @@ export default function ClubPageMessages() {
             <div className="flex flex-col">
               <span className="text-primary font-bold">John Smith</span>
               <div className="text-primary-800">
-                Hello everyone! We had a wonderful ride this week around the
-                park with our riders. Everyone is raring and preparing for the
-                Atlantic Equestrian competition!
+                Hello everyone! We had a wonderful ride this week around the park with our riders.
+                Everyone is raring and preparing for the Atlantic Equestrian competition!
                 <img
                   src="/equestrian_practice.jpg"
                   alt="Young woman horse riding and jumping over obstacle"
@@ -84,16 +80,14 @@ export default function ClubPageMessages() {
               <span className="text-primary font-bold">John Smith</span>
               <div className="text-primary-800">
                 {" "}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 <br />
                 <br />
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </div>
             </div>
           </div>

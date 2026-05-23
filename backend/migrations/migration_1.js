@@ -26,6 +26,11 @@ exports.up = async function up(knex) {
       t.string("bannerPath", 255).nullable();
       t.string("iconPath", 255).nullable();
       t.string("slogan", 127).nullable();
+      t.string("email", 255).nullable();
+      t.string("twitterX", 255).nullable();
+      t.string("instagram", 255).nullable();
+      t.string("facebook", 255).nullable();
+      t.enum("enrollmentType", ["open", "tryouts", "membership"]);
       t.timestamps(true, true);
       t.engine("InnoDB");
       t.charset("utf8mb4");
