@@ -1,6 +1,11 @@
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 
-export default function ClubPageDescription() {
+export default function ClubPageDescription(clubId) {
+  const [clubInfo, setClubInfo] = useState({});
+  const { clubName } = useParams();
+
   return (
     // Bookmark box
     <div className="z-20 py-5 px-10 bg-primary-800 w-[25vw] shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.6)] h-[125vh] rounded-lg overflow-hidden">
@@ -63,7 +68,7 @@ export default function ClubPageDescription() {
                 AS
               </div>
               <div className="flex flex-col text-left">
-                <p>Amy Schwart</p>
+                <p>Amy Schwartz</p>
                 <p className="font-normal">Secretary</p>
               </div>
             </div>

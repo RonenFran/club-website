@@ -23,7 +23,7 @@ export default function ClubBrowserItem({ club }) {
   return (
     // Overall link to the club
     <Link to={"/clubpage/" + club.name}>
-      <div className="relative flex flex-row overflow-hidden bg-secondary gap-6 p-2 border-2 border-primary rounded-md items-center transition duration-250 ease-in-out hover:brightness-90 hover:-translate-y-1">
+      <div className="relative flex flex-row overflow-hidden bg-secondary gap-6 p-2 border-2 border-primary rounded-md items-center transition duration-150 ease-in-out hover:brightness-90 hover:-translate-y-1 hover:scale-102">
         {/* Icon */}
         <img
           src={club.iconPath}

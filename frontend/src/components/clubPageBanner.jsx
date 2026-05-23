@@ -1,5 +1,5 @@
-export default function ClubPageBanner({ name, slogan banner}) {
- return (
+export default function ClubPageBanner({ name, slogan, banner }) {
+  return (
     // Container div which maintains the size of the banner and is width of the screen
     <div className="flex relative w-full h-80 overflow-hidden relative shadow-xl border-b-2 border-primary">
       {/* SMU Husky Logo */}

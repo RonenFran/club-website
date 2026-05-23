@@ -309,6 +309,29 @@ app.get("/api/clubs/:clubName", async (req, res) => {
   }
 });
 
+app.get("/api/clubs/description/:clubName", async (req, res) => {
+  const { clubName } = req.params;
+
+  try {
+    const clubDescription = await db("Club")
+      .join("Role", "Club.clubId", "=", "Role.clubId")
+      .join("Membership", function () {
+        this.on("Club.clubId", "=", "Membership.clubId").andOn(
+          "Role.roleId",
+          "=",
+          "Membership.roleId"
+        );
+      })
+      .join("User", "Membership.userId", "=", "User.userId")
+      .where("isLeadership", true)
+      .where("Club.name", clubName);
+
+    res.json(clubDescription);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch club description" });
+  }
+});
 // // Retrieve the users new notifications from all chats
 // app.get("/api/chats/messages/:userId", async (req, res) => {
 //   const { userId } = req.params;
