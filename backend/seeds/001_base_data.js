@@ -3,11 +3,11 @@
  * @returns { Promise<void> }
  */
 exports.seed = async function (knex) {
-  // Deletes ALL existing entries
   await knex("ChatMessage").del();
   await knex("ChatMember").del();
   await knex("TextChat").del();
   await knex("Membership").del();
+  await knex("Role").del();
   await knex("Club").del();
   await knex("User").del();
 
@@ -15,7 +15,6 @@ exports.seed = async function (knex) {
   await knex.raw("ALTER TABLE TextChat AUTO_INCREMENT = 1");
   await knex.raw("ALTER TABLE User AUTO_INCREMENT = 1");
   await knex.raw("ALTER TABLE Club AUTO_INCREMENT = 1");
-  await knex.raw("ALTER TABLE Membership AUTO_INCREMENT = 1");
 
   await knex("User").insert([
     {
@@ -23,7 +22,7 @@ exports.seed = async function (knex) {
       lastName: "Smith",
       email: "john.smith@gmail.com",
       passwordHash: "$2b$10$RPjXPw8cHS6BeB5iaV7i3OsU4zTdNUanHLpIDeHKwJnPcF.XW8YGe",
-    }, //Password: 12345678
+    },
     {
       firstName: "Alex",
       lastName: "Baldwin",
@@ -204,12 +203,20 @@ exports.seed = async function (knex) {
   ]);
 
   await knex("Role").insert([
-    { roleId: 1, clubId: 4, roleName: "President" }, // Chess Club
-    { roleId: 2, clubId: 4, roleName: "Member" }, // Chess Club
-    { roleId: 3, clubId: 5, roleName: "President" }, // CS Society
-    { roleId: 4, clubId: 5, roleName: "Member" }, // CS Society
-    { roleId: 5, clubId: 2, roleName: "Member" }, // Debate Team
-    { roleId: 6, clubId: 8, roleName: "Member" }, // Robotics Club
+    { roleId: 1, clubId: 4, roleName: "President", isLeadership: true },
+    { roleId: 2, clubId: 4, roleName: "Member", isLeadership: false },
+    { roleId: 3, clubId: 5, roleName: "President", isLeadership: true },
+    { roleId: 4, clubId: 5, roleName: "Member", isLeadership: false },
+    { roleId: 5, clubId: 2, roleName: "President", isLeadership: true },
+    { roleId: 6, clubId: 2, roleName: "Member", isLeadership: false },
+    { roleId: 7, clubId: 3, roleName: "Captain", isLeadership: true },
+    { roleId: 8, clubId: 3, roleName: "Member", isLeadership: false },
+    { roleId: 9, clubId: 8, roleName: "Lead Engineer", isLeadership: true },
+    { roleId: 10, clubId: 8, roleName: "Member", isLeadership: false },
+    { roleId: 11, clubId: 6, roleName: "President", isLeadership: true },
+    { roleId: 12, clubId: 6, roleName: "Member", isLeadership: false },
+    { roleId: 13, clubId: 10, roleName: "President", isLeadership: true },
+    { roleId: 14, clubId: 10, roleName: "Member", isLeadership: false },
   ]);
 
   await knex("Membership").insert([
@@ -219,14 +226,14 @@ exports.seed = async function (knex) {
     { clubId: 4, userId: 7, roleId: 2, status: "joined" },
 
     // Debate Team (clubId: 2)
-    { clubId: 2, userId: 2, status: "joined" },
-    { clubId: 2, userId: 5, status: "pending" },
-    { clubId: 2, userId: 11, status: "joined" },
+    { clubId: 2, userId: 2, roleId: 5, status: "joined" },
+    { clubId: 2, userId: 5, roleId: 6, status: "pending" },
+    { clubId: 2, userId: 11, roleId: 6, status: "joined" },
 
     // LoL Team (clubId: 3)
-    { clubId: 3, userId: 6, status: "joined" },
-    { clubId: 3, userId: 8, status: "joined" },
-    { clubId: 3, userId: 9, status: "pending" },
+    { clubId: 3, userId: 6, roleId: 7, status: "joined" },
+    { clubId: 3, userId: 8, roleId: 8, status: "joined" },
+    { clubId: 3, userId: 9, roleId: 8, status: "pending" },
 
     // CS Society (clubId: 5)
     { clubId: 5, userId: 3, roleId: 3, status: "joined" },
@@ -234,17 +241,17 @@ exports.seed = async function (knex) {
     { clubId: 5, userId: 12, roleId: 4, status: "joined" },
 
     // Robotics Club (clubId: 8)
-    { clubId: 8, userId: 7, roleId: 6, status: "joined" },
-    { clubId: 8, userId: 14, roleId: 6, status: "joined" },
+    { clubId: 8, userId: 7, roleId: 9, status: "joined" },
+    { clubId: 8, userId: 14, roleId: 10, status: "joined" },
 
     // Photography Club (clubId: 6)
-    { clubId: 6, userId: 15, status: "joined" },
-    { clubId: 6, userId: 16, status: "pending" },
+    { clubId: 6, userId: 15, roleId: 11, status: "joined" },
+    { clubId: 6, userId: 16, roleId: 12, status: "pending" },
 
     // Outdoor Adventure Club (clubId: 10)
-    { clubId: 10, userId: 18, status: "joined" },
-    { clubId: 10, userId: 19, status: "joined" },
-    { clubId: 10, userId: 20, status: "joined" },
+    { clubId: 10, userId: 18, roleId: 13, status: "joined" },
+    { clubId: 10, userId: 19, roleId: 14, status: "joined" },
+    { clubId: 10, userId: 20, roleId: 14, status: "joined" },
   ]);
 
   await knex("TextChat").insert([
@@ -253,18 +260,14 @@ exports.seed = async function (knex) {
   ]);
 
   await knex("ChatMember").insert([
-    // Chess Club group chat
-    { chatId: 1, userId: 1 }, // John
-    { chatId: 1, userId: 3 }, // Ronen
-    { chatId: 1, userId: 7 }, // Daniel
-
-    // John & Ronen DM
-    { chatId: 2, userId: 1 }, // John
-    { chatId: 2, userId: 3 }, // Ronen
+    { chatId: 1, userId: 1 },
+    { chatId: 1, userId: 3 },
+    { chatId: 1, userId: 7 },
+    { chatId: 2, userId: 1 },
+    { chatId: 2, userId: 3 },
   ]);
 
   await knex("ChatMessage").insert([
-    // Chess Club group chat
     {
       chatId: 1,
       userId: 3,
@@ -284,8 +287,6 @@ exports.seed = async function (knex) {
       posted: "2025-05-01 10:09:00",
     },
     { chatId: 1, userId: 3, message: "Perfect, I'll book the room", posted: "2025-05-01 10:12:00" },
-
-    // John & Ronen DM
     {
       chatId: 2,
       userId: 1,

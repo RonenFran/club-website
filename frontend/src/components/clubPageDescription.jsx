@@ -1,17 +1,29 @@
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function ClubPageDescription(clubId) {
-  const [clubInfo, setClubInfo] = useState({});
+export default function ClubPageDescription({ clubInfo }) {
+  const [clubMembers, setClubMembers] = useState({});
   const { clubName } = useParams();
+
+  useEffect(() => {
+    const fetchDescription = async () => {
+      const res = await axios.get(`/api/clubs/membership/${clubName}`);
+      setClubMembers(res.data[0]);
+
+      console.log(clubMembers);
+    };
+
+    fetchDescription();
+  }, []);
 
   return (
     // Bookmark box
-    <div className="z-20 py-5 px-10 bg-primary-800 w-[25vw] shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.6)] h-[125vh] rounded-lg overflow-hidden">
+    <div className="py-5 px-10 bg-primary-800 w-[25vw] shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.6)] h-[125vh] rounded-lg overflow-hidden">
       {/* Club Picture */}
       <img
-        src="/horse_cropped.jpg"
+        // src=
         alt="Horse head"
         className="w-full border-2 border-primary rounded-[50%] mb-10 border-8 border-secondary-400"
       />

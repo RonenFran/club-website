@@ -8,7 +8,7 @@ export default function EnrolledClubs() {
   const { isAuthenticated, user } = useAuth();
 
   const fetchClubs = async () => {
-    const res = await axios.get(`/api/myclubs/${user.userId}`);
+    const res = await axios.get(`/api/user/${user.userId}/clubs`);
     setClubs(res.data);
   };
 

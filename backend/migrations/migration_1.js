@@ -81,7 +81,8 @@ exports.up = async function up(knex) {
 
     // Roles in clubs that give members certain permissions
     .createTable("Role", (t) => {
-      t.increments("roleId").primary();
+      t.primary(["clubId", "roleId"]);
+      t.integer("roleId").notNullable().unsigned();
       t.integer("clubId")
         .notNullable()
         .unsigned()
@@ -89,6 +90,7 @@ exports.up = async function up(knex) {
         .inTable("Club")
         .onDelete("CASCADE");
       t.string("roleName", 100).notNullable();
+      t.boolean("isLeadership").defaultTo(false).notNullable();
       t.engine("InnoDB");
       t.charset("utf8mb4");
       t.collate("utf8mb4_0900_ai_ci");
@@ -139,12 +141,12 @@ exports.up = async function up(knex) {
 
     // Describes what clubs users are in
     .createTable("Membership", (t) => {
-      t.primary(["clubId", "userId"]);
-      t.integer("clubId")
-        .notNullable()
-        .unsigned()
-        .references("clubId")
-        .inTable("Club")
+      t.primary(["clubId", "roleId", "userId"]);
+      t.integer("clubId").unsigned().notNullable();
+      t.integer("roleId").unsigned().notNullable();
+      t.foreign(["clubId", "roleId"])
+        .references(["clubId", "roleId"])
+        .inTable("Role")
         .onDelete("CASCADE");
       t.integer("userId")
         .notNullable()
@@ -152,12 +154,6 @@ exports.up = async function up(knex) {
         .references("userId")
         .inTable("User")
         .onDelete("CASCADE");
-      t.integer("roleId")
-        .nullable()
-        .unsigned()
-        .references("roleId")
-        .inTable("Role")
-        .onDelete("SET NULL");
       t.dateTime("joinedAt").nullable();
       t.boolean("favorite").defaultTo(false);
       t.enum("status", ["pending", "joined", "rejected", "banned"]).notNullable();
@@ -250,18 +246,12 @@ exports.up = async function up(knex) {
 
     // Permissions given to certain roles in clubs, dictated by club managers
     .createTable("RolePermission", (t) => {
-      t.primary(["roleId", "clubId", "permissionId"]);
-      t.integer("roleId")
-        .notNullable()
-        .unsigned()
-        .references("roleId")
+      t.primary(["clubId", "roleId", "permissionId"]);
+      t.integer("roleId").notNullable().unsigned();
+      t.integer("clubId").notNullable().unsigned();
+      t.foreign(["clubId", "roleId"])
+        .references(["clubId", "roleId"])
         .inTable("Role")
-        .onDelete("CASCADE");
-      t.integer("clubId")
-        .notNullable()
-        .unsigned()
-        .references("clubId")
-        .inTable("Club")
         .onDelete("CASCADE");
       t.integer("permissionId")
         .notNullable()

@@ -61,40 +61,8 @@ app.use(
   })
 );
 
-app.get("/api/clubs", async (req, res) => {
-  try {
-    const clubs = await db("Club").select("*");
-    res.json(clubs);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to fetch clubs" });
-  }
-});
-
-// Retrieve all the members in a certain club by clubId
-app.get("/api/clubs/:clubId/members", async (req, res) => {
-  const { clubId } = req.params;
-
-  try {
-    const clubMembers = await db("Club")
-      .select("Club.clubId", "name", "User.userId", "firstName", "lastName")
-      .join("Membership", "Club.clubId", "=", "Membership.clubId")
-      .join("User", "Membership.userId", "=", "User.userId")
-      .where("Club.clubId", clubId);
-
-    if (clubMembers.length === 0) {
-      return res.status(404).json({ error: "No members" });
-    }
-
-    res.json(clubMembers);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to fetch club" });
-  }
-});
-
 // Retrieve the member count of a certain club by clubId
-app.get("/api/members/:clubId", async (req, res) => {
+app.get("/api/clubs/:clubId/membercount", async (req, res) => {
   const { clubId } = req.params;
 
   try {
@@ -107,6 +75,55 @@ app.get("/api/members/:clubId", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch club" });
+  }
+});
+
+// Get all the members of a certain club
+app.get("/api/clubs/:clubName/members", async (req, res) => {
+  const { clubName } = req.params;
+
+  try {
+    const clubMembers = await db("Club")
+      .join("Role", "Club.clubId", "=", "Role.clubId")
+      .join("Membership", function () {
+        this.on("Club.clubId", "=", "Membership.clubId").andOn(
+          "Role.roleId",
+          "=",
+          "Membership.roleId"
+        );
+      })
+      .join("User", "Membership.userId", "=", "User.userId")
+      .where("Club.name", clubName);
+
+    res.json(clubMembers);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch club members" });
+  }
+});
+
+// Getting a club tuple based on club name
+app.get("/api/clubs/:clubName", async (req, res) => {
+  const { clubName } = req.params;
+
+  try {
+    const clubInfo = await db("Club").select("*").where("Club.name", clubName);
+
+    res.json(clubInfo);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch club information" });
+  }
+});
+
+// Retrieve all the clubs in the system
+app.get("/api/clubs", async (req, res) => {
+  try {
+    const clubs = await db("Club").select("*");
+    res.json(clubs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch clubs" });
   }
 });
 
@@ -241,7 +258,7 @@ app.post("/api/auth/login", loginLimiter, async (req, res) => {
 });
 
 // Get the user's clubs
-app.get("/api/myclubs/:userId", async (req, res) => {
+app.get("/api/user/:userId/clubs", async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -266,7 +283,7 @@ app.get("/api/myclubs/:userId", async (req, res) => {
 });
 
 // Set specified club as a favorited club for the user
-app.post("/api/myclubs/:userId/:clubId/favorite", async (req, res) => {
+app.post("/api/user/:userId/:clubId/favorite", async (req, res) => {
   const { userId, clubId } = req.params;
 
   try {
@@ -282,7 +299,7 @@ app.post("/api/myclubs/:userId/:clubId/favorite", async (req, res) => {
 });
 
 // Remove user from specified club
-app.post("/api/myclubs/:userId/:clubId/leave", async (req, res) => {
+app.post("/api/user/:userId/:clubId/leave", async (req, res) => {
   const { userId, clubId } = req.params;
 
   try {
@@ -295,43 +312,6 @@ app.post("/api/myclubs/:userId/:clubId/leave", async (req, res) => {
   }
 });
 
-// Getting the required info for a specified club's club page
-app.get("/api/clubs/:clubName", async (req, res) => {
-  const { clubName } = req.params;
-
-  try {
-    const clubInfo = await db("Club").select("*").where("Club.name", clubName);
-
-    res.json(clubInfo);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Failed to fetch club information" });
-  }
-});
-
-app.get("/api/clubs/description/:clubName", async (req, res) => {
-  const { clubName } = req.params;
-
-  try {
-    const clubDescription = await db("Club")
-      .join("Role", "Club.clubId", "=", "Role.clubId")
-      .join("Membership", function () {
-        this.on("Club.clubId", "=", "Membership.clubId").andOn(
-          "Role.roleId",
-          "=",
-          "Membership.roleId"
-        );
-      })
-      .join("User", "Membership.userId", "=", "User.userId")
-      .where("isLeadership", true)
-      .where("Club.name", clubName);
-
-    res.json(clubDescription);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Failed to fetch club description" });
-  }
-});
 // // Retrieve the users new notifications from all chats
 // app.get("/api/chats/messages/:userId", async (req, res) => {
 //   const { userId } = req.params;

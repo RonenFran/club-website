@@ -9,7 +9,7 @@ export default function ClubBrowserItem({ club }) {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const res = await axios.get(`/api/members/${club.clubId}`);
+        const res = await axios.get(`/api/clubs/${club.clubId}/membercount`);
         setClubCount(res.data);
       } catch (err) {
         console.error("Failed to fetch member count", err);
