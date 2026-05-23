@@ -23,11 +23,7 @@ export default function ClubPage() {
   return (
     <>
       {/* Club banner */}
-      <ClubPageBanner
-        clubName={clubInfo.name}
-        clubSlogan={clubInfo.slogan}
-        clubBanner={clubInfo.bannerPath}
-      />
+      <ClubPageBanner name={clubInfo.name} slogan={clubInfo.slogan} banner={clubInfo.bannerPath} />
 
       <div className="mt-40 h-[140vh]">
         {/* Message board for club posts and updates */}

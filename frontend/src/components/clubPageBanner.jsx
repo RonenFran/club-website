@@ -1,5 +1,5 @@
-export default function ClubPageBanner({ clubName, clubSlogan, clubBanner }) {
-  return (
+export default function ClubPageBanner({ name, slogan banner}) {
+ return (
     // Container div which maintains the size of the banner and is width of the screen
     <div className="flex relative w-full h-80 overflow-hidden relative shadow-xl border-b-2 border-primary">
       {/* SMU Husky Logo */}
@@ -23,15 +23,15 @@ export default function ClubPageBanner({ clubName, clubSlogan, clubBanner }) {
 
         {/* Text block over white polygon */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="text-7xl font-bold text-primary">{clubName}</h1>
-          <p className="text-lg text-gray-700">{clubSlogan}</p>
+          <h1 className="text-7xl font-bold text-primary">{name}</h1>
+          <p className="text-lg text-gray-700">{slogan}</p>
         </div>
       </div>
 
       {/* Pretty image for the other half of the banner */}
       <div className="h-full right-0">
         <img
-          src={clubBanner}
+          src={banner}
           alt="Horses prancing on a grassy field"
           className="absolute h-[200%] -right-16 -top-10 object-cover"
         />
