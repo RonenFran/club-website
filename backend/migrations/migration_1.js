@@ -30,7 +30,7 @@ exports.up = async function up(knex) {
       t.string("twitterX", 255).nullable();
       t.string("instagram", 255).nullable();
       t.string("facebook", 255).nullable();
-      t.enum("enrollmentType", ["open", "tryouts", "membership"]);
+      t.enum("enrollmentType", ["Open", "Tryouts", "By invite"]).notNullable();
       t.timestamps(true, true);
       t.engine("InnoDB");
       t.charset("utf8mb4");

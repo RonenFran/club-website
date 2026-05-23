@@ -68,6 +68,7 @@ app.get("/api/clubs/:clubId/membercount", async (req, res) => {
   try {
     const memberCount = await db("Membership")
       .where("clubId", clubId)
+      .where("status", "joined")
       .count("userId as count")
       .first();
 
@@ -93,7 +94,9 @@ app.get("/api/clubs/:clubName/members", async (req, res) => {
         );
       })
       .join("User", "Membership.userId", "=", "User.userId")
-      .where("Club.name", clubName);
+      .select("User.firstName", "User.lastName", "Role.roleName", "Role.isLeadership")
+      .where("Club.name", clubName)
+      .where("Membership.status", "joined");
 
     res.json(clubMembers);
   } catch (err) {

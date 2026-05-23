@@ -1,18 +1,17 @@
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 
 export default function ClubPageDescription({ clubInfo }) {
-  const [clubMembers, setClubMembers] = useState({});
+  const [clubMembers, setClubMembers] = useState([]);
   const { clubName } = useParams();
 
   useEffect(() => {
     const fetchDescription = async () => {
-      const res = await axios.get(`/api/clubs/membership/${clubName}`);
-      setClubMembers(res.data[0]);
-
-      console.log(clubMembers);
+      const res = await axios.get(`/api/clubs/${clubName}/members`);
+      setClubMembers(res.data);
     };
 
     fetchDescription();
@@ -23,7 +22,7 @@ export default function ClubPageDescription({ clubInfo }) {
     <div className="py-5 px-10 bg-primary-800 w-[25vw] shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.6)] h-[125vh] rounded-lg overflow-hidden">
       {/* Club Picture */}
       <img
-        // src=
+        src={clubInfo.iconPath}
         alt="Horse head"
         className="w-full border-2 border-primary rounded-[50%] mb-10 border-8 border-secondary-400"
       />
@@ -32,22 +31,18 @@ export default function ClubPageDescription({ clubInfo }) {
         {/* Description */}
         <div className="col-span-2 inset-shadow-sm/50 bg-secondary-400 text-primary-800 text-md rounded-lg py-2 px-4">
           <div className="text-lg font-bold text-primary-500">ABOUT</div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </div>
+          <div>{clubInfo.description}</div>
         </div>
 
         {/* Members */}
         <div className="inset-shadow-sm/50  w-full justify-center flex flex-col rounded-lg bg-primary-500 text-center text-secondary p-4">
-          <p className="text-2xl font-bold">43</p>
+          <p className="text-2xl font-bold">{clubMembers.length}</p>
           <p className="text-md text-primary-200">Members</p>
         </div>
 
         {/* Enrollment Type */}
         <div className="inset-shadow-sm/50 w-full justify-center flex flex-col rounded-lg bg-primary-500 text-center text-secondary p-4">
-          <p className="text-2xl font-bold">Open</p>
+          <p className="text-2xl font-bold">{clubInfo.enrollmentType}</p>
           <p className="text-md text-primary-200">enrollment</p>
         </div>
 
@@ -55,49 +50,50 @@ export default function ClubPageDescription({ clubInfo }) {
         <div className="col-span-2 inset-shadow-sm/50 bg-secondary-400 text-primary-800 rounded-lg font-semibold py-2 px-4">
           <div className="font-bold text-lg text-primary-500 mb-2">LEADERSHIP</div>
           <div className="flex flex-col text-md justify-around gap-y-1 mb-2">
-            <div className="flex gap-4 items-center">
-              <div className="flex items-center justify-center bg-secondary-600 size-10 rounded-[50%]">
-                JS
-              </div>
-              <div className="flex flex-col text-left">
-                <p>John Smith</p>
-                <p className="font-normal">Captain</p>
-              </div>
-            </div>
-            <div className="border-b-1 border-primary"></div>
-            <div className="flex gap-4 items-center">
-              <div className="flex items-center justify-center bg-secondary-600 size-10 rounded-[50%]">
-                AR
-              </div>
-              <div className="flex flex-col text-left">
-                <p>Adam Robicheaux</p>
-                <p className="font-normal">Vice Captain</p>
-              </div>
-            </div>
-            <div className="border-b-1 border-primary"></div>
-            <div className="flex gap-4 items-center">
-              <div className="flex items-center justify-center bg-secondary-600 size-10 rounded-[50%]">
-                AS
-              </div>
-              <div className="flex flex-col text-left">
-                <p>Amy Schwartz</p>
-                <p className="font-normal">Secretary</p>
-              </div>
-            </div>
+            {clubMembers
+              .filter((member) => member.isLeadership)
+              .map((member, i) => {
+                return (
+                  <React.Fragment key={i}>
+                    {i !== 0 && <div className="border-b border-primary-500" />}
+                    <div className="flex gap-4 items-center">
+                      <div className="flex items-center justify-center bg-secondary-600 size-10 rounded-[50%]">
+                        {member.firstName[0] + member.lastName[0]}
+                      </div>
+                      <div className="flex flex-col text-left">
+                        <p>{member.firstName + " " + member.lastName}</p>
+                        <p className="font-normal">{member.roleName}</p>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                );
+              })}
           </div>
           <a
             href="mailto:smuequestrains@smu.ca"
             className="block text-center pointer-events-auto hover:text-primary-400"
           >
-            smuequestrains@smu.ca
+            {clubInfo.email}
           </a>
         </div>
 
         {/* Socials */}
-        <div className="flex flex-wrap gap-x-12 justify-center col-span-2 text-secondary-200 rounded-lg font-semibold py-2 px-4">
-          <FaFacebook size={32} />
-          <FaInstagram size={32} />
-          <FaXTwitter size={32} />
+        <div className="flex flex-wrap gap-x-12 justify-center col-span-2 text-secondary-200 rounded-lg font-semibold py-2 px-4 pointer-events-auto">
+          {clubInfo.facebook && (
+            <a href={clubInfo.facebook} target="_blank">
+              <FaFacebook size={32} className="hover:text-secondary-800" />
+            </a>
+          )}
+          {clubInfo.instagram && (
+            <a href={clubInfo.instagram} target="_blank">
+              <FaInstagram size={32} className="hover:text-secondary-800" />
+            </a>
+          )}
+          {clubInfo.twitterx && (
+            <a href={clubInfo.twitterx} target="_blank">
+              <FaXTwitter size={32} className="hover:text-secondary-800" />
+            </a>
+          )}
         </div>
       </div>
     </div>
