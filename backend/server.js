@@ -130,6 +130,24 @@ app.get("/api/clubs/:clubName/announcements", async (req, res) => {
   }
 });
 
+// Get all tags for specified club
+app.get("/api/clubs/:clubName/tags", async (req, res) => {
+  const { clubName } = req.params;
+
+  try {
+    const clubTags = await db("Club")
+      .join("ClubTag", "Club.clubId", "=", "ClubTag.clubId")
+      .join("InterestTag", "ClubTag.tagId", "=", "InterestTag.tagId")
+      .select("InterestTag.tagId", "InterestTag.name")
+      .where("Club.name", clubName);
+
+    res.json(clubTags);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch club tags" });
+  }
+});
+
 // Getting a club tuple based on club name
 app.get("/api/clubs/:clubName", async (req, res) => {
   const { clubName } = req.params;

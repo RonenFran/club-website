@@ -10,7 +10,6 @@ export default function ClubPageBoard() {
     const getAnnouncements = async () => {
       const res = await axios.get(`/api/clubs/${clubName}/announcements`);
       setAnnouncements(res.data);
-      console.log(res);
     };
 
     getAnnouncements();

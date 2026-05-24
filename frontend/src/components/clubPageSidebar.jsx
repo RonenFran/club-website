@@ -1,4 +1,21 @@
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 export default function ClubPageSiderbar() {
+  const [tags, setTags] = useState([]);
+  const { clubName } = useParams();
+
+  useEffect(() => {
+    const getTags = async () => {
+      const res = await axios.get(`/api/clubs/${clubName}/tags`);
+      setTags(res.data);
+      console.log("res: " + res);
+    };
+
+    getTags();
+  }, []);
+
   return (
     <div className="w-full items-center flex flex-col gap-4 p-4">
       {/* Join button */}
@@ -23,11 +40,13 @@ export default function ClubPageSiderbar() {
       <div className="w-full p-4 bg-secondary-200 rounded-lg text-primary-900">
         <h2 className="font-bold text-primary-500 text-sm mb-1">TAGS</h2>
         <div className="flex flex-wrap gap-1">
-          <span className="bg-primary-50 px-3 py-1 rounded-lg font-semibold">Sports</span>
-          <span className="bg-primary-50 px-3 py-1 rounded-lg font-semibold">Outdoors</span>
-          <span className="bg-primary-50 px-3 py-1 rounded-lg font-semibold">Competitive</span>
-          <span className="bg-primary-50 px-3 py-1 rounded-lg font-semibold">Team</span>
-          <span className="bg-primary-50 px-3 py-1 rounded-lg font-semibold">Animals</span>
+          {tags.map((tag) => {
+            return (
+              <span key={tag.tagId} className="bg-primary-50 px-3 py-1 rounded-lg font-semibold">
+                {tag.name}
+              </span>
+            );
+          })}
         </div>
       </div>
 
