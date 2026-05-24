@@ -1,7 +1,7 @@
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
+import { IoMdMail } from "react-icons/io";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import React from "react";
 import axios from "axios";
 
 export default function ClubPageDescription({ clubInfo }) {
@@ -54,7 +54,7 @@ export default function ClubPageDescription({ clubInfo }) {
               .filter((member) => member.isLeadership)
               .map((member, i) => {
                 return (
-                  <React.Fragment key={i}>
+                  <div key={i}>
                     {i !== 0 && <div className="border-b border-primary-500" />}
                     <div className="flex gap-4 items-center">
                       <div className="flex items-center justify-center bg-secondary-600 size-10 rounded-[50%]">
@@ -65,20 +65,19 @@ export default function ClubPageDescription({ clubInfo }) {
                         <p className="font-normal">{member.roleName}</p>
                       </div>
                     </div>
-                  </React.Fragment>
+                  </div>
                 );
               })}
           </div>
-          <a
-            href="mailto:smuequestrains@smu.ca"
-            className="block text-center pointer-events-auto hover:text-primary-400"
-          >
-            {clubInfo.email}
-          </a>
         </div>
 
         {/* Socials */}
         <div className="flex flex-wrap gap-x-12 justify-center col-span-2 text-secondary-200 rounded-lg font-semibold py-2 px-4 pointer-events-auto">
+          {clubInfo.email && (
+            <a href={"mailto:" + clubInfo.email}>
+              <IoMdMail size={32} className="hover:text-secondary-800" />
+            </a>
+          )}
           {clubInfo.facebook && (
             <a href={clubInfo.facebook} target="_blank">
               <FaFacebook size={32} className="hover:text-secondary-800" />

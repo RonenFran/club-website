@@ -3,16 +3,17 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 export default function ClubPageBoard() {
-  const [posts, setPosts] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
   const { clubName } = useParams();
 
   useEffect(() => {
-    const getPosts = async () => {
-      const res = await axios.get(`/api/clubs/${clubName}/posts`);
-      setPosts(res.data);
+    const getAnnouncements = async () => {
+      const res = await axios.get(`/api/clubs/${clubName}/announcements`);
+      setAnnouncements(res.data);
+      console.log(res);
     };
 
-    getPosts();
+    getAnnouncements();
   }, []);
 
   return (
@@ -21,50 +22,26 @@ export default function ClubPageBoard() {
       <h2 className="w-full text-6xl font-bold text-secondary mb-4 border-b-4 [border-image:linear-gradient(to_right,#e8e2e2,transparent_60%)_1]">
         Announcements
       </h2>
-      {/* {posts.map((post) => {
-          <div key={post.postId}> </div>;
-        })} */}
       <div className="flex flex-col gap-y-4">
-        <div className="w-full bg-secondary-200 rounded-2xl p-4 text-primary-600 font-semibold">
-          {/* User */}
-          <div className="flex items-center gap-2 text-primary-700 font-bold mb-1">
-            <div className="flex items-center justify-center bg-secondary-600 size-10 rounded-[50%]">
-              JS
+        {announcements.map((announcement) => {
+          return (
+            <div
+              key={announcement.announcementId}
+              className="w-full bg-secondary-200 rounded-2xl p-4 text-primary-600 font-semibold"
+            >
+              {/* User */}
+              <div className="flex items-center gap-2 text-primary-700 font-bold mb-1">
+                <div className="flex items-center justify-center bg-secondary-600 size-10 rounded-[50%]">
+                  {announcement.firstName[0] + announcement.lastName[0]}
+                </div>
+                <div>{announcement.firstName + " " + announcement.lastName}</div>
+                <div className="text-gray-400 font-normal text-xs">May 21</div>
+              </div>
+              {/* Content */}
+              {announcement.content}
             </div>
-            <div>John Smith</div>
-            <div className="text-gray-400 font-normal text-xs">May 21</div>
-          </div>
-          {/* Content */}
-          Welcome to the Equestrian Society! Check our schedule and feel free to reach out with
-          questions.
-        </div>
-
-        <div className="w-full bg-secondary-200 rounded-2xl p-4 text-primary-600 font-semibold">
-          {/* User */}
-          <div className="flex items-center gap-2 text-primary-700 font-bold mb-1">
-            <div className="flex items-center justify-center bg-secondary-600 size-10 rounded-[50%]">
-              SA
-            </div>
-            <div>Sarah Ahmed</div>
-            <div className="text-gray-400 font-normal text-xs">Oct 3</div>
-          </div>
-          {/* Content */}
-          Practice moved to Thursday this week due to the weather forecast.
-        </div>
-
-        <div className="w-full bg-secondary-200 rounded-2xl p-4 text-primary-600 font-semibold">
-          {/* User */}
-          <div className="flex items-center gap-2 text-primary-700 font-bold mb-1">
-            <div className="flex items-center justify-center bg-secondary-600 size-10 rounded-[50%]">
-              JS
-            </div>
-            <div>John Smith</div>
-            <div className="text-gray-400 font-normal text-xs">May 21</div>
-          </div>
-          {/* Content */}
-          Had a wonderful ride this week around the park. Everyone is preparing for the Atlantic
-          competition!
-        </div>
+          );
+        })}
       </div>
     </div>
   );

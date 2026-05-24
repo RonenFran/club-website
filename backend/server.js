@@ -112,7 +112,16 @@ app.get("/api/clubs/:clubName/announcements", async (req, res) => {
   try {
     const clubAnnouncements = await db("Club")
       .join("Announcement", "Club.clubId", "=", "Announcement.clubId")
-      .where("Club.clubName", clubName);
+      .join("User", "Announcement.userId", "=", "User.userId")
+      .select(
+        "User.firstName",
+        "User.lastName",
+        "Announcement.content",
+        "Announcement.createdAt",
+        "Announcement.isPinned",
+        "Announcement.announcementId"
+      )
+      .where("Club.name", clubName);
 
     res.json(clubAnnouncements);
   } catch (err) {
@@ -147,13 +156,17 @@ app.get("/api/clubs", async (req, res) => {
 });
 
 // PATCH /api/clubs/:clubId/announcements/:announcementId/pin
-router.patch("/api/clubs/:clubId/announcements/:announcementId/pin", async (req, res) => {
+app.patch("/api/clubs/:clubId/announcements/:announcementId/pin", async (req, res) => {
   const { clubId, announcementId } = req.params;
 
-  await knex("Announcement").where({ clubId }).update({ isPinned: false });
-  await knex("Announcement").where({ announcementId }).update({ isPinned: true });
-
-  res.sendStatus(200);
+  try {
+    await db("Announcement").where({ clubId }).update({ isPinned: false });
+    await db("Announcement").where({ announcementId }).update({ isPinned: true });
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to pin announcement" });
+  }
 });
 
 app.get("/api/auth/me", async (req, res) => {
