@@ -19,7 +19,7 @@ export default function ClubPageSiderbar() {
   return (
     <div className="w-full items-center flex flex-col gap-4 p-4">
       {/* Join button */}
-      <div className="flex w-48 h-16 px-4 mt-4 rounded-md self-end justify-center items-center justify-self-end bg-primary-500 text-secondary font-bold">
+      <div className="flex w-48 h-16 px-4 mt-4 rounded-md self-end justify-center items-center justify-self-end bg-primary-500 text-secondary border-2 border-secondary-200 hover:scale-105 hover:bg-primary-400 hover:cursor-pointer font-bold">
         <span className="flex-1 text-center text-xl">Join Now</span>
         <svg viewBox="0 0 10 10" fill="white" className="size-12">
           <rect width="7" height="1.5" x="1.5" y="4.25" rx="0.5" />

@@ -331,10 +331,15 @@ app.get("/api/user/:userId/clubs", async (req, res) => {
         "Membership.userId",
         "Role.roleName"
       )
-      .where("Membership.userId", userId)
-      .join("Role", "Membership.roleId", "=", "Role.roleId")
-      .join("Club", "Membership.clubId", "=", "Club.clubId");
-
+      .join("Role", function () {
+        this.on("Membership.roleId", "=", "Role.roleId").andOn(
+          "Membership.clubId",
+          "=",
+          "Role.clubId"
+        );
+      })
+      .join("Club", "Membership.clubId", "=", "Club.clubId")
+      .where("Membership.userId", userId);
     res.json(clubs);
   } catch (err) {
     console.error(err);
