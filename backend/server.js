@@ -105,19 +105,19 @@ app.get("/api/clubs/:clubName/members", async (req, res) => {
   }
 });
 
-// Get all public posts for specified club
-app.get("/api/clubs/:clubName/posts", async (req, res) => {
+// Get all public announcements for specified club
+app.get("/api/clubs/:clubName/announcements", async (req, res) => {
   const { clubName } = req.params;
 
   try {
-    const clubPosts = await db("Club")
-      .join("Post", "Club.clubId", "=", "Post.clubId")
+    const clubAnnouncements = await db("Club")
+      .join("Announcement", "Club.clubId", "=", "Announcement.clubId")
       .where("Club.clubName", clubName);
 
-    res.json(clubPosts);
+    res.json(clubAnnouncements);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Failed to fetch club posts" });
+    res.status(500).json({ error: "Failed to fetch club announcements" });
   }
 });
 
@@ -144,6 +144,16 @@ app.get("/api/clubs", async (req, res) => {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch clubs" });
   }
+});
+
+// PATCH /api/clubs/:clubId/announcements/:announcementId/pin
+router.patch("/api/clubs/:clubId/announcements/:announcementId/pin", async (req, res) => {
+  const { clubId, announcementId } = req.params;
+
+  await knex("Announcement").where({ clubId }).update({ isPinned: false });
+  await knex("Announcement").where({ announcementId }).update({ isPinned: true });
+
+  res.sendStatus(200);
 });
 
 app.get("/api/auth/me", async (req, res) => {

@@ -19,7 +19,7 @@ export default function ClubPageDescription({ clubInfo }) {
 
   return (
     // Bookmark box
-    <div className="py-5 px-10 bg-primary-800 w-full shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.6)] h-[125vh] rounded-lg overflow-hidden">
+    <div className="py-5 px-6 bg-primary-800 w-full shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.6)] h-[125vh] rounded-lg overflow-hidden">
       {/* Club Picture */}
       <img
         src={clubInfo.iconPath}

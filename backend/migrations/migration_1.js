@@ -162,9 +162,9 @@ exports.up = async function up(knex) {
       t.collate("utf8mb4_0900_ai_ci");
     })
 
-    // Front page posts created by clubs
-    .createTable("Post", (t) => {
-      t.increments("postId").primary();
+    // Front page announcementss created by clubs
+    .createTable("Announcement", (t) => {
+      t.increments("announcementId").primary();
       t.integer("userId")
         .notNullable()
         .unsigned()
@@ -179,6 +179,7 @@ exports.up = async function up(knex) {
         .onDelete("CASCADE");
       t.text("content").notNullable();
       t.dateTime("createdAt").notNullable();
+      t.boolean("isPinned").defaultTo(false);
       t.engine("InnoDB");
       t.charset("utf8mb4");
       t.collate("utf8mb4_0900_ai_ci");
@@ -342,7 +343,7 @@ exports.down = async function down(knex) {
     .dropTableIfExists("EventTag")
     .dropTableIfExists("UserTag")
     .dropTableIfExists("ClubTag")
-    .dropTableIfExists("Post")
+    .dropTableIfExists("Announcement")
     .dropTableIfExists("Membership")
     .dropTableIfExists("ChatMessage")
     .dropTableIfExists("ChatMember")
