@@ -1,6 +1,7 @@
 import ClubPageBanner from "../components/clubPageBanner.jsx";
-import ClubPageMessages from "../components/clubPageMessages.jsx";
+import ClubPageBoard from "../components/clubPageBoard.jsx";
 import ClubPageDescription from "../components/clubPageDescription.jsx";
+import ClubPageSidebar from "../components/clubPageSidebar.jsx";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -23,16 +24,16 @@ export default function ClubPage() {
       {/* Club banner */}
       <ClubPageBanner name={clubInfo.name} slogan={clubInfo.slogan} banner={clubInfo.bannerPath} />
 
-      <div className="mt-40 h-[140vh]">
-        {/* Message board for club posts and updates */}
-        <ClubPageMessages />
-
+      <div className="grid grid-cols-4 mx-auto mt-30 h-[120vh] w-[95vw] rounded-xl bg-primary-700 shadow-[0_0_10px_3px_rgba(0,0,0,0.35)]">
         {/* Club description side panel*/}
-        <div className="relative h-full top-[-125vh] pl-16 pointer-events-none">
+        <div className="relative h-full top-[-5vh] pl-16">
           <ClubPageDescription clubInfo={clubInfo} />
         </div>
 
-        {/* Member list (Potential component)*/}
+        {/* Message board for club announcements */}
+        <ClubPageBoard />
+
+        <ClubPageSidebar />
       </div>
     </>
   );

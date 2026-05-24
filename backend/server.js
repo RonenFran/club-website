@@ -105,6 +105,22 @@ app.get("/api/clubs/:clubName/members", async (req, res) => {
   }
 });
 
+// Get all public posts for specified club
+app.get("/api/clubs/:clubName/posts", async (req, res) => {
+  const { clubName } = req.params;
+
+  try {
+    const clubPosts = await db("Club")
+      .join("Post", "Club.clubId", "=", "Post.clubId")
+      .where("Club.clubName", clubName);
+
+    res.json(clubPosts);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch club posts" });
+  }
+});
+
 // Getting a club tuple based on club name
 app.get("/api/clubs/:clubName", async (req, res) => {
   const { clubName } = req.params;
