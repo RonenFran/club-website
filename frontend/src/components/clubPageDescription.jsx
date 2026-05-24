@@ -24,7 +24,7 @@ export default function ClubPageDescription({ clubInfo }) {
       <img
         src={clubInfo.iconPath}
         alt="Horse head"
-        className="w-full border-2 border-primary rounded-[50%] mb-10 border-8 border-secondary-400"
+        className="w-full aspect-square object-cover border-2 border-primary rounded-[50%] mb-10 border-8 border-secondary-400"
       />
 
       <div className="grid grid-cols-2 gap-4">

@@ -33,7 +33,7 @@ export default function ClubBrowserItem({ club }) {
 
         {/* Club and Members */}
         <div className="flex flex-col gap-2 p-1">
-          <span className="font-semibold text-primary text-xl">{club.name}</span>
+          <span className="z-20 font-semibold text-primary text-xl">{club.name}</span>
           <div className="flex items-center mt-1 text-gray-600">
             <svg viewBox="0 0 5 5" fill="currentColor" aria-hidden="true" className="size-4 mr-1">
               <circle r="1" cx="2.5" cy="1.5" />
@@ -44,8 +44,8 @@ export default function ClubBrowserItem({ club }) {
         </div>
 
         {/* Gradient banner image */}
-        <div className="z-10 absolute bg-linear-20 from-secondary from-25% to-transparent to-125% w-[75%] right-0 h-full" />
-        <img src={club.bannerPath} className="absolute right-0 -top-12 w-[75%]"></img>
+        <div className="z-10 absolute bg-linear-20 from-secondary from-25% to-transparent to-125% w-[80%] right-0 h-full" />
+        <img src={club.bannerPath} className="z-0 absolute right-0 -top-12 w-[75%]"></img>
 
         {/* Add club button */}
         <svg
