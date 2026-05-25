@@ -17,7 +17,7 @@ export default function ClubBrowser() {
   return (
     <>
       {/* Dropdown container */}
-      <div className="flex flex-col m-16 bg-orange-100 p-8 border-4 gap-1 rounded-lg border-solid border-primary w-3/4">
+      <div className="flex flex-col">
         {clubs.map((club) => (
           <ClubBrowserItem key={club.clubId} club={club} />
         ))}
