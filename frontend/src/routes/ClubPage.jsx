@@ -26,7 +26,7 @@ export default function ClubPage() {
 
       <div className="grid grid-cols-5 mx-auto mt-30 h-[120vh] w-[95vw] rounded-xl bg-primary-700 shadow-[0_0_10px_3px_rgba(0,0,0,0.35)]">
         {/* Club description side panel*/}
-        <div className="relative h-full top-[-2vh] pl-4">
+        <div className="relative h-full top-[-1vh] pl-4">
           <ClubPageDescription clubInfo={clubInfo} />
         </div>
 

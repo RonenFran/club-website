@@ -23,7 +23,7 @@ export default function ClubPageDescription({ clubInfo }) {
       <div className="-z-10 absolute w-3 h-full rounded-r-md bg-primary-800 -right-2"></div>
       <div className="-z-10 absolute w-2 h-full rounded-2xl bg-primary-800 brightness-75 -right-2"></div>
       {/* Left panel container */}
-      <div className="py-5 px-6 bg-primary-800 w-full shadow-lg shadow-black h-[124vh] rounded-l-lg overflow-hidden">
+      <div className="py-5 px-6 bg-primary-800 w-full shadow-[5px_1px_6px] shadow-black/85 h-[122vh] rounded-l-lg overflow-hidden">
         {/* Club Picture */}
         <img
           src={clubInfo.iconPath}

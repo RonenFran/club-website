@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "../api";
 import ClubBrowserItem from "./clubBrowserItem";
 
-export default function ClubBrowser() {
+export default function ClubBrowserList() {
   const [clubs, setClubs] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function ClubBrowser() {
   return (
     <>
       {/* Dropdown container */}
-      <div className="flex flex-col">
+      <div className="flex flex-col m-8">
         {clubs.map((club) => (
           <ClubBrowserItem key={club.clubId} club={club} />
         ))}
