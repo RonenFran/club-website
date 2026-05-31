@@ -240,7 +240,13 @@ app.get("/api/clubs/:clubName/members", async (req, res) => {
         );
       })
       .join("User", "Membership.userId", "=", "User.userId")
-      .select("User.firstName", "User.lastName", "Role.roleName", "Role.isLeadership")
+      .select(
+        "User.userId",
+        "User.firstName",
+        "User.lastName",
+        "Role.roleName",
+        "Role.isLeadership"
+      )
       .where("Club.name", clubName)
       .where("Membership.status", "joined");
 
@@ -277,15 +283,15 @@ app.get("/api/clubs/:clubName/announcements", async (req, res) => {
 });
 
 // Get all tags for specified club
-app.get("/api/clubs/:clubName/tags", async (req, res) => {
-  const { clubName } = req.params;
+app.get("/api/clubs/:clubId/tags", async (req, res) => {
+  const { clubId } = req.params;
 
   try {
     const clubTags = await db("Club")
       .join("ClubTag", "Club.clubId", "=", "ClubTag.clubId")
       .join("InterestTag", "ClubTag.tagId", "=", "InterestTag.tagId")
       .select("InterestTag.tagId", "InterestTag.name")
-      .where("Club.name", clubName);
+      .where("Club.clubId", clubId);
 
     res.json(clubTags);
   } catch (err) {

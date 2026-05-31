@@ -1,16 +1,21 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { FaPlus } from "react-icons/fa";
+import { IoMdCheckmark } from "react-icons/io";
+import { useAuth } from "../auth";
 
-export default function ClubPageSiderbar() {
+export default function ClubPageSiderbar({ clubId, isAuthenticated, userId, isMember }) {
   const [tags, setTags] = useState([]);
-  const { clubName } = useParams();
+  const [popUp, setPopUp] = useState(false);
+  const { user } = useAuth();
+
+  console.log(isMember);
 
   useEffect(() => {
     const getTags = async () => {
-      const res = await axios.get(`/api/clubs/${clubName}/tags`);
+      const res = await axios.get(`/api/clubs/${clubId}/tags`);
       setTags(res.data);
-      console.log("res: " + res);
     };
 
     getTags();
@@ -19,13 +24,21 @@ export default function ClubPageSiderbar() {
   return (
     <div className="w-full items-center flex flex-col gap-4 p-4">
       {/* Join button */}
-      <div className="flex w-48 h-16 px-4 mt-4 rounded-md self-end justify-center items-center justify-self-end bg-primary-500 text-secondary border-2 border-secondary-200 hover:scale-105 hover:bg-primary-400 hover:cursor-pointer font-bold">
-        <span className="flex-1 text-center text-xl">Join Now</span>
-        <svg viewBox="0 0 10 10" fill="white" className="size-12">
-          <rect width="7" height="1.5" x="1.5" y="4.25" rx="0.5" />
-          <rect width="1.5" height="7" x="4.25" y="1.5" ry="0.5" />
-        </svg>
-      </div>
+      {isAuthenticated ? (
+        isMember ? (
+          <div className="flex w-48 h-16 px-4 mt-4 rounded-md self-end justify-center items-center justify-self-end bg-secondary-400 text-secondary-800 hover:scale-105 hover:brightness-75 hover:cursor-pointer font-bold">
+            <span className="flex-1 text-center text-xl">Joined</span>
+            <IoMdCheckmark className="z-10 size-10 rounded-md ml-auto mr-2" />
+          </div>
+        ) : (
+          <div className="flex w-48 h-16 px-4 mt-4 rounded-md self-end justify-center items-center justify-self-end bg-primary-500 text-secondary border-2 border-secondary-200 hover:scale-105 hover:bg-primary-400 hover:cursor-pointer font-bold">
+            <span className="flex-1 text-center text-xl">Join Now</span>
+            <FaPlus className="z-10 size-10 rounded-md ml-auto mr-2" />
+          </div>
+        )
+      ) : (
+        <div className="w-48 h-16 mt-4"></div>
+      )}
 
       {/* Meeting section */}
       <div className="w-full p-4 bg-secondary-200 rounded-lg text-primary-900">
@@ -66,6 +79,13 @@ export default function ClubPageSiderbar() {
           <p className="w-full text-primary-800">Atlantic Riders Competition</p>
         </div>
       </div>
+      {popUp && (
+        <ConfirmationPopUp
+          message={`Are you sure you want to leave the ${club.name}?`}
+          confirm={handleLeave}
+          cancel={() => setPopUp(false)}
+        />
+      )}
     </div>
   );
 }

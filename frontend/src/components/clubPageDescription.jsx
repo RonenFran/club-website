@@ -4,18 +4,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function ClubPageDescription({ clubInfo }) {
-  const [clubMembers, setClubMembers] = useState([]);
+export default function ClubPageDescription({ clubInfo, clubMembers }) {
   const { clubName } = useParams();
-
-  useEffect(() => {
-    const fetchDescription = async () => {
-      const res = await axios.get(`/api/clubs/${clubName}/members`);
-      setClubMembers(res.data);
-    };
-
-    fetchDescription();
-  }, []);
 
   return (
     <>
