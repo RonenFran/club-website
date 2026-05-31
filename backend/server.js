@@ -353,6 +353,12 @@ app.patch("/api/clubs/:clubId/announcements/:announcementId/pin", async (req, re
   }
 });
 
+/* 
+====================================================================================================
+----------------------------------------- User Actions ---------------------------------------------
+==================================================================================================== 
+*/
+
 // Get the user's clubs
 app.get("/api/user/:userId/clubs", async (req, res) => {
   const { userId } = req.params;
@@ -365,6 +371,7 @@ app.get("/api/user/:userId/clubs", async (req, res) => {
         "Club.clubId",
         "Membership.favorite",
         "Membership.userId",
+        "Membership.status",
         "Role.roleName"
       )
       .join("Role", function () {
@@ -384,7 +391,7 @@ app.get("/api/user/:userId/clubs", async (req, res) => {
 });
 
 // Set specified club as a favorited club for the user
-app.post("/api/user/:userId/:clubId/favorite", async (req, res) => {
+app.patch("/api/user/:userId/clubs/:clubId/favorite", async (req, res) => {
   const { userId, clubId } = req.params;
 
   try {
@@ -400,7 +407,7 @@ app.post("/api/user/:userId/:clubId/favorite", async (req, res) => {
 });
 
 // Remove user from specified club
-app.post("/api/user/:userId/:clubId/leave", async (req, res) => {
+app.delete("/api/user/:userId/clubs/:clubId", async (req, res) => {
   const { userId, clubId } = req.params;
 
   try {
@@ -410,6 +417,26 @@ app.post("/api/user/:userId/:clubId/leave", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to leave club" });
+  }
+});
+
+// Add user to specified club
+app.post("/api/user/:userId/clubs/:clubId", async (req, res) => {
+  const { userId, clubId } = req.params;
+
+  try {
+    await db("Membership").insert({
+      userId: userId,
+      roleId: 3,
+      clubId: clubId,
+      joinedAt: new Date().toISOString().slice(0, 19).replace("T", " "),
+      status: "joined",
+    });
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to join club" });
   }
 });
 

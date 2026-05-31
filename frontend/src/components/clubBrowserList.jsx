@@ -5,8 +5,7 @@ import { useUserClubs } from "../hooks/useUserClubs";
 
 export default function ClubBrowserList({ clubs }) {
   const [clubCounts, setClubCounts] = useState({});
-  const { userClubs, isAuthenticated } = useUserClubs();
-
+  const { userClubs, isAuthenticated, user, loading } = useUserClubs();
   // Fetching number of members in the club
   useEffect(() => {
     const fetchCount = async () => {
@@ -23,20 +22,23 @@ export default function ClubBrowserList({ clubs }) {
     fetchCount();
   }, []);
 
-  return (
-    <>
-      {/* Dropdown container */}
-      <div className="flex flex-col m-8">
-        {clubs.map((club) => (
-          <ClubBrowserItem
-            key={club.clubId}
-            club={club}
-            memberCount={clubCounts[club.clubId]}
-            loggedIn={isAuthenticated}
-            clubStatus={userClubs.some((c) => c.clubId === club.clubId)}
-          />
-        ))}
-      </div>
-    </>
-  );
+  if (loading) return null;
+  else
+    return (
+      <>
+        {/* Dropdown container */}
+        <div className="flex flex-col m-8">
+          {clubs.map((club) => (
+            <ClubBrowserItem
+              key={club.clubId}
+              club={club}
+              memberCount={clubCounts[club.clubId]}
+              loggedIn={isAuthenticated}
+              clubStatus={userClubs.find((c) => c.clubId === club.clubId)?.status}
+              userId={user?.userId}
+            />
+          ))}
+        </div>
+      </>
+    );
 }

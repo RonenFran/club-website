@@ -8,11 +8,11 @@ export default function EnrolledClubItem({ club, onUpdate }) {
 
   const handleFavorite = async () => {
     setFavorite(!isFavorite);
-    const res = await axios.post(`api/user/${club.userId}/${club.clubId}/favorite`);
+    const res = await axios.patch(`api/user/${club.userId}/clubs/${club.clubId}/favorite`);
   };
 
   const handleLeave = async () => {
-    const res = await axios.post(`api/user/${club.userId}/${club.clubId}/leave`);
+    const res = await axios.delete(`api/user/${club.userId}/clubs/${club.clubId}`);
     setPopUp(false);
     onUpdate();
   };

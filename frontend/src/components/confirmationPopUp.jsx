@@ -14,13 +14,13 @@ export default function ConfirmationPopUp({ message, confirm, cancel }) {
         </svg>
         <div className="px-8 w-full font-bold text-xl text-center">{message}</div>
         <button
-          className="w-32 h-12 bg-primary-600 text-secondary font-bold border-2 border-primary rounded-md hover:brightness-75 hover:scale-110"
+          className="w-32 h-12 bg-primary-600 text-secondary font-bold border-2 border-primary rounded-md hover:brightness-75 hover:scale-110 hover:cursor-pointer"
           onClick={confirm}
         >
           Yes
         </button>
         <button
-          className="w-32 h-12 bg-secondary text-primary-600 font-bold border-2 border-primary rounded-md hover:brightness-75 hover:scale-110"
+          className="w-32 h-12 bg-secondary text-primary-600 font-bold border-2 border-primary rounded-md hover:brightness-75 hover:scale-110 hover:cursor-pointer"
           onClick={cancel}
         >
           No
