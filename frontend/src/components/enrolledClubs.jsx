@@ -1,26 +1,14 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "../auth";
-import axios from "axios";
+import { useState } from "react";
 import EnrolledClubItem from "./enrolledClubItem";
+import { useUserClubs } from "../hooks/useUserClubs";
 
 export default function EnrolledClubs() {
-  const [clubs, setClubs] = useState([]);
-  const { isAuthenticated, user } = useAuth();
-
-  const fetchClubs = async () => {
-    const res = await axios.get(`/api/user/${user.userId}/clubs`);
-    setClubs(res.data);
-  };
-
-  useEffect(() => {
-    if (!user) return;
-    fetchClubs();
-  }, [user]);
+  const { userClubs } = useUserClubs();
 
   return (
     <div className="border-4 border-primary rounded-lg h-full w-72 bg-red-100">
-      {clubs.map((club) => (
-        <EnrolledClubItem key={club.name} club={club} onUpdate={fetchClubs} />
+      {userClubs.map((club) => (
+        <EnrolledClubItem key={club.name} club={club} onUpdate={useUserClubs} />
       ))}
     </div>
   );
