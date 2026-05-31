@@ -1,19 +1,6 @@
-import { useEffect, useState } from "react";
-import axios from "../api";
 import ClubBrowserItem from "./clubBrowserItem";
 
-export default function ClubBrowserList() {
-  const [clubs, setClubs] = useState([]);
-
-  useEffect(() => {
-    const fetchClubs = async () => {
-      const res = await axios.get(`/api/clubs`);
-      setClubs(res.data);
-    };
-
-    fetchClubs();
-  }, []);
-
+export default function ClubBrowserList({ clubs }) {
   return (
     <>
       {/* Dropdown container */}

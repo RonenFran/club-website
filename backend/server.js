@@ -164,8 +164,29 @@ app.get("/api/clubs/:clubName", async (req, res) => {
 
 // Retrieve all the clubs in the system
 app.get("/api/clubs", async (req, res) => {
+  const { search, tags } = req.query;
+  console.log(req.query);
+
   try {
-    const clubs = await db("Club").select("*");
+    let query = db("Club").select("Club.*");
+
+    if (search || tags) {
+      query = query
+        .join("ClubTag", "Club.clubId", "=", "ClubTag.clubId")
+        .join("InterestTag", "ClubTag.tagId", "=", "InterestTag.tagId");
+
+      if (search) {
+        query = query.whereILike("Club.name", `%${search}%`);
+      }
+
+      if (tags) {
+        query = query.whereIn("InterestTag.name", tags);
+      }
+
+      query = query.groupBy("Club.clubId");
+    }
+
+    const clubs = await query;
     res.json(clubs);
   } catch (err) {
     console.error(err);
