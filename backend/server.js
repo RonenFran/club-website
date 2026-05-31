@@ -61,18 +61,164 @@ app.use(
   })
 );
 
-// Retrieve the member count of a certain club by clubId
-app.get("/api/clubs/:clubId/membercount", async (req, res) => {
-  const { clubId } = req.params;
+/* 
+====================================================================================================
+--------------------------------------- User Status ------------------------------------------------
+==================================================================================================== 
+*/
 
+app.get("/api/auth/me", async (req, res) => {
   try {
-    const memberCount = await db("Membership")
-      .where("clubId", clubId)
+    if (!req.session.userId) return res.json(null);
+
+    const user = await db("User")
+      .where({ userId: req.session.userId })
+      .first()
+      .select("userId", "firstName", "lastName", "email", "displayName");
+
+    res.json(user ?? null);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+});
+
+/* 
+====================================================================================================
+------------------------------------ Login and Sign Up ---------------------------------------------
+==================================================================================================== 
+*/
+
+app.post("/api/auth/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) return res.status(500).json({ error: "logout failed" });
+    res.clearCookie("sid");
+    res.json({ ok: true });
+  });
+});
+
+app.post(
+  "/api/auth/sign-up",
+  body("firstName")
+    .trim()
+    .matches(/^[\p{L}\p{M}\p{Zs}'-]+$/u)
+    .withMessage("Names can include letters, spaces, dashes, and apostrophes")
+    .notEmpty()
+    .withMessage("Names cannot be empty")
+    .escape(),
+  body("lastName")
+    .trim()
+    .matches(/^[\p{L}\p{M}\p{Zs}'-]+$/u)
+    .withMessage("Names can include letters, spaces, dashes, and apostrophes")
+    .notEmpty()
+    .withMessage("Names cannot be empty")
+    .escape(),
+  body("email").trim().isEmail().withMessage("Emails must be valid email format").normalizeEmail(),
+  body("password")
+    .trim()
+    .isLength({ min: 8 })
+    .withMessage("Passwords must be minimum 8 characters")
+    .escape(),
+  body("passwordRe")
+    .trim()
+    .isLength({ min: 8 })
+    .withMessage("Passwords must be minimum 8 characters")
+    .escape(),
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
+      const formData = matchedData(req);
+      const existing = await db("User").where({ email: formData.email }).first();
+      if (existing) {
+        return res.status(409).json({ error: "Email already in use", path: "email" });
+      }
+
+      if (formData.password != formData.passwordRe) {
+        return res.status(409).json({ error: "Passwords do not match", path: "passwordRe" });
+      }
+      const passwordHash = await bcrypt.hash(formData.password, SALT_ROUNDS);
+
+      const [userId] = await db("User").insert({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        passwordHash,
+      });
+
+      req.session.regenerate((err) => {
+        if (err) return res.status(500).json({ error: "Sign in failed", path: "passwordRe" });
+        req.session.userId = userId;
+
+        res.status(201).json({
+          userId,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+        });
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Sign up failed" });
+    }
+  }
+);
+
+app.post("/api/auth/login", loginLimiter, async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Missing fields" });
+    }
+
+    const user = await db("User").where({ email }).first();
+    if (!user) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    const ok = await bcrypt.compare(password, user.passwordHash);
+    if (!ok) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    req.session.regenerate((err) => {
+      if (err) return res.status(500).json({ error: "Sign in failed" });
+
+      req.session.userId = user.userId;
+
+      res.json({
+        userId: user.userId,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      });
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Sign in failed" });
+  }
+});
+
+/* 
+====================================================================================================
+------------------------------------------- Club ---------------------------------------------------
+==================================================================================================== 
+*/
+
+// Retrieve the member count of a certain club by clubId
+app.get("/api/clubs/membercount", async (req, res) => {
+  try {
+    const memberCounts = await db("Membership")
+      .select("clubId")
       .where("status", "joined")
       .count("userId as count")
-      .first();
+      .groupBy("clubId");
 
-    res.json(Number(memberCount.count));
+    res.json(memberCounts);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch club" });
@@ -204,136 +350,6 @@ app.patch("/api/clubs/:clubId/announcements/:announcementId/pin", async (req, re
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to pin announcement" });
-  }
-});
-
-app.get("/api/auth/me", async (req, res) => {
-  try {
-    if (!req.session.userId) return res.json(null);
-
-    const user = await db("User")
-      .where({ userId: req.session.userId })
-      .first()
-      .select("userId", "firstName", "lastName", "email", "displayName");
-
-    res.json(user ?? null);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to fetch user" });
-  }
-});
-
-app.post("/api/auth/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) return res.status(500).json({ error: "logout failed" });
-    res.clearCookie("sid");
-    res.json({ ok: true });
-  });
-});
-
-app.post(
-  "/api/auth/sign-up",
-  body("firstName")
-    .trim()
-    .matches(/^[\p{L}\p{M}\p{Zs}'-]+$/u)
-    .withMessage("Names can include letters, spaces, dashes, and apostrophes")
-    .notEmpty()
-    .withMessage("Names cannot be empty")
-    .escape(),
-  body("lastName")
-    .trim()
-    .matches(/^[\p{L}\p{M}\p{Zs}'-]+$/u)
-    .withMessage("Names can include letters, spaces, dashes, and apostrophes")
-    .notEmpty()
-    .withMessage("Names cannot be empty")
-    .escape(),
-  body("email").trim().isEmail().withMessage("Emails must be valid email format").normalizeEmail(),
-  body("password")
-    .trim()
-    .isLength({ min: 8 })
-    .withMessage("Passwords must be minimum 8 characters")
-    .escape(),
-  body("passwordRe")
-    .trim()
-    .isLength({ min: 8 })
-    .withMessage("Passwords must be minimum 8 characters")
-    .escape(),
-  async (req, res) => {
-    try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
-
-      const formData = matchedData(req);
-      const existing = await db("User").where({ email: formData.email }).first();
-      if (existing) {
-        return res.status(409).json({ error: "Email already in use", path: "email" });
-      }
-
-      if (formData.password != formData.passwordRe) {
-        return res.status(409).json({ error: "Passwords do not match", path: "passwordRe" });
-      }
-      const passwordHash = await bcrypt.hash(formData.password, SALT_ROUNDS);
-
-      const [userId] = await db("User").insert({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        passwordHash,
-      });
-
-      req.session.regenerate((err) => {
-        if (err) return res.status(500).json({ error: "Sign in failed", path: "passwordRe" });
-        req.session.userId = userId;
-
-        res.status(201).json({
-          userId,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-        });
-      });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: "Sign up failed" });
-    }
-  }
-);
-
-app.post("/api/auth/login", loginLimiter, async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({ error: "Missing fields" });
-    }
-
-    const user = await db("User").where({ email }).first();
-    if (!user) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    const ok = await bcrypt.compare(password, user.passwordHash);
-    if (!ok) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    req.session.regenerate((err) => {
-      if (err) return res.status(500).json({ error: "Sign in failed" });
-
-      req.session.userId = user.userId;
-
-      res.json({
-        userId: user.userId,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-      });
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Sign in failed" });
   }
 });
 

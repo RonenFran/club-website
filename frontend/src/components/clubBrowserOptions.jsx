@@ -14,6 +14,7 @@ export default function ClubBrowserOptions({ setFilterTag }) {
   return (
     <div className="z-30 sticky top-0 w-32 h-screen bg-gray-800">
       <div className="flex flex-col gap-4 h-full justify-center font-bold text-lg text-secondary-200">
+        {/* Displays all main tags for users to filter clubs by */}
         {Object.entries(tagList).map(([tag, color]) => {
           return (
             <div

@@ -2,24 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "../api";
 
-export default function ClubBrowserItem({ club }) {
-  const [clubCount, setClubCount] = useState(0);
-
-  // Fetching number of members in the club
-  useEffect(() => {
-    const fetchCount = async () => {
-      try {
-        const res = await axios.get(`/api/clubs/${club.clubId}/membercount`);
-        setClubCount(res.data);
-      } catch (err) {
-        console.error("Failed to fetch member count", err);
-        setClubCount(0); // graceful fallback
-      }
-    };
-
-    fetchCount();
-  }, [club.clubId]);
-
+export default function ClubBrowserItem({ club, memberCount }) {
   return (
     // Overall link to the club
     <Link to={"/clubpage/" + club.name}>
@@ -39,7 +22,7 @@ export default function ClubBrowserItem({ club }) {
               <circle r="1" cx="2.5" cy="1.5" />
               <circle r="1.5" cx="2.5" cy="4.5" />
             </svg>
-            {clubCount + " Members"}
+            {memberCount + " Members"}
           </div>
         </div>
 
