@@ -6,12 +6,12 @@ import axios from "../api";
 
 export default function Browse() {
   const [clubs, setClubs] = useState([]);
-  const [tags, setTags] = useState(null);
+  const [tag, setTag] = useState(null);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
     const params = {};
-    if (tags) params.tags = tags;
+    if (tag) params.tag = tag;
     if (search) params.search = search;
 
     const fetchClubs = async () => {
@@ -20,12 +20,12 @@ export default function Browse() {
     };
 
     fetchClubs();
-  }, [tags, search]);
+  }, [tag, search]);
 
   return (
     <>
       <div className="bg-secondary flex">
-        <ClubBrowserOptions tagSetter={setTags} />
+        <ClubBrowserOptions setFilterTag={setTag} />
         <div className="flex-1">
           <SearchBar searchSetter={setSearch} />
           <ClubBrowserList clubs={clubs} />

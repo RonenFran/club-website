@@ -164,12 +164,12 @@ app.get("/api/clubs/:clubName", async (req, res) => {
 
 // Retrieve all the clubs in the system
 app.get("/api/clubs", async (req, res) => {
-  const { search, tags } = req.query;
+  const { search, tag } = req.query;
 
   try {
     let query = db("Club").select("Club.*");
 
-    if (search || tags) {
+    if (search || tag) {
       query = query
         .join("ClubTag", "Club.clubId", "=", "ClubTag.clubId")
         .join("InterestTag", "ClubTag.tagId", "=", "InterestTag.tagId");
@@ -178,8 +178,8 @@ app.get("/api/clubs", async (req, res) => {
         query = query.whereILike("Club.name", `%${search}%`);
       }
 
-      if (tags) {
-        query = query.whereIn("InterestTag.name", tags);
+      if (tag) {
+        query = query.whereILike("InterestTag.name", tag);
       }
 
       query = query.groupBy("Club.clubId");

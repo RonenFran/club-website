@@ -1,16 +1,14 @@
-export default function ClubBrowserOptions({ tagSetter }) {
-  const selectTag = async (e) => {
-    console.log(e.target.className);
-  };
+import { useState } from "react";
 
-  // const tagList = ["All", "Sports", "Outdoors", "Social", "Technology"];
+export default function ClubBrowserOptions({ setFilterTag }) {
+  const [activeTag, setActiveTag] = useState("All");
 
   const tagList = {
-    All: "red",
-    Sports: "yellow",
-    Outdoors: "green",
-    Social: "blue",
-    Technology: "purple",
+    All: "bg-red-800",
+    Sports: "bg-yellow-800",
+    Outdoors: "bg-green-800",
+    Social: "bg-blue-800",
+    Technology: "bg-purple-800",
   };
 
   return (
@@ -19,13 +17,17 @@ export default function ClubBrowserOptions({ tagSetter }) {
         {Object.entries(tagList).map(([tag, color]) => {
           return (
             <div
+              key={tag}
               className={
-                "flex items-end justify-center p-8 border-secondary border-3 border-l-0 w-28 h-fit rounded-r-xl transition-all duration-200 ease-in-out hover:w-40 hover:cursor-pointer bg-" +
+                "flex items-end justify-center p-8 border-secondary border-3 border-l-0 h-fit rounded-r-xl transition-all duration-200 ease-in-out hover:w-40 hover:cursor-pointer " +
                 color +
-                "-800"
+                (tag === activeTag ? " w-40" : " w-28")
               }
               onClick={(e) => {
-                selectTag(null);
+                setActiveTag(tag);
+
+                if (tag === "All") setFilterTag(null);
+                else setFilterTag(tag);
               }}
               // style={{ writingMode: "sideways-lr" }} Sideways writing which is bad design, but feels like it kind of fits
               // Will return to this later
