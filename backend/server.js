@@ -165,7 +165,6 @@ app.get("/api/clubs/:clubName", async (req, res) => {
 // Retrieve all the clubs in the system
 app.get("/api/clubs", async (req, res) => {
   const { search, tags } = req.query;
-  console.log(req.query);
 
   try {
     let query = db("Club").select("Club.*");

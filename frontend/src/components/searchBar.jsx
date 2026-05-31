@@ -11,7 +11,6 @@ export default function SearchBar({ searchSetter }) {
           name="search"
           placeholder="Search clubs"
           onChange={(e) => {
-            console.log(e.target.value);
             searchSetter(e.target.value);
           }}
           className="h-full w-full focus:outline-0"

@@ -217,7 +217,7 @@ exports.seed = async function (knex) {
     { name: "Engineering" }, // 13
     { name: "Science" }, // 14
     { name: "Social" }, // 15
-    { name: "Fitness" }, // 16
+    { name: "Sports" }, // 16
     { name: "Nature" }, // 17
     { name: "Programming" }, // 18
     { name: "E-Sports" }, // 19
@@ -230,7 +230,7 @@ exports.seed = async function (knex) {
     { clubId: 1, tagId: 5 }, // Animals
     { clubId: 1, tagId: 6 }, // Outdoors
     { clubId: 1, tagId: 15 }, // Social
-    { clubId: 1, tagId: 16 }, // Fitness
+    { clubId: 1, tagId: 16 }, // Sports
     // Debate Team (2)
     { clubId: 2, tagId: 7 }, // Public Speaking
     { clubId: 2, tagId: 8 }, // Leadership
@@ -274,7 +274,7 @@ exports.seed = async function (knex) {
     // Outdoor Adventure (10)
     { clubId: 10, tagId: 6 }, // Outdoors
     { clubId: 10, tagId: 17 }, // Nature
-    { clubId: 10, tagId: 16 }, // Fitness
+    { clubId: 10, tagId: 16 }, // Sports
     { clubId: 10, tagId: 20 }, // Community
   ]);
 
