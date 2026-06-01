@@ -34,7 +34,7 @@ export default function ClubBrowserList({ clubs }) {
               club={club}
               memberCount={clubCounts[club.clubId]}
               loggedIn={isAuthenticated}
-              clubStatus={userClubs.find((c) => c.clubId === club.clubId)?.status}
+              memberStatus={userClubs.find((c) => c.clubId === club.clubId)?.status}
               userId={user?.userId}
             />
           ))}

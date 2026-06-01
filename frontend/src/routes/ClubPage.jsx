@@ -5,13 +5,13 @@ import ClubPageSidebar from "../components/clubPageSidebar.jsx";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../auth";
+import { useUserClubs } from "../hooks/useUserClubs.js";
 
 export default function ClubPage() {
   const [clubInfo, setClubInfo] = useState({});
   const [clubMembers, setClubMembers] = useState([]);
   const { clubName } = useParams();
-  const { user, isAuthenticated, loading } = useAuth();
+  const { user, isAuthenticated, loading } = useUserClubs();
 
   useEffect(() => {
     const fetchClubInfo = async () => {
@@ -31,27 +31,33 @@ export default function ClubPage() {
     fetchDescription();
   }, []);
 
-  return (
-    <>
-      {/* Club banner */}
-      <ClubPageBanner name={clubInfo.name} slogan={clubInfo.slogan} banner={clubInfo.bannerPath} />
-
-      <div className="grid grid-cols-5 mx-auto mt-30 h-[120vh] w-[95vw] rounded-xl bg-primary-700 shadow-[0_0_10px_3px_rgba(0,0,0,0.35)]">
-        {/* Club description side panel*/}
-        <div className="relative h-full top-[-1vh] pl-4">
-          <ClubPageDescription clubInfo={clubInfo} clubMembers={clubMembers} />
-        </div>
-
-        {/* Message board for club announcements */}
-        <ClubPageBoard />
-
-        <ClubPageSidebar
-          clubId={clubInfo.clubId}
-          isAuthenticated={isAuthenticated}
-          userId={user?.userId}
-          isMember={clubMembers.some((u) => u.userId === user.userId)}
+  if (loading) return null;
+  else
+    return (
+      <>
+        {/* Club banner */}
+        <ClubPageBanner
+          name={clubInfo.name}
+          slogan={clubInfo.slogan}
+          banner={clubInfo.bannerPath}
         />
-      </div>
-    </>
-  );
+
+        <div className="grid grid-cols-5 mx-auto mt-30 h-[120vh] w-[95vw] rounded-xl bg-primary-700 shadow-[0_0_10px_3px_rgba(0,0,0,0.35)]">
+          {/* Club description side panel*/}
+          <div className="relative h-full top-[-1vh] pl-4">
+            <ClubPageDescription clubInfo={clubInfo} clubMembers={clubMembers} />
+          </div>
+
+          {/* Message board for club announcements */}
+          <ClubPageBoard />
+
+          <ClubPageSidebar
+            clubInfo={clubInfo}
+            loggedIn={isAuthenticated}
+            userId={user?.userId}
+            memberStatus={clubMembers.find((u) => u.userId === user?.userId)?.status}
+          />
+        </div>
+      </>
+    );
 }

@@ -244,11 +244,11 @@ app.get("/api/clubs/:clubName/members", async (req, res) => {
         "User.userId",
         "User.firstName",
         "User.lastName",
+        "Membership.status",
         "Role.roleName",
         "Role.isLeadership"
       )
-      .where("Club.name", clubName)
-      .where("Membership.status", "joined");
+      .where("Club.name", clubName);
 
     res.json(clubMembers);
   } catch (err) {

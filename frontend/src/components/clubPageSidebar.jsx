@@ -3,18 +3,32 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { IoMdCheckmark } from "react-icons/io";
-import { useAuth } from "../auth";
+import { useUserClubs } from "../hooks/useUserClubs";
+import ConfirmationPopUp from "./confirmationPopUp";
 
-export default function ClubPageSiderbar({ clubId, isAuthenticated, userId, isMember }) {
+export default function ClubPageSiderbar({ clubInfo, loggedIn, userId, memberStatus }) {
   const [tags, setTags] = useState([]);
+  // Leave club pop up
   const [popUp, setPopUp] = useState(false);
-  const { user } = useAuth();
+  // Component level version of status so React can rerender component when it changes
+  const [status, setStatus] = useState(memberStatus);
 
-  console.log(isMember);
+  // Toggle whether the user is a member of the club or not
+  const joinToggle = async () => {
+    if (status === "joined") {
+      await axios.delete(`/api/user/${userId}/clubs/${clubInfo.clubId}`);
+      setPopUp(false);
+      setStatus(null);
+    } else {
+      await axios.post(`/api/user/${userId}/clubs/${clubInfo.clubId}`);
+      setStatus("joined");
+    }
+  };
 
+  // Get the tags related to the club from the backend
   useEffect(() => {
     const getTags = async () => {
-      const res = await axios.get(`/api/clubs/${clubId}/tags`);
+      const res = await axios.get(`/api/clubs/${clubInfo.clubId}/tags`);
       setTags(res.data);
     };
 
@@ -23,15 +37,25 @@ export default function ClubPageSiderbar({ clubId, isAuthenticated, userId, isMe
 
   return (
     <div className="w-full items-center flex flex-col gap-4 p-4">
-      {/* Join button */}
-      {isAuthenticated ? (
-        isMember ? (
-          <div className="flex w-48 h-16 px-4 mt-4 rounded-md self-end justify-center items-center justify-self-end bg-secondary-400 text-secondary-800 hover:scale-105 hover:brightness-75 hover:cursor-pointer font-bold">
+      {/* Join button: Check whether there is a logged in user and if they are already a member */}
+      {loggedIn ? (
+        status === "joined" ? (
+          <div
+            className="flex w-48 h-16 px-4 mt-4 rounded-md self-end justify-center items-center justify-self-end bg-secondary-400 text-secondary-800 hover:scale-105 hover:brightness-75 hover:cursor-pointer font-bold"
+            onClick={() => {
+              setPopUp(true);
+            }}
+          >
             <span className="flex-1 text-center text-xl">Joined</span>
             <IoMdCheckmark className="z-10 size-10 rounded-md ml-auto mr-2" />
           </div>
         ) : (
-          <div className="flex w-48 h-16 px-4 mt-4 rounded-md self-end justify-center items-center justify-self-end bg-primary-500 text-secondary border-2 border-secondary-200 hover:scale-105 hover:bg-primary-400 hover:cursor-pointer font-bold">
+          <div
+            className="flex w-48 h-16 px-4 mt-4 rounded-md self-end justify-center items-center justify-self-end bg-primary-500 text-secondary border-2 border-secondary-200 hover:scale-105 hover:bg-primary-400 hover:cursor-pointer font-bold"
+            onClick={() => {
+              joinToggle();
+            }}
+          >
             <span className="flex-1 text-center text-xl">Join Now</span>
             <FaPlus className="z-10 size-10 rounded-md ml-auto mr-2" />
           </div>
@@ -40,7 +64,7 @@ export default function ClubPageSiderbar({ clubId, isAuthenticated, userId, isMe
         <div className="w-48 h-16 mt-4"></div>
       )}
 
-      {/* Meeting section */}
+      {/* Team meeting times section */}
       <div className="w-full p-4 bg-secondary-200 rounded-lg text-primary-900">
         <h2 className="font-bold text-primary-500 text-sm">NEXT MEETING</h2>
         Thursday May 18th <br />
@@ -63,7 +87,7 @@ export default function ClubPageSiderbar({ clubId, isAuthenticated, userId, isMe
         </div>
       </div>
 
-      {/* Upcoming section */}
+      {/* Upcoming events section */}
       <div className="w-full p-4 bg-secondary-200 rounded-lg text-primary-900">
         <h2 className="font-bold text-primary-500 text-sm mb-1">UPCOMING</h2>
         <div className="flex gap-1 pb-2 border-b-1 border-secondary-600">
@@ -79,10 +103,12 @@ export default function ClubPageSiderbar({ clubId, isAuthenticated, userId, isMe
           <p className="w-full text-primary-800">Atlantic Riders Competition</p>
         </div>
       </div>
+
+      {/* Leave club popup associated with toggleJoin */}
       {popUp && (
         <ConfirmationPopUp
-          message={`Are you sure you want to leave the ${club.name}?`}
-          confirm={handleLeave}
+          message={`Are you sure you want to leave the ${clubInfo.name}?`}
+          confirm={joinToggle}
           cancel={() => setPopUp(false)}
         />
       )}

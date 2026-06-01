@@ -30,7 +30,9 @@ export default function ClubPageDescription({ clubInfo, clubMembers }) {
 
           {/* Members */}
           <div className="inset-shadow-sm/50  w-full justify-center flex flex-col rounded-lg bg-primary-500 text-center text-secondary p-4">
-            <p className="text-2xl font-bold">{clubMembers.length}</p>
+            <p className="text-2xl font-bold">
+              {clubMembers.filter((c) => c.status === "joined").length}
+            </p>
             <p className="text-md text-primary-200">Members</p>
           </div>
 

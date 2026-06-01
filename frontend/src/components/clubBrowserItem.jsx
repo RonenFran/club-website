@@ -5,14 +5,14 @@ import { IoMdCheckmark } from "react-icons/io";
 import ConfirmationPopUp from "./confirmationPopUp";
 import axios from "../api";
 
-export default function ClubBrowserItem({ club, memberCount, loggedIn, clubStatus, userId }) {
+export default function ClubBrowserItem({ club, memberCount, loggedIn, memberStatus, userId }) {
   const [popUp, setPopUp] = useState(false);
   // Component level version of status so React can rerender component when it changes
-  const [status, setStatus] = useState(clubStatus);
+  const [status, setStatus] = useState(memberStatus);
 
   const joinToggle = async () => {
     if (status === "joined") {
-      await axios.delete(`api/user/${userId}/clubs/${club.clubId}`);
+      await axios.delete(`/api/user/${userId}/clubs/${club.clubId}`);
       setPopUp(false);
       setStatus(null);
     } else {
