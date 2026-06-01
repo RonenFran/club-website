@@ -7,17 +7,20 @@ import axios from "../api";
 
 export default function ClubBrowserItem({ club, memberCount, loggedIn, memberStatus, userId }) {
   const [popUp, setPopUp] = useState(false);
-  // Component level version of status so React can rerender component when it changes
+  // Component level version of status and member counts so React can rerender component when it user joins or leaves club
   const [status, setStatus] = useState(memberStatus);
+  const [membersNum, setMembersNum] = useState(memberCount);
 
   const joinToggle = async () => {
     if (status === "joined") {
       await axios.delete(`/api/user/${userId}/clubs/${club.clubId}`);
       setPopUp(false);
       setStatus(null);
+      setMembersNum(membersNum - 1);
     } else {
       await axios.post(`/api/user/${userId}/clubs/${club.clubId}`);
       setStatus("joined");
+      setMembersNum(membersNum + 1);
     }
   };
 
@@ -32,7 +35,7 @@ export default function ClubBrowserItem({ club, memberCount, loggedIn, memberSta
             alt="Club icon"
             className="size-20 border-3 border-primary object-cover rounded-[50%]"
           />
-          {/* Club and Members */}
+          {/* Club and Member number */}
           <div className="flex flex-col gap-2 p-1">
             <span className="z-20 font-semibold text-primary text-xl">{club.name}</span>
             <div className="flex items-center mt-1 text-gray-600">
@@ -40,7 +43,7 @@ export default function ClubBrowserItem({ club, memberCount, loggedIn, memberSta
                 <circle r="1" cx="2.5" cy="1.5" />
                 <circle r="1.5" cx="2.5" cy="4.5" />
               </svg>
-              {memberCount + " Members"}
+              {membersNum + " Members"}
             </div>
           </div>
           {/* Gradient banner image */}
