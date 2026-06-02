@@ -326,14 +326,27 @@ app.get("/api/clubs", async (req, res) => {
         .join("ClubTag", "Club.clubId", "=", "ClubTag.clubId")
         .join("InterestTag", "ClubTag.tagId", "=", "InterestTag.tagId");
 
+      // Filter down to items matching search regex by club name or club tags
       if (search) {
-        query = query.whereILike("Club.name", `%${search}%`);
+        query = query.where((builder) => {
+          builder
+            .whereILike("Club.name", `%${search}%`)
+            .orWhereILike("InterestTag.name", `%${search}%`);
+        });
       }
 
+      // If tags are selected check that the currently selected clubs also have
+      // those tags
       if (tag) {
-        query = query.whereILike("InterestTag.name", tag);
+        query = query.whereIn("Club.clubId", function () {
+          this.select("ClubTag.clubId")
+            .from("ClubTag")
+            .join("InterestTag", "ClubTag.tagId", "=", "InterestTag.tagId")
+            .whereILike("InterestTag.name", tag);
+        });
       }
 
+      // Clean duplicates
       query = query.groupBy("Club.clubId");
     }
 
