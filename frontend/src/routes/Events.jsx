@@ -1,14 +1,21 @@
 import EventRow from "../components/eventRow";
 import { useState } from "react";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { SlArrowRight } from "react-icons/sl";
 
 export default function Events() {
   const [showText, setShowText] = useState(true);
 
   return (
     <div className="flex flex-col gap-4 p-8">
-      <h2 className="text-5xl text-primary-700 font-bold mb-4 border-b-4 border-primary-700">
-        Featured Events
-      </h2>
+      <div className="flex items-center gap-4 text-primary-800 hover:cursor-pointer">
+        <div className="w-1.5 h-8 bg-primary-700"></div>
+        <div className="flex flex-col">
+          <h2 className="text-3xl font-semibold ">Featured Events</h2>
+          <h3 className="text-lg text-primary-600">14 events this month</h3>
+        </div>
+        <MdKeyboardArrowRight className="size-12" />
+      </div>
       <EventRow />
       <h2 className="text-5xl text-primary-700 font-bold mb-4 border-b-4 border-primary-700">
         Events for <em>You</em>
