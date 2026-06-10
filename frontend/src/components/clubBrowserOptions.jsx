@@ -11,6 +11,14 @@ export default function ClubBrowserOptions({ setFilterTag }) {
     Technology: "bg-purple-800",
   };
 
+  // const tagList = {
+  //   All: "bg-gray-600",
+  //   Sports: "bg-primary-600",
+  //   Outdoors: "bg-gray-600",
+  //   Social: "bg-primary-600",
+  //   Technology: "bg-gray-600",
+  // };
+
   return (
     <div className="z-30 sticky top-0 w-32 h-screen bg-gray-800">
       <div className="flex flex-col gap-4 h-full justify-center font-bold text-lg text-secondary-200">
@@ -30,8 +38,6 @@ export default function ClubBrowserOptions({ setFilterTag }) {
                 if (tag === "All") setFilterTag(null);
                 else setFilterTag(tag);
               }}
-              // style={{ writingMode: "sideways-lr" }} Sideways writing which is bad design, but feels like it kind of fits
-              // Will return to this later
             >
               {tag}
             </div>
