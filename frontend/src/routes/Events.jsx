@@ -8,7 +8,7 @@ export default function Events() {
 
   return (
     <div className="flex flex-col gap-4 py-8">
-      <div className="flex items-center gap-4 px-8 text-primary-800 hover:cursor-pointer">
+      <div className="flex items-center gap-4 px-12 text-primary-800 hover:cursor-pointer">
         <div className="w-1.5 h-8 bg-primary-700"></div>
         <div className="flex flex-col">
           <h2 className="text-3xl font-semibold ">Featured Events</h2>

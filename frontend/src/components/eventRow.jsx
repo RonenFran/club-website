@@ -8,18 +8,17 @@ export default function EventRow({ events }) {
   const [showControls, setShowControls] = useState(false);
   const scrollRef = useRef(null);
 
-  const handleScroll = (direction, amount) => {
-    if (direction === "right") {
-      scrollRef.current.scrollBy({ left: scrollRef.current.clientWidth, behavior: "smooth" });
-    } else {
-      scrollRef.current.scrollBy({ left: -2000, behavior: "smooth" });
-    }
+  const handleScroll = (direction) => {
+    const container = scrollRef.current;
+    const itemWidth = container.querySelector(".event-item").getBoundingClientRect().width + 16;
+    const itemsPerPage = Math.floor(container.clientWidth / itemWidth);
+    container.scrollBy({ left: direction * itemsPerPage * itemWidth, behavior: "smooth" });
   };
 
   return (
     <>
-      <div
-        className="flex gap-4 px-8 overflow-x-auto scrollbar-none"
+      <ul
+        className="@container flex w-full gap-4 px-12 overflow-x-auto scrollbar-none"
         ref={scrollRef}
         onScroll={() => {
           const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
@@ -29,7 +28,7 @@ export default function EventRow({ events }) {
         onMouseEnter={() => setShowControls(true)}
         onMouseLeave={() => setShowControls(false)}
       >
-        {Array.from({ length: 30 }, (_, i) => (
+        {Array.from({ length: 100 }, (_, i) => (
           <EventItem key={i} />
         ))}
         {showControls && (
@@ -37,7 +36,7 @@ export default function EventRow({ events }) {
             {!atStart && (
               <div
                 className="absolute flex items-center left-0 h-60 w-24 bg-secondary/50 rounded-r-4xl hover:bg-secondary/90 hover:text-primary hover:cursor-pointer"
-                onClick={() => handleScroll("left")}
+                onClick={() => handleScroll(-1)}
               >
                 <MdKeyboardArrowLeft className="size-24 text-primary/70" />
               </div>
@@ -45,14 +44,14 @@ export default function EventRow({ events }) {
             {!atEnd && (
               <div
                 className="absolute flex items-center right-0 h-60 w-24 bg-secondary/50 rounded-l-4xl hover:bg-secondary/90 hover:text-primary hover:cursor-pointer"
-                onClick={() => handleScroll("right")}
+                onClick={() => handleScroll(1)}
               >
                 <MdKeyboardArrowRight className="size-24 text-primary/70" />
               </div>
             )}
           </>
         )}
-      </div>
+      </ul>
     </>
   );
 }

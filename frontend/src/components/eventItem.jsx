@@ -6,7 +6,7 @@ export default function EventItem({ event }) {
   const [showText, setShowText] = useState(false);
 
   return (
-    <div className="relative shrink-0 h-60 w-108 text-secondary hover:cursor-pointer">
+    <li className="relative h-60 @sm:w-[calc(100%/2-12px)] @md:w-[calc(100%/3-12px)] @lg:w-[calc(100%/4-12px)] @xl:w-[calc(100%/5-12px)] min-w-80 max-w-120 shrink-0 text-secondary hover:cursor-pointer event-item">
       <div
         className="absolute inset-0 bg-[url(../public/club_banners/equestrian4.avif)] bg-cover opacity-80 brightness-70 rounded-xl"
         onMouseEnter={() => setShowText(true)}
@@ -39,6 +39,6 @@ export default function EventItem({ event }) {
           Horse Race
         </div>
       )}
-    </div>
+    </li>
   );
 }
