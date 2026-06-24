@@ -28,9 +28,14 @@
   --color-secondary-800: #a89898;
   --color-secondary-900: #8a7878;
 
-  --color-oak: #decaab;
-
   --font-sans: "Raleway", "Arial", sans-serif;
+
+  --container-sm: 480px;
+  --container-md: 1024px;
+  --container-lg: 1280px;
+  --container-xl: 1600px;
+  --container-2xl: 1920px;
+  --container-3xl: 2560px;
 }
 
 /*
