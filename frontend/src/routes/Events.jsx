@@ -1,26 +1,35 @@
 import EventRow from "../components/eventRow";
 import { useState } from "react";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import { SlArrowRight } from "react-icons/sl";
+import { FaRegStar } from "react-icons/fa";
+import { FaWandMagicSparkles } from "react-icons/fa6";
 
 export default function Events() {
   const [showText, setShowText] = useState(true);
 
   return (
     <div className="flex flex-col gap-4 py-8">
-      <div className="flex items-center gap-4 px-12 text-primary-800 hover:cursor-pointer">
-        <div className="w-1.5 h-8 bg-primary-700"></div>
+      {/* Featured Events */}
+      <div className="flex items-center gap-4 px-12 text-primary-800">
+        <FaRegStar className="size-10" />
         <div className="flex flex-col">
           <h2 className="text-3xl font-semibold ">Featured Events</h2>
           <h3 className="text-lg text-primary-600">14 events this month</h3>
         </div>
-        <MdKeyboardArrowRight className="size-12" />
       </div>
       <EventRow />
-      <h2 className="text-5xl text-primary-700 font-bold mb-4 border-b-4 border-primary-700">
-        Events for <em>You</em>
-      </h2>
+
+      {/* Reccomended Events */}
+      <div className="flex items-center gap-4 px-12 text-primary-800">
+        <FaWandMagicSparkles className="size-10" />
+        <div className="flex flex-col">
+          <h2 className="text-3xl font-semibold ">Picked for You</h2>
+          <h3 className="text-lg text-primary-600">14 events this month</h3>
+        </div>
+      </div>
       <EventRow />
+
+      {/* General Categories */}
       <div className="w-full h-24 bg-primary-600 mt-12 text-secondary text-4xl font-bold p-6 pl-8">
         Popular Categories
       </div>

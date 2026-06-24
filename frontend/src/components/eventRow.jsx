@@ -7,12 +7,21 @@ export default function EventRow({ events }) {
   const [atEnd, setAtEnd] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const scrollRef = useRef(null);
+  const isScrolling = useRef(false);
 
   const handleScroll = (direction) => {
+    // Ensure only one scroll can occur at one time
+    if (isScrolling.current) return;
+
+    isScrolling.current = true;
     const container = scrollRef.current;
     const itemWidth = container.querySelector(".event-item").getBoundingClientRect().width + 16;
     const itemsPerPage = Math.floor(container.clientWidth / itemWidth);
     container.scrollBy({ left: direction * itemsPerPage * itemWidth, behavior: "smooth" });
+
+    setTimeout(() => {
+      isScrolling.current = false;
+    }, 700);
   };
 
   return (
