@@ -1,55 +1,98 @@
 import EventRow from "../components/eventRow";
 import { useState } from "react";
 import { SlArrowRight } from "react-icons/sl";
-import { FaRegStar } from "react-icons/fa";
-import { FaWandMagicSparkles } from "react-icons/fa6";
+import { FaRegStar, FaBriefcase, FaFootballBall, FaMicroscope } from "react-icons/fa";
+import { FaWandMagicSparkles, FaMicrochip } from "react-icons/fa6";
+import { IoPeople } from "react-icons/io5";
 
 export default function Events() {
   const [showText, setShowText] = useState(true);
 
   return (
-    <div className="flex flex-col gap-4 py-8">
+    <div className="flex flex-col gap-10 py-8">
       {/* Featured Events */}
-      <div className="flex items-center gap-4 px-12 text-primary-800">
-        <FaRegStar className="size-10" />
-        <div className="flex flex-col">
-          <h2 className="text-3xl font-semibold ">Featured Events</h2>
-          <h3 className="text-lg text-primary-600">14 events this month</h3>
+      <div>
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+          <FaRegStar className="size-10" />
+          <div className="flex flex-col">
+            <h2 className="text-3xl font-semibold ">Featured Events</h2>
+            <h3 className="text-lg text-primary-600">14 events this month</h3>
+          </div>
         </div>
+        <EventRow />
       </div>
-      <EventRow />
 
       {/* Reccomended Events */}
-      <div className="flex items-center gap-4 px-12 text-primary-800">
-        <FaWandMagicSparkles className="size-10" />
-        <div className="flex flex-col">
-          <h2 className="text-3xl font-semibold ">Picked for You</h2>
-          <h3 className="text-lg text-primary-600">14 events this month</h3>
+      <div>
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+          <FaWandMagicSparkles className="size-10" />
+          <div className="flex flex-col">
+            <h2 className="text-3xl font-semibold ">Picked for You</h2>
+            <h3 className="text-lg text-primary-600">14 events this month</h3>
+          </div>
         </div>
+        <EventRow />
       </div>
-      <EventRow />
 
       {/* General Categories */}
-      <div className="w-full h-24 bg-primary-600 mt-12 text-secondary text-4xl font-bold p-6 pl-8">
-        Popular Categories
-      </div>
-      <h3 className="text-4xl text-primary-700 font-bold mb-4 border-b-4 border-primary-700">
-        Business
-      </h3>
-      <div className="flex gap-2 mx-8 overflow-x-auto">
-        {Array.from({ length: 10 }, (_, i) => (
-          <div
-            key={i}
-            className="relative shrink-0 h-48 w-80 border-5 border-primary-700 rounded-lg text-secondary"
-          >
-            <div className="absolute inset-0 bg-[url(../public/club_banners/equestrian4.avif)] bg-cover opacity-50 brightness-35"></div>
-            <div className="absolute inset-0">
-              <div className="text-2xl font-semibold m-4">Title of Event</div>
-              <div className="absolute bottom-2 left-4"> January 4th</div>
-              <div className="absolute bottom-2 right-4">6:00 PM - 8:00 PM</div>
-            </div>
+      {/* Business */}
+      <div>
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+          <FaBriefcase className="size-10" />
+          <div className="flex flex-col">
+            <h2 className="text-3xl font-semibold ">Business</h2>
+            <h3 className="text-lg text-primary-600">14 events this month</h3>
           </div>
-        ))}
+        </div>
+        <EventRow />
+      </div>
+
+      {/* Social */}
+      <div>
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+          <IoPeople className="size-10" />
+          <div className="flex flex-col">
+            <h2 className="text-3xl font-semibold ">Social</h2>
+            <h3 className="text-lg text-primary-600">14 events this month</h3>
+          </div>
+        </div>
+        <EventRow />
+      </div>
+
+      {/* Science */}
+      <div>
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+          <FaMicroscope className="size-10" />
+          <div className="flex flex-col">
+            <h2 className="text-3xl font-semibold ">Science</h2>
+            <h3 className="text-lg text-primary-600">14 events this month</h3>
+          </div>
+        </div>
+        <EventRow />
+      </div>
+
+      {/* Sports */}
+      <div>
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+          <FaFootballBall className="size-10" />
+          <div className="flex flex-col">
+            <h2 className="text-3xl font-semibold ">Sports</h2>
+            <h3 className="text-lg text-primary-600">14 events this month</h3>
+          </div>
+        </div>
+        <EventRow />
+      </div>
+
+      {/* Technology */}
+      <div>
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+          <FaMicrochip className="size-10" />
+          <div className="flex flex-col">
+            <h2 className="text-3xl font-semibold ">Technology</h2>
+            <h3 className="text-lg text-primary-600">14 events this month</h3>
+          </div>
+        </div>
+        <EventRow />
       </div>
     </div>
   );
