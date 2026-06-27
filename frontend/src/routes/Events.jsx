@@ -12,11 +12,11 @@ export default function Events() {
     <div className="flex flex-col gap-10 py-8">
       {/* Featured Events */}
       <div>
-        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+        <div className="flex items-center gap-4 px-12 text-secondary-200 mb-4 bg-primary ml-12 mr-8 rounded-lg">
           <FaRegStar className="size-10" />
           <div className="flex flex-col">
-            <h2 className="text-3xl font-semibold ">Featured Events</h2>
-            <h3 className="text-lg text-primary-600">14 events this month</h3>
+            <h2 className="text-3xl font-semibold">Featured Events</h2>
+            <h3 className="text-lg text-secondary-500">14 events this month</h3>
           </div>
         </div>
         <EventRow />
@@ -24,11 +24,11 @@ export default function Events() {
 
       {/* Reccomended Events */}
       <div>
-        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+        <div className="flex items-center gap-4 px-12 text-secondary-200 mb-4  bg-primary ml-12 mr-8 rounded-lg">
           <FaWandMagicSparkles className="size-10" />
           <div className="flex flex-col">
             <h2 className="text-3xl font-semibold ">Picked for You</h2>
-            <h3 className="text-lg text-primary-600">14 events this month</h3>
+            <h3 className="text-lg text-secondary-500">14 events this month</h3>
           </div>
         </div>
         <EventRow />
@@ -37,10 +37,10 @@ export default function Events() {
       {/* General Categories */}
       {/* Business */}
       <div>
-        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4 bg-purple-200 ml-12 mr-8 rounded-lg">
           <FaBriefcase className="size-10" />
-          <div className="flex flex-col">
-            <h2 className="text-3xl font-semibold ">Business</h2>
+          <div className="flex flex-col w-full">
+            <h2 className="text-3xl font-semibold">Business</h2>
             <h3 className="text-lg text-primary-600">14 events this month</h3>
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function Events() {
 
       {/* Social */}
       <div>
-        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4 bg-yellow-200 ml-12 mr-8 rounded-lg">
           <IoPeople className="size-10" />
           <div className="flex flex-col">
             <h2 className="text-3xl font-semibold ">Social</h2>
@@ -61,7 +61,7 @@ export default function Events() {
 
       {/* Science */}
       <div>
-        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4 bg-green-200 ml-12 mr-8 rounded-lg">
           <FaMicroscope className="size-10" />
           <div className="flex flex-col">
             <h2 className="text-3xl font-semibold ">Science</h2>
@@ -73,7 +73,7 @@ export default function Events() {
 
       {/* Sports */}
       <div>
-        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4 bg-primary-200 ml-12 mr-8 rounded-lg">
           <FaFootballBall className="size-10" />
           <div className="flex flex-col">
             <h2 className="text-3xl font-semibold ">Sports</h2>
@@ -85,7 +85,7 @@ export default function Events() {
 
       {/* Technology */}
       <div>
-        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4">
+        <div className="flex items-center gap-4 px-12 text-primary-800 mb-4 bg-blue-200 ml-12 mr-8 rounded-lg">
           <FaMicrochip className="size-10" />
           <div className="flex flex-col">
             <h2 className="text-3xl font-semibold ">Technology</h2>
