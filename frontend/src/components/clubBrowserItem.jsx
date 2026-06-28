@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { IoMdCheckmark } from "react-icons/io";
+import { FaUser } from "react-icons/fa";
 import ConfirmationPopUp from "./confirmationPopUp";
 import axios from "../api";
 
@@ -39,10 +40,7 @@ export default function ClubBrowserItem({ club, memberCount, loggedIn, memberSta
           <div className="flex flex-col gap-2 p-1">
             <span className="z-20 font-semibold text-primary text-xl">{club.name}</span>
             <div className="flex items-center mt-1 text-gray-600">
-              <svg viewBox="0 0 5 5" fill="currentColor" aria-hidden="true" className="size-4 mr-1">
-                <circle r="1" cx="2.5" cy="1.5" />
-                <circle r="1.5" cx="2.5" cy="4.5" />
-              </svg>
+              <FaUser className="size-3.5 mr-1" />
               {membersNum + " Members"}
             </div>
           </div>

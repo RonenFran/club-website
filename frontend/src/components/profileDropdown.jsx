@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth";
 import { useState, useEffect, useRef } from "react";
+import { FaUser } from "react-icons/fa";
 
 export default function ProfileDropdown() {
   const { isAuthenticated } = useAuth();
@@ -30,10 +31,7 @@ export default function ProfileDropdown() {
         id="profile"
         onClick={() => setDisplayDropdown(!displayDropdown)}
       >
-        <svg viewBox="0 0 5 5" fill="white" aria-hidden="true" className="size-8">
-          <circle r="1" cx="2.5" cy="1.5" />
-          <circle r="1.7" cx="2.5" cy="4.5" />
-        </svg>
+        <FaUser className="size-8 text-secondary" />
       </div>
 
       {isAuthenticated ? (

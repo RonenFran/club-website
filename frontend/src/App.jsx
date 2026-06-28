@@ -16,6 +16,7 @@ import Login from "./routes/Login";
 import Logout from "./routes/Logout";
 import MyClubs from "./routes/MyClubs";
 import Events from "./routes/Events";
+import EventPage from "./routes/EventPage";
 // import Profile from "./pages/Profile";
 
 function Root() {
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="logout" id="logout" element={<Logout />} action={logoutUser} />
+      <Route path="events/eventpage" element={<EventPage />} />
     </Route>
   )
 );
