@@ -1,3 +1,5 @@
+import { FaUser } from "react-icons/fa";
+
 export default function EventPage() {
   return (
     <>
@@ -40,11 +42,55 @@ export default function EventPage() {
           Register
         </div>
 
-        {/* Attendees */}
-        <div className="flex w-full h-48 bg-gray-100 p-4 rounded-lg">
-          <div className="flex flex-col h-full w-36 bg-secondary-200 border-3 border-primary rounded-md"></div>
-        </div>
         {/* Extra Image */}
+        <img
+          src="/public/club_banners/equestrian3.avif"
+          alt="Previous contenstant jumping over hurdle on horse"
+        />
+
+        {/* Attendees */}
+        <div className="flex gap-4 w-full h-48 bg-gray-100 p-4 rounded-lg text-primary-700">
+          <div className="flex flex-col items-center justify-center gap-4 h-full w-36 p-4 bg-secondary-200 border-3 border-primary rounded-md">
+            <div className="bg-secondary-400 p-3 rounded-[50%] overflow-hidden">
+              <FaUser className="size-8 text-gray-400" />
+            </div>
+            <div className="text-center">
+              <strong>User Name</strong>
+              <br />
+              Host
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-4 h-full w-36 p-4 bg-secondary-200 border-3 border-primary rounded-md">
+            <div className="bg-secondary-400 p-3 rounded-[50%] overflow-hidden">
+              <FaUser className="size-8 text-gray-400" />
+            </div>
+            <div className="text-center">
+              <strong>User Name</strong>
+              <br />
+              Co-Host
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-4 h-full w-36 p-4 bg-secondary-200 border-3 border-primary rounded-md">
+            <div className="bg-secondary-400 p-3 rounded-[50%] overflow-hidden">
+              <FaUser className="size-8 text-gray-400" />
+            </div>
+            <div className="text-center">
+              <strong>User Name</strong>
+              <br />
+              Volunteer
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-4 h-full w-36 p-4 bg-secondary-200 border-3 border-primary rounded-md">
+            <div className="bg-secondary-400 p-3 rounded-[50%] overflow-hidden">
+              <FaUser className="size-8 text-gray-400" />
+            </div>
+            <div className="text-center">
+              <strong>User Name</strong>
+              <br />
+              Attendant
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
