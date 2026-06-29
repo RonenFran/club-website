@@ -27,13 +27,14 @@ export default function ClubPageSiderbar({ clubInfo, loggedIn, userId, memberSta
 
   // Get the tags related to the club from the backend
   useEffect(() => {
+    if (!clubInfo.clubId) return;
     const getTags = async () => {
       const res = await axios.get(`/api/clubs/${clubInfo.clubId}/tags`);
       setTags(res.data);
     };
 
     getTags();
-  }, []);
+  }, [!!clubInfo.clubId]);
 
   return (
     <div className="w-full items-center flex flex-col gap-4 p-4">

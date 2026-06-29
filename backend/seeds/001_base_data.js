@@ -222,7 +222,6 @@ exports.seed = async function (knex) {
     { name: "Programming" }, // 18
     { name: "E-Sports" }, // 19
     { name: "Community" }, // 20
-    { name: "Business" }, // 21
   ]);
 
   // ─── Club Tags ────────────────────────────────────────────────────────────
