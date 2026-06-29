@@ -459,6 +459,23 @@ app.post("/api/user/:userId/clubs/:clubId", async (req, res) => {
   }
 });
 
+/* 
+====================================================================================================
+------------------------------------------- Events -------------------------------------------------
+==================================================================================================== 
+*/
+
+app.get("/api/events", async (req, res) => {
+  try {
+    const events = await db("Events").select("Events.*").where("Event.endsAt", ">", knex.fn.now());
+
+    res.json(events);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch events" });
+  }
+});
+
 // // Retrieve the users new notifications from all chats
 // app.get("/api/chats/messages/:userId", async (req, res) => {
 //   const { userId } = req.params;
