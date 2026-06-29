@@ -63,6 +63,7 @@ exports.up = async function up(knex) {
       t.dateTime("startsAt").notNullable();
       t.dateTime("endsAt").nullable();
       t.string("location", 255).nullable();
+      t.string("bannerPath", 255).nullable();
       t.timestamps(true, true);
       t.engine("InnoDB");
       t.charset("utf8mb4");
