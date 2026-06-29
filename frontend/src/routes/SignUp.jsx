@@ -83,7 +83,7 @@ export default function SignUp() {
                 value={formData.firstName}
                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 placeholder="Enter your first name"
-                className="w-full border-b-2"
+                className="w-full border-b-2 outline-none py-1"
               />
             </div>
 
@@ -99,7 +99,7 @@ export default function SignUp() {
                 value={formData.lastName}
                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                 placeholder="Enter your last name"
-                className="w-full border-b-2"
+                className="w-full border-b-2 outline-none py-1"
               />
             </div>
 
@@ -118,7 +118,7 @@ export default function SignUp() {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="example.student@smu.ca"
-            className="w-full border-b-2"
+            className="w-full border-b-2 outline-none py-1"
           />
           <strong className="w-full mt-2 text-red-500 font-semibold text-left text-sm">
             {err.email}
@@ -134,7 +134,7 @@ export default function SignUp() {
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             placeholder="Enter your password"
-            className="w-full border-b-2"
+            className="w-full border-b-2 outline-none py-1"
           />
           <strong className="w-full mt-2 text-red-500 font-semibold text-left text-sm">
             {err.password}
@@ -150,7 +150,7 @@ export default function SignUp() {
             value={formData.passwordRe}
             onChange={(e) => setFormData({ ...formData, passwordRe: e.target.value })}
             placeholder="Confirm your password"
-            className="w-full border-b-2"
+            className="w-full border-b-2 outline-none py-1"
           />
           <strong className="w-full mt-2 text-red-500 font-semibold text-left text-sm">
             {err.passwordRe}

@@ -50,7 +50,7 @@ export default function Login() {
             name="email"
             placeholder="Enter your email"
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full border-b-2"
+            className="w-full border-b-2 outline-none py-1"
           />
 
           {/* Password */}
@@ -63,7 +63,7 @@ export default function Login() {
             name="password"
             placeholder="Enter your password"
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-            className="w-full border-b-2"
+            className="w-full border-b-2 outline-none py-1"
           />
 
           <strong className="w-full mt-2 text-red-500 font-semibold text-left text-sm">
