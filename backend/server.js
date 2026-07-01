@@ -467,7 +467,11 @@ app.post("/api/user/:userId/clubs/:clubId", async (req, res) => {
 
 app.get("/api/events", async (req, res) => {
   try {
-    const events = await db("Events").select("Events.*").where("Event.endsAt", ">", knex.fn.now());
+    const events = await db("Event")
+      .select("Event.*", "InterestTag.name as tagName")
+      .join("EventTag", "Event.eventId", "=", "EventTag.eventId")
+      .join("InterestTag", "EventTag.tagId", "=", "InterestTag.tagId")
+      .where("Event.endsAt", ">", new Date());
 
     res.json(events);
   } catch (err) {

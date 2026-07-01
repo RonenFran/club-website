@@ -2,7 +2,7 @@ import EventItem from "./eventItem";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { useState, useRef } from "react";
 
-export default function EventRow({ events, height }) {
+export default function EventRow({ eventList }) {
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
   const [showControls, setShowControls] = useState(false);

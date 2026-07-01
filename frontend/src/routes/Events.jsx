@@ -1,5 +1,6 @@
 import EventRow from "../components/eventRow";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { SlArrowRight } from "react-icons/sl";
 import { FaRegStar, FaBriefcase, FaFootballBall, FaMicroscope } from "react-icons/fa";
 import { FaWandMagicSparkles, FaMicrochip } from "react-icons/fa6";
@@ -7,6 +8,16 @@ import { IoPeople } from "react-icons/io5";
 
 export default function Events() {
   const [showText, setShowText] = useState(true);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const res = await axios.get("/api/events");
+      setEvents(res.data);
+    };
+
+    fetchEvents();
+  }, []);
 
   return (
     <div className="flex flex-col gap-10 py-8">
@@ -44,7 +55,8 @@ export default function Events() {
             <h3 className="text-lg text-primary-600">14 events this month</h3>
           </div>
         </div>
-        <EventRow />
+        <EventRow eventList={events.filter((e) => e.tagName === "Business")} />
+        {console.log(events.filter((e) => e.tagName === "Business"))}
       </div>
 
       {/* Social */}
